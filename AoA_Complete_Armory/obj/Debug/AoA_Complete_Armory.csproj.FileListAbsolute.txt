@@ -1,0 +1,17 @@
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\bin\Debug\AoA_Complete_Armory.exe.config
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\bin\Debug\AoA_Complete_Armory.exe
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\bin\Debug\AoA_Complete_Armory.pdb
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\bin\Debug\MahApps.Metro.dll
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\bin\Debug\System.Windows.Interactivity.dll
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\bin\Debug\MahApps.Metro.xml
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\obj\Debug\AoA_Complete_Armory.csprojResolveAssemblyReference.cache
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\obj\Debug\MainWindow.baml
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\obj\Debug\App.baml
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\obj\Debug\MainWindow.g.cs
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\obj\Debug\App.g.cs
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\obj\Debug\AoA_Complete_Armory_MarkupCompile.cache
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\obj\Debug\AoA_Complete_Armory.g.resources
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\obj\Debug\AoA_Complete_Armory.Properties.Resources.resources
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\obj\Debug\AoA_Complete_Armory.csproj.GenerateResource.Cache
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\obj\Debug\AoA_Complete_Armory.exe
+c:\users\mja\documents\visual studio 2013\Projects\AoA_Complete_Armory\AoA_Complete_Armory\obj\Debug\AoA_Complete_Armory.pdb
