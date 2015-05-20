@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 
-namespace AoA_Complete_Armory
+namespace DM.Armory.View.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
