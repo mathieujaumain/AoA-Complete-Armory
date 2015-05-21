@@ -19,5 +19,6 @@ namespace DM.Armory.Model
             set { _Turrets = value; }
         }
 
+        public AoAVehicle Vehicle { get; set; }
     }
 }

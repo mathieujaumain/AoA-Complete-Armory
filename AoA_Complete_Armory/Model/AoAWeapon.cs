@@ -8,6 +8,7 @@ namespace DM.Armory.Model
 {
     public class AoAWeapon:IUpdatable
     {
+        public int WeaponId = -1;
         public byte[] NameHash;
         private long _MaxNbShotsPerSalvo;
         private long _CurrentNbShotsInSalvo;
@@ -27,7 +28,7 @@ namespace DM.Armory.Model
 
         private double _TotalTimeElapsed = 0; // Shitty naming
 
-
+        private TargetType Targetables = 
 
         void IUpdatable.Update(double timeElapsed)
         {
@@ -124,5 +125,10 @@ namespace DM.Armory.Model
     public enum WeaponsStatus
     {
         IDLE, RELOADING, AIMING, FIRING,
+    }
+
+    public enum TargetType
+    {
+        Infantry, Armor, Air
     }
 }

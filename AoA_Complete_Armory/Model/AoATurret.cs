@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DM.Armory.Model
 {
-    public class AoATurret
+    public class AoATurret : IUpdatable
     {
         private List<AoAWeapon> _Weapons = new List<AoAWeapon>();
 
@@ -16,7 +16,7 @@ namespace DM.Armory.Model
             set { _Weapons = value; }
         }
 
-       
+       // Ammo ?
 
     }
 }

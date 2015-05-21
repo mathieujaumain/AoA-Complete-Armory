@@ -14,6 +14,8 @@ namespace DM.Armory.Model
         public int CashCost { get; set; }
         public int RareEarthCost { get; set; }
 
+        public long ConstructionTime { get; set; }
+
         public FactionEnum Faction { get; set; }
 
     }
@@ -22,4 +24,5 @@ namespace DM.Armory.Model
     {
         US, Cartel, Chimera, Neutral, Other
     }
+
 }
