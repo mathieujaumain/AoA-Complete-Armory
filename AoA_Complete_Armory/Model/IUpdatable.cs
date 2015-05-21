@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace DM.Armory.Model
 {
-    public class AoABaseObject
+    public interface IUpdatable
     {
-
+        public interface IUpdatable
+        {
+            void Update(double timeElapsed);
+        }
     }
 }

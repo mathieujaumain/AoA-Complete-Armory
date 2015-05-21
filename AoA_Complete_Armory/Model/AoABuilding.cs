@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DM.Armory.Model
 {
-    public class AoABuilding:AoABaseObject
+    public class AoABuilding : AoAGameObject
     {
     }
 }
