@@ -32,3 +32,4 @@ C:\Users\mja\Documents\GitHub\AoA-Complete-Armory\AoA_Complete_Armory\obj\Debug\
 C:\Users\mja\Documents\GitHub\AoA-Complete-Armory\AoA_Complete_Armory\obj\Debug\AoA_Complete_Armory.csproj.GenerateResource.Cache
 C:\Users\mja\Documents\GitHub\AoA-Complete-Armory\AoA_Complete_Armory\obj\Debug\View\Windows\MainWindow.baml
 C:\Users\mja\Documents\GitHub\AoA-Complete-Armory\AoA_Complete_Armory\obj\Debug\View\Windows\MainWindow.g.cs
+C:\Users\mja\Documents\GitHub\AoA-Complete-Armory\AoA_Complete_Armory\obj\Debug\DM.Armory.Properties.Resources.resources

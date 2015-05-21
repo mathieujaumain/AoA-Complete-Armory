@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace DM.Armory.Model
 {
+
     public interface IUpdatable
     {
-        public interface IUpdatable
-        {
-            void Update(double timeElapsed);
-        }
+        void Update(double timeElapsed);
     }
+    
 }
