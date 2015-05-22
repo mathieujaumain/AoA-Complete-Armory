@@ -17,9 +17,8 @@ namespace DM.Armory.Model
 
         private double _TimeBetweenShots;
         private double _SalvoReloadTime;
-        private double _AimingTime = 0.2;   // This is my best bet, I don't remember where to find it, 
-        //plus it's obviously different amoung the weapons, like arty and all
-
+        private double _AimingTime;   
+        
         private bool _HasFirstShotBeenFired = false;
 
         private long _CurrentNbProjectilesFired;
@@ -28,7 +27,7 @@ namespace DM.Armory.Model
 
         private double _TotalTimeElapsed = 0; // Shitty naming
 
-        private TargetType Targetables = 
+        private TargetType Targetables = TargetType.None;
 
         void IUpdatable.Update(double timeElapsed)
         {
@@ -127,8 +126,8 @@ namespace DM.Armory.Model
         IDLE, RELOADING, AIMING, FIRING,
     }
 
-    public enum TargetType
+    public enum TargetType:byte
     {
-        Infantry, Armor, Air
+        Infantry = 0x1, Armor = 0x10, Air = 0x100, None = 0x0
     }
 }
