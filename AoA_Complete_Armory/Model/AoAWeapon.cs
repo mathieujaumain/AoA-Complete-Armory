@@ -8,6 +8,34 @@ namespace DM.Armory.Model
 {
     public class AoAWeapon:IUpdatable
     {
+
+        #region Ndf Queries
+        public static string CAN_SHOOT_WHILE_MOVING_PROPERTY = "TirEnMouvement"; //bool
+        public static string AMMUNITION_PROPERTY = "Ammunition";
+        public static string NAME_PROPERTY = "Ammunition.Name";//loca hash
+        public static string TYPE_PROPERTY = "Ammunition.TypeArme"; //loca hash
+        public static string ARME_PROPERTY = "Ammunition.Arme"; //uint32
+        public static string POWER_PROPERTY = "Ammunition.Puissance";
+        public static string TIME_BETWEEN_SHOTS_PROPERTY = "Ammunition.TempsEntreDeuxTirs"; //float32
+        public static string MAX_RANGE_PROPERTY = "Ammunition.PorteeMaximale"; //float32
+        public static string SPLASH_DAMAGE_RADIUS_PROPERTY = "Ammunition.RadiusSplashPhysicalDamages"; //float 32
+        public static string DAMAGE_PROPERTY = "Ammunition.PhysicalDamages";//float32
+        public static string AMBUSH_MULTIPLIER_PROPERTY = "Ammunition.AmbushShotDamageMultiplier"; //float32
+        public static string SALVO_RELOAD_TIME_PROPERTY = "Ammunition.TempsEntreDeuxSalves"; //float32
+        public static string SIMULTANEOUS_PROJECTILES_PROPERTY = "Ammunition.NbrProjectilesSimultanes"; //uint32
+        public static string SHOTS_PER_SALVO_PROPERTY = "Ammunition.NbTirParSalves"; //uint32
+        public static string POW_PROBABILITY_PROPERTY = "Ammunition.GeneratePilotsProbability";
+        public static string POW_TAGS_PROPERTY = "Ammunition.PilotsTagSet"; //List of TTypeUnitTag, see DebugTagName property
+        public static string INDIRECT_FIRE_PROPERTY = "Ammunition.TirIndirect"; //bool
+        public static string TRIGGER_FIRE_PROPERTY = "Ammunition.FireTriggeringProbability"; //float32
+        public static string HELICOPTER_MAX_RANGE_PROPERTY = "Ammunition.PorteeMaximaleTBA"; //uint32
+        public static string MIN_RANGE_PROPERTY = "Ammunition.PorteeMinimal"; //float32
+        public static string AIMING_TIME_PROPERTY = "Ammunition.TempsDeVisee"; //float32, null = 0 I think
+        public static string PLANE_MAX_RANGE_PROPERTY = "Ammunition.PorteeMaximaleHA"; //float32
+        public static string PLANE_MIN_RANGE_PROPERTY = "Ammunition.PorteeMinimaleHA";
+        public static string HELICOPTER_MIN_RANGE_PROPERTY = "Ammunition.PorteeMinimaleTBA";
+        #endregion
+
         public int WeaponId = -1;
         public byte[] NameHash;
         private long _MaxNbShotsPerSalvo;
@@ -17,7 +45,7 @@ namespace DM.Armory.Model
 
         private double _TimeBetweenShots;
         private double _SalvoReloadTime;
-        private double _AimingTime;   
+        private double _AimingTime = 0;   
         
         private bool _HasFirstShotBeenFired = false;
 
@@ -33,7 +61,7 @@ namespace DM.Armory.Model
         {
             _TotalTimeElapsed += timeElapsed;
 
-            switch (_CurrentStatus) /// Fat, ugly, shitty, dirty-d but quick, didn't want to make an actual FSM with actual classes and interfaces and shit :<<
+            switch (_CurrentStatus) /// Fat, ugly, shitty, but quick, didn't want to make an actual FSM with actual classes and interfaces and shit :<<
             {
                 case WeaponsStatus.IDLE:
                     _CurrentStatus = WeaponsStatus.AIMING;
@@ -75,7 +103,7 @@ namespace DM.Armory.Model
                     break;
 
                 case WeaponsStatus.FIRING:
-                    Firing(_TotalTimeElapsed); // because this and stuffs
+                    Firing(_TotalTimeElapsed); 
                     break;
             }
         }
@@ -129,5 +157,10 @@ namespace DM.Armory.Model
     public enum TargetType:byte
     {
         Infantry = 0x1, Armor = 0x10, Air = 0x100, None = 0x0
+    }
+
+    public enum WeaponType:uint
+    {
+
     }
 }

@@ -8,6 +8,11 @@ namespace DM.Armory.Model
 {
     public class AoATurret : IUpdatable
     {
+        #region Ndf Queries 
+        public static string WEAPONS_PROPERTY = "MountedWeaponDescriptorList";
+        public static string ROTATION_SPEED_PROPERTY = "VitesseRotation"; //Float32
+        #endregion
+
         private List<AoAWeapon> _Weapons = new List<AoAWeapon>();
 
         public List<AoAWeapon> Weapons

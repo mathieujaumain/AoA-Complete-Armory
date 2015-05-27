@@ -72,8 +72,10 @@
     <Compile Include="Model\AoAGameObject.cs" />
     <Compile Include="Model\AoATurret.cs" />
     <Compile Include="Model\AoAUnit.cs" />
+    <Compile Include="Model\AoAUppgrade.cs" />
     <Compile Include="Model\AoAVehicle.cs" />
     <Compile Include="Model\AoAWeapon.cs" />
+    <Compile Include="Model\INdfbinLoadable.cs" />
     <Compile Include="Model\IUpdatable.cs" />
     <Compile Include="View\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
