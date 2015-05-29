@@ -13,5 +13,11 @@ namespace AoA_Complete_Armory
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            //Loads the accents and style there
+
+            base.OnStartup(e);
+        }
     }
 }

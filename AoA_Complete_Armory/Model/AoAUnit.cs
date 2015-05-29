@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IrisZoomDataApi.Model.Ndfbin;
 
 namespace DM.Armory.Model
 {
-    public class AoAUnit : AoAGameObject, IUpdatable
+    public class AoAUnit : AoAGameObject, IUpdatable, INdfbinLoadable
     {
         #region Ndf Queries
         public static string NDF_CLASS_NAME = "TUniteDescriptor";
@@ -40,6 +41,11 @@ namespace DM.Armory.Model
         public AoAVehicle Vehicle { get; set; }
 
         public void Update(double timeElapsed)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool LoadData(NdfObject dataobject)
         {
             throw new NotImplementedException();
         }

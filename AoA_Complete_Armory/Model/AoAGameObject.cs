@@ -20,9 +20,9 @@ namespace DM.Armory.Model
 
     }
 
-    public enum FactionEnum
+    public enum FactionEnum:uint
     {
-        US, Cartel, Chimera, Neutral, Other
+        US = 3, Cartel = 1, Chimera = 2, Neutral , Other
     }
 
 }

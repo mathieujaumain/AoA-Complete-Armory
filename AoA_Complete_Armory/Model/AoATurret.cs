@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IrisZoomDataApi.Model.Ndfbin;
 
 namespace DM.Armory.Model
 {
-    public class AoATurret : IUpdatable
+    public class AoATurret : IUpdatable, INdfbinLoadable
     {
         #region Ndf Queries 
         public static string WEAPONS_PROPERTY = "MountedWeaponDescriptorList";
@@ -25,6 +26,11 @@ namespace DM.Armory.Model
 
 
         public void Update(double timeElapsed)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool LoadData(NdfObject dataobject)
         {
             throw new NotImplementedException();
         }
