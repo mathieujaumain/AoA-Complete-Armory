@@ -23,5 +23,10 @@ namespace DM.Armory.Model
 
        // Ammo ?
 
+
+        public void Update(double timeElapsed)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

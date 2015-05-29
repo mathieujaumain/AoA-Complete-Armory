@@ -38,5 +38,10 @@ namespace DM.Armory.Model
         }
 
         public AoAVehicle Vehicle { get; set; }
+
+        public void Update(double timeElapsed)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -28,7 +28,6 @@ C:\Users\mja\Documents\GitHub\AoA-Complete-Armory\AoA_Complete_Armory\obj\Debug\
 C:\Users\mja\Documents\GitHub\AoA-Complete-Armory\AoA_Complete_Armory\obj\Debug\App.g.cs
 C:\Users\mja\Documents\GitHub\AoA-Complete-Armory\AoA_Complete_Armory\obj\Debug\AoA_Complete_Armory_MarkupCompile.cache
 C:\Users\mja\Documents\GitHub\AoA-Complete-Armory\AoA_Complete_Armory\obj\Debug\AoA_Complete_Armory.g.resources
-C:\Users\mja\Documents\GitHub\AoA-Complete-Armory\AoA_Complete_Armory\obj\Debug\AoA_Complete_Armory.Properties.Resources.resources
 C:\Users\mja\Documents\GitHub\AoA-Complete-Armory\AoA_Complete_Armory\obj\Debug\AoA_Complete_Armory.csproj.GenerateResource.Cache
 C:\Users\mja\Documents\GitHub\AoA-Complete-Armory\AoA_Complete_Armory\obj\Debug\View\Windows\MainWindow.baml
 C:\Users\mja\Documents\GitHub\AoA-Complete-Armory\AoA_Complete_Armory\obj\Debug\View\Windows\MainWindow.g.cs

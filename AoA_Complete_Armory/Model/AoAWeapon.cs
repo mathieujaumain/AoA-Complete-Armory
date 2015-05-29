@@ -156,7 +156,7 @@ namespace DM.Armory.Model
 
     public enum TargetType:byte
     {
-        Infantry = 0x1, Armor = 0x10, Air = 0x100, None = 0x0
+        Infantry = 1, Armor = 2, Helicopters = 4, Planes = 8, None = 0
     }
 
     public enum WeaponType:uint

@@ -7,5 +7,9 @@ namespace DM.Armory.Model
 {
     public class AoAVehicle:IUpdatable
     {
+        public void Update(double timeElapsed)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
