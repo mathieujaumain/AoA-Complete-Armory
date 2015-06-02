@@ -3,9 +3,32 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
                       Title="MainWindow"
-                      Height="350"
-                      Width="525">
-    <Grid>
-
-    </Grid>
+                      Height="900"
+                      Width="1200">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="Settings" />
+        </Controls:WindowCommands>
+        
+    </Controls:MetroWindow.RightWindowCommands>
+    
+    <Controls:MetroContentControl>
+        <Grid>
+            <Controls:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="TabControl">
+                <TabItem Name="MainTab">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Name="USicon" />
+                        <Separator Width="10" Opacity="0" />
+                        <Button Name="CartelIcon" />
+                        <Separator Width="10" Opacity="0" />
+                        <Button Name="ChimeraIcon" />
+                    </StackPanel>
+                </TabItem>
+                <TabItem Name="USTab"/>
+                <TabItem Name="CartelTab"/>
+                <TabItem Name="ChimeraTab"/>      
+            </Controls:MetroAnimatedSingleRowTabControl>
+        </Grid>
+    </Controls:MetroContentControl>
+    
 </Controls:MetroWindow>
