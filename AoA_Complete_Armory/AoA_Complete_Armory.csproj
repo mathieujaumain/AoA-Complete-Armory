@@ -48,6 +48,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.0.14.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -144,6 +145,7 @@
   <ItemGroup>
     <Folder Include="assets\" />
     <Folder Include="BL\" />
+    <Folder Include="Resources\" />
     <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
