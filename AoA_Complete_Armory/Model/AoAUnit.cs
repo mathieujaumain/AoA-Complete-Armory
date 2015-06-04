@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IrisZoomDataApi.Model.Ndfbin;
+using IrisZoomDataApi.Model.Ndfbin.Types.AllTypes;
 
 namespace DM.Armory.Model
 {
@@ -24,7 +25,10 @@ namespace DM.Armory.Model
         public static string PRODUCTION_PATH = "Modules.Production.Default";
         public static string SCANNER_CONFIG_PATH = "Modules.ScannerConfiguration.Default";
         public static string MOVEMENT_PATH = "Modules.MouvementHandler.Default";
+        public static string DEBUG_NAME = "ClassNameForDebug";
         #endregion
+
+        public static string[] DEBUG_NAME_USELESS = { "Company", "Cadavre", "Wounded", "Fire", "Missile", "Fake", "Wounded", "Smoke", "En_Construction" }; //should eliminate a good chunk of useless data
 
         private object _Lock = new object();
         private List<AoAUppgrade> _PossibleUppgrades = new List<AoAUppgrade>();
@@ -47,7 +51,21 @@ namespace DM.Armory.Model
 
         public bool LoadData(NdfObject dataobject)
         {
-            throw new NotImplementedException();
+            NdfString debugstring;
+            if (dataobject.TryGetValueFromQuery<NdfString>(DEBUG_NAME, out debugstring))
+            {
+                string debugname = debugstring.Value as string;
+                if (DEBUG_NAME_USELESS.Any(x => debugname.Contains(x))) // verify if unit isn't a useless data
+                    return false;
+
+                ///Finish loading data
+
+            }
+            else
+            {
+                return false;
+            }
         }
+
     }
 }
