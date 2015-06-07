@@ -12,7 +12,6 @@ namespace DM.Armory.Model
     {
         #region Ndf Queries
         public static string NDF_CLASS_NAME = "TUniteDescriptor";
-        public static string UNIT_TYPE_PATH = "Modules.TypeUnit.Default";
         public static string TURRET_LIST_PATH = "Modules.WeaponManager.Default.TurretDescriptorList";
         public static string VISIBILITY_PATH = "Modules.Visibility.Default";
         public static string DAMMAGE_PATH = "Modules.Dammages.Default";
@@ -26,9 +25,10 @@ namespace DM.Armory.Model
         public static string SCANNER_CONFIG_PATH = "Modules.ScannerConfiguration.Default";
         public static string MOVEMENT_PATH = "Modules.MouvementHandler.Default";
         public static string DEBUG_NAME = "ClassNameForDebug";
+        public static 
         #endregion
 
-        public static string[] DEBUG_NAME_USELESS = { "Company", "Cadavre", "Wounded", "Fire", "Missile", "Fake", "Wounded", "Smoke", "En_Construction" }; //should eliminate a good chunk of useless data
+        public static string[] DEBUG_NAME_USELESS = { "District", "Company", "Cadavre", "Wounded", "Fire", "Missile", "Fake", "Wounded", "Smoke", "En_Construction" }; //should eliminate a good chunk of useless data
 
         private object _Lock = new object();
         private List<AoAUppgrade> _PossibleUppgrades = new List<AoAUppgrade>();
@@ -51,6 +51,7 @@ namespace DM.Armory.Model
 
         public bool LoadData(NdfObject dataobject)
         {
+            return false;
             NdfString debugstring;
             if (dataobject.TryGetValueFromQuery<NdfString>(DEBUG_NAME, out debugstring))
             {

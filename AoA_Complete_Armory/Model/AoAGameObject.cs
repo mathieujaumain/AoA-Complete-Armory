@@ -7,6 +7,13 @@ namespace DM.Armory.Model
 {
     public class AoAGameObject:AoABaseObject
     {
+        #region  NDFbin queries
+        public static string UNIT_FACTION = "Modules.TypeUnit.Nationalite";
+        public static string UNIT_ICON = "Modules.TypeUnit.TextureForInterface.FileName";
+        public static string UNIT_NAME_HASH = "Modules.TypeUnit.NameInMenuToken";
+        public static string UNIT_DESCRIPTION_HASH = "Modules.TypeUnit.DescriptionHintToken";
+        #endregion
+
         public AoAGameObject()
         {
             Name = string.Empty;

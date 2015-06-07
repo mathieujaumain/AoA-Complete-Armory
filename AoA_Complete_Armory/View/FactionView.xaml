@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="DM.Armory.View.FactionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" >
+    <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Metro:Tile Name="UsTile" Width="{Binding Background.ImageSource.Width, ElementName=UsTile, Mode=OneWay}" Height="{Binding Background.ImageSource.Height, ElementName=UsTile, Mode=OneWay}">
+                <Metro:Tile.Background >
+                    <ImageBrush ImageSource="{StaticResource US_Image}"/>
+                </Metro:Tile.Background>
+            </Metro:Tile>
+            <Separator Width="10" Background="{x:Null}" />
+            <Metro:Tile Name="CartelTile" Width="{Binding Background.ImageSource.Width, ElementName=CartelTile, Mode=OneWay}" Height="{Binding Background.ImageSource.Height, ElementName=CartelTile, Mode=OneWay}">
+                <Metro:Tile.Background>
+                    <ImageBrush ImageSource="{DynamicResource Cartel_Image}"/>
+                </Metro:Tile.Background>
+            </Metro:Tile>
+            <Separator Width="10" Background="{x:Null}"/>
+            <Metro:Tile Name="ChimeraTile" Width="{Binding Background.ImageSource.Width, ElementName=ChimeraTile, Mode=OneWay}" Height="{Binding Background.ImageSource.Height, ElementName=ChimeraTile, Mode=OneWay}">
+                <Metro:Tile.Background>
+                    <ImageBrush ImageSource="{DynamicResource Chimera_Image}"/>
+                </Metro:Tile.Background>
+            </Metro:Tile>
+        </StackPanel>
+    </Grid>
+
+</UserControl>

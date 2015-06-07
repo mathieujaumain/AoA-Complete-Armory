@@ -77,6 +77,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\FactionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UnitListingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -103,6 +107,11 @@
     <Compile Include="Model\AoAWeapon.cs" />
     <Compile Include="Model\INdfbinLoadable.cs" />
     <Compile Include="Model\IUpdatable.cs" />
+    <Compile Include="ViewModel\AoAUnitViewModel.cs" />
+    <Compile Include="ViewModel\BuildingViewModel.cs" />
+    <Compile Include="View\FactionView.xaml.cs">
+      <DependentUpon>FactionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UnitListingView.xaml.cs">
       <DependentUpon>UnitListingView.xaml</DependentUpon>
     </Compile>
@@ -132,6 +141,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="assets\gamecube-webfont.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -143,14 +153,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="assets\" />
     <Folder Include="BL\" />
     <Folder Include="Resources\" />
-    <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dll\Ionic.Zlib.dll" />
     <None Include="dll\IrisZoomDataApi.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\bloc_cartel.jpg" />
+    <Resource Include="assets\bloc_chimere.jpg" />
+    <Resource Include="assets\bloc_us.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,7 +4,10 @@
              StartupUri="/View/Windows/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            
+            <BitmapImage x:Key="Cartel_Image" UriSource="pack://application:,,,/assets/bloc_cartel.jpg"/>
+            <BitmapImage x:Key="US_Image" UriSource="pack://application:,,,/assets/bloc_us.jpg"/>
+            <BitmapImage x:Key="Chimera_Image" UriSource="pack://application:,,,/assets/bloc_chimere.jpg"/>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />

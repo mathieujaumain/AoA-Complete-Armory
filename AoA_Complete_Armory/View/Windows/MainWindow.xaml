@@ -2,7 +2,8 @@
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
-                      Title="MainWindow"
+                      xmlns:views="clr-namespace:DM.Armory.View"
+                      Title="Act of Agression Armory"
                       Height="900"
                       Width="1200">
     <Controls:MetroWindow.RightWindowCommands>
@@ -13,37 +14,14 @@
     </Controls:MetroWindow.RightWindowCommands>
 
     <Controls:MetroContentControl>
-        <Grid>
-            <Controls:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="TabControl">
-                <!-- <Controls:MetroTabItem  Name="MainTab">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Name="USicon" />
-                        <Separator Width="10" Opacity="0" />
-                        <Button Name="CartelIcon" />
-                        <Separator Width="10" Opacity="0" />
-                        <Button Name="ChimeraIcon" />
-                    </StackPanel>
-                </Controls:MetroTabItem >-->
-                <Controls:MetroTabItem Name="USTab"/>
-                    <!--
-                    <StackPanel>
-                        <Controls:Tile 
-                        Width="100" Height="100" Title="PIAF" TitleFontSize="36" >
-                            <Controls:Tile.Background>
-                                <ImageBrush ImageSource="C:\Users\mja\Documents\GitHub\AoA-Complete-Armory\AoA_Complete_Armory\assets\Tiny-wings-icon.jpg"/>
-                            </Controls:Tile.Background>
-                        </Controls:Tile>
-
-                        <Controls:Tile
-                        Title="Hello!" 
-                        TiltFactor="7"
-                        Width="100" Height="100">
-                        </Controls:Tile>
-                    </StackPanel>-->
-                <Controls:MetroTabItem Name="CartelTab"/>
-                <Controls:MetroTabItem  Name="ChimeraTab"/>
-            </Controls:MetroAnimatedSingleRowTabControl>
-        </Grid>
+        <Controls:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="TabControl">
+            <Controls:MetroTabItem  Name="MainTab">
+                <views:FactionView x:Name="Factions"/>
+            </Controls:MetroTabItem >
+            <Controls:MetroTabItem Name="USTab"/>
+            <Controls:MetroTabItem Name="CartelTab"/>
+            <Controls:MetroTabItem  Name="ChimeraTab"/>
+        </Controls:MetroAnimatedSingleRowTabControl>
     </Controls:MetroContentControl>
 
 </Controls:MetroWindow>
