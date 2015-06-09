@@ -23,7 +23,8 @@ namespace DM.Armory.View.Windows
     {
         public MainWindow()
         {
-            //InitializeComponent();
+            // Load everything !!
+            
         }
     }
 }

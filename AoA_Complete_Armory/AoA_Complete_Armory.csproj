@@ -97,6 +97,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BL\InitialisationController.cs" />
     <Compile Include="Model\AoABaseObject.cs" />
     <Compile Include="Model\AoABuilding.cs" />
     <Compile Include="Model\AoAGameObject.cs" />
@@ -153,17 +154,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BL\" />
     <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="dll\Ionic.Zlib.dll" />
-    <None Include="dll\IrisZoomDataApi.dll" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="assets\bloc_cartel.jpg" />
     <Resource Include="assets\bloc_chimere.jpg" />
     <Resource Include="assets\bloc_us.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dll\Ionic.Zlib.dll" />
+    <Content Include="dll\IrisZoomDataApi.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
