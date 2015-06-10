@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IrisZoomDataApi;
 using IrisZoomDataApi.Model.Ndfbin;
 using IrisZoomDataApi.Model.Ndfbin.Types.AllTypes;
 
@@ -11,7 +12,6 @@ namespace DM.Armory.Model
     public class AoAUnit : AoAGameObject, IUpdatable, INdfbinLoadable
     {
         #region Ndf Queries
-        public static string NDF_CLASS_NAME = "TUniteDescriptor";
         public static string TURRET_LIST_PATH = "Modules.WeaponManager.Default.TurretDescriptorList";
         public static string VISIBILITY_PATH = "Modules.Visibility.Default";
         public static string DAMMAGE_PATH = "Modules.Dammages.Default";
@@ -24,17 +24,27 @@ namespace DM.Armory.Model
         public static string PRODUCTION_PATH = "Modules.Production.Default";
         public static string SCANNER_CONFIG_PATH = "Modules.ScannerConfiguration.Default";
         public static string MOVEMENT_PATH = "Modules.MouvementHandler.Default";
-        public static string DEBUG_NAME = "ClassNameForDebug";
-        public static 
         #endregion
 
-        public static string[] DEBUG_NAME_USELESS = { "District", "Company", "Cadavre", "Wounded", "Fire", "Missile", "Fake", "Wounded", "Smoke", "En_Construction" }; //should eliminate a good chunk of useless data
+       
 
         private object _Lock = new object();
         private List<AoAUppgrade> _PossibleUppgrades = new List<AoAUppgrade>();
         private List<AoATurret> _Turrets = new List<AoATurret>();
         private List<AoAUnit> _Children = new List<AoAUnit>();
         private List<AoAUnit> _Parents = new List<AoAUnit>();
+
+        public AoAUnit(AoAGameObject obj)
+        {
+            Name = obj.Name;
+            DebugName = obj.DebugName;
+            Description = obj.Description;
+            AluminiumCost = obj.AluminiumCost;
+            CashCost = obj.CashCost;
+            RareEarthCost = obj.RareEarthCost;
+            ConstructionTime = obj.ConstructionTime;
+            Faction = obj.Faction;
+        }
 
         public List<AoATurret> Turrets
         {
@@ -49,7 +59,7 @@ namespace DM.Armory.Model
             throw new NotImplementedException();
         }
 
-        public bool LoadData(NdfObject dataobject)
+        public bool LoadData(NdfObject dataobject, TradManager dictionary, EdataManager iconPackage)
         {
             return false;
             NdfString debugstring;

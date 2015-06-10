@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IrisZoomDataApi.Model.Ndfbin;
+using IrisZoomDataApi;
 
 namespace DM.Armory.Model
 {
     interface INdfbinLoadable
     {
-        bool LoadData(NdfObject dataobject);
+        bool LoadData(NdfObject dataobject, TradManager dictionary, EdataManager iconPackage);
     }
 }
