@@ -97,6 +97,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BL\EugenStringConverter.cs" />
     <Compile Include="BL\InitialisationController.cs" />
     <Compile Include="Model\AoABaseObject.cs" />
     <Compile Include="Model\AoABuilding.cs" />

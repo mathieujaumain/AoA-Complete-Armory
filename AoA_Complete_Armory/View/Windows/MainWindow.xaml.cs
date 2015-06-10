@@ -62,8 +62,11 @@ namespace DM.Armory.View.Windows
             AoAGameObject losatObject = new AoAGameObject();
             if (losatObject.LoadData(losatndf, dic, iconspack))
             {
-                string name = losatObject.Name;
+                losatObject.Icon.Save("Losat.png");
             }
+
+            // if object is unit...
+            // if object is building...
         }
     }
 
