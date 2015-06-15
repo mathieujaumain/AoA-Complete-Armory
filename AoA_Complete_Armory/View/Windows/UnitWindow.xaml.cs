@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DM.Armory.View
+namespace DM.Armory.View.Windows
 {
     /// <summary>
-    /// Interaction logic for UnitViewer.xaml
+    /// Interaction logic for UnitWindow.xaml
     /// </summary>
-    public partial class UnitViewer : UserControl
+    public partial class UnitWindow : Window
     {
-        public UnitViewer()
+        public UnitWindow()
         {
             InitializeComponent();
         }

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace DM.Armory.View
 {
     /// <summary>
-    /// Interaction logic for UnitListingView.xaml
+    /// Interaction logic for BuildingView.xaml
     /// </summary>
-    public partial class UnitListingView : UserControl
+    public partial class BuildingListView : UserControl
     {
-        public UnitListingView()
+        public BuildingListView()
         {
             InitializeComponent();
         }

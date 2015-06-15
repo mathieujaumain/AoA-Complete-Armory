@@ -49,6 +49,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.0.14.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -77,15 +78,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\BuildingListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\FactionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UnitListingView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UnitViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,14 +108,11 @@
     <Compile Include="Model\IUpdatable.cs" />
     <Compile Include="ViewModel\AoAUnitViewModel.cs" />
     <Compile Include="ViewModel\BuildingViewModel.cs" />
+    <Compile Include="View\BuildingListView.xaml.cs">
+      <DependentUpon>BuildingListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\FactionView.xaml.cs">
       <DependentUpon>FactionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\UnitListingView.xaml.cs">
-      <DependentUpon>UnitListingView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\UnitViewer.xaml.cs">
-      <DependentUpon>UnitViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
