@@ -39,7 +39,7 @@ namespace DM.Armory.BL
             DirectoryInfo dataDirectory = new DirectoryInfo(Settings.Default.PathToData);
             DirectoryInfo[] dirs = dataDirectory.GetDirectories();
             //sort by version
-            List<DirectoryInfo> orderedList = dirs.OrderBy(x => Convert.ToInt32(x.Name)).ToList();
+            List<DirectoryInfo> orderedList = dirs.OrderBy(x => Convert.ToInt64(x.Name)).ToList(); // folder name = version
 
             bool everything = false;
             bool unitdic = false;
@@ -66,6 +66,41 @@ namespace DM.Armory.BL
 
             return false;
         }
+
+        public bool GetUpdateFromDataFolder(long version)
+        {
+            DirectoryInfo dataDirectory = new DirectoryInfo(Settings.Default.PathToData);
+            DirectoryInfo[] dirs = dataDirectory.GetDirectories(); 
+            //sort by version
+            List<DirectoryInfo> orderedList = dirs.OrderBy(x => Convert.ToInt64(x.Name)).ToList();
+            orderedList.RemoveAll(x => Convert.ToInt64(x.Name) > version); // remove all folders corresponding to newer versions of the game data
+
+            bool everything = false;
+            bool unitdic = false;
+            bool techdic = false;
+            bool icons = false;
+
+            foreach (DirectoryInfo dir in orderedList)
+            {
+                if (!everything)
+                    everything = TryGetNdfbinFileFromFolder(dir.FullName, NDF_WIN_FILE, EVERYTHING, out _EverythingNdfbin);
+
+                if (!unitdic)
+                    unitdic = TryGetDicFileFromFolder(dir.FullName, ZZ_WIN_FILE, UNIT_DIC, out _UniteDic);
+
+                if (!techdic)
+                    techdic = TryGetDicFileFromFolder(dir.FullName, ZZ_WIN_FILE, TECH_DIC, out _TechDic);
+
+                if (!icons)
+                    icons = TryGetPackFileFromFolder(dir.FullName, ZZ4_FILE, ICON_PACKAGE, out _IconsPack);
+
+                if (everything && unitdic && techdic && icons)
+                    return true;
+            }
+
+            return false;
+        }
+
 
         public bool TryGetNdfbinFileFromFolder(string folder, string filename, string ndfbinfile, out NdfbinManager ndfbin)
         {

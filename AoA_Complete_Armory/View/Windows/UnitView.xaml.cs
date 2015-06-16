@@ -17,11 +17,10 @@ namespace DM.Armory.View.Windows
     /// <summary>
     /// Interaction logic for UnitWindow.xaml
     /// </summary>
-    public partial class UnitWindow : Window
+    public partial class UnitView
     {
-        public UnitWindow()
+        public UnitView()
         {
-            InitializeComponent();
         }
     }
 }

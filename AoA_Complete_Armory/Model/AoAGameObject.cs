@@ -22,11 +22,17 @@ namespace DM.Armory.Model
         public static string UNIT_TYPE_ALT = "Modules.TypeUnit.Category";
         public static string UNIT_DESCRIPTION_HASH = "Modules.TypeUnit.Default.DescriptionHintToken";
         public static string UNIT_DESCRIPTION_HASH_ALT = "Modules.TypeUnit.DescriptionHintToken";
+        public static string UNIT_CASH_COST = "Modules.Production.Default.ProductionRessourcesNeeded.5";
+        public static string UNIT_ALU_COST = "Modules.Production.Default.ProductionRessourcesNeeded.3";
+        public static string UNIT_ELEC_COST = "Modules.Production.Default.ProductionRessourcesNeeded.6";
+        public static string UNIT_REA_COST = "Modules.Production.Default.ProductionRessourcesNeeded.14";
+
         public static string DEBUG_NAME = "ClassNameForDebug";
         public static string NDF_CLASS_NAME = "TUniteDescriptor";
+        
         #endregion
 
-        public static string[] DEBUG_NAME_USELESS = { "District", "Company", "Cadavre", "Wounded", "Fire", "Missile", "Fake", "Wounded", "Smoke", "En_Construction" }; //should eliminate a good chunk of useless data
+        public static string[] DEBUG_NAME_USELESS = { "District", "Company", "Cadavre", "Wounded","Extracteur", "Fire", "Missile", "Fake", "Wounded", "Smoke", "En_Construction" }; //should eliminate a good chunk of useless data
 
         public AoAGameObject()
         {
@@ -44,12 +50,14 @@ namespace DM.Armory.Model
         public string DebugName { get; internal set; }
         public string Description { get; internal set; }
         public ObjectType Type { get; internal set; }
+        public uint InstanceIndex { get; internal set; }
 
         public Bitmap Icon { get; internal set; }
 
         public int AluminiumCost { get; internal set; }
         public int CashCost { get; internal set; }
         public int RareEarthCost { get; internal set; }
+        public int ElectricityCost { get; internal set; }
 
         public long ConstructionTime { get; internal set; }
 
@@ -58,6 +66,8 @@ namespace DM.Armory.Model
 
         public bool LoadData(NdfObject dataobject, TradManager dictionary, EdataManager iconPackage)
         {
+            InstanceIndex = dataobject.Id;
+
             NdfString debugstring;
             if (dataobject.TryGetValueFromQuery<NdfString>(DEBUG_NAME, out debugstring))
             {
@@ -114,6 +124,14 @@ namespace DM.Armory.Model
 
                 
                 //COSTS
+                if (dataobject.TryGetValueFromQuery<NdfUInt32>(UNIT_CASH_COST, out ndfuint32))
+                    CashCost = (int)ndfuint32.Value;
+                if (dataobject.TryGetValueFromQuery<NdfUInt32>(UNIT_ALU_COST, out ndfuint32))
+                    AluminiumCost = (int)ndfuint32.Value;
+                if (dataobject.TryGetValueFromQuery<NdfUInt32>(UNIT_ELEC_COST, out ndfuint32))
+                    ElectricityCost = (int)ndfuint32.Value;
+                if (dataobject.TryGetValueFromQuery<NdfUInt32>(UNIT_REA_COST, out ndfuint32))
+                    RareEarthCost = (int)ndfuint32.Value;
 
                 //Build Time
 
@@ -134,7 +152,7 @@ namespace DM.Armory.Model
 
     public enum ObjectType : uint
     {
-        Unit, Building
+        Ground_Unit_A = 3, Ground_Unit_B = 5, Ground_Unit_C = 6, Aircraft = 2, Building = 8
     }
 
 }

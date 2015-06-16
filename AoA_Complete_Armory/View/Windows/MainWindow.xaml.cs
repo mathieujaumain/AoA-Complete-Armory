@@ -66,6 +66,15 @@ namespace DM.Armory.View.Windows
             }
 
             // if object is unit...
+            if (losatObject.Type != ObjectType.Building) 
+            {
+                AoAUnit losat = new AoAUnit(losatObject);
+                losatObject = null;
+                if (losat.LoadData(losatndf, dic, iconspack))
+                {
+
+                }
+            }
             // if object is building...
         }
     }

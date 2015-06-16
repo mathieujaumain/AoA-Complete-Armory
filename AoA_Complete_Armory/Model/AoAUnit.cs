@@ -44,6 +44,8 @@ namespace DM.Armory.Model
             RareEarthCost = obj.RareEarthCost;
             ConstructionTime = obj.ConstructionTime;
             Faction = obj.Faction;
+
+            Vehicle = new AoAVehicle();
         }
 
         public List<AoATurret> Turrets
@@ -61,21 +63,7 @@ namespace DM.Armory.Model
 
         public bool LoadData(NdfObject dataobject, TradManager dictionary, EdataManager iconPackage)
         {
-            return false;
-            NdfString debugstring;
-            if (dataobject.TryGetValueFromQuery<NdfString>(DEBUG_NAME, out debugstring))
-            {
-                string debugname = debugstring.Value as string;
-                if (DEBUG_NAME_USELESS.Any(x => debugname.Contains(x))) // verify if unit isn't a useless data
-                    return false;
-
-                ///Finish loading data
-
-            }
-            else
-            {
-                return false;
-            }
+            return true;
         }
 
     }
