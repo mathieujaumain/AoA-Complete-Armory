@@ -5,22 +5,27 @@
                       xmlns:views="clr-namespace:DM.Armory.View"
                       Title="Act of Agression Armory"
                       Height="900"
-                      Width="1200">
+                      Width="1200"
+                      TitleCaps="True"
+                      FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button Content="Settings" />
+            <Button Content="settings" />
         </Controls:WindowCommands>
 
     </Controls:MetroWindow.RightWindowCommands>
 
     <Controls:MetroContentControl>
         <Controls:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="TabControl">
-            <Controls:MetroTabItem  Name="MainTab">
-                <views:FactionView x:Name="Factions"/>
+            <Controls:MetroTabItem  Name="MainTab" Header="main" FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet" >
+                 <views:FactionView x:Name="Factions"/>
             </Controls:MetroTabItem >
-            <Controls:MetroTabItem Name="USTab"/>
-            <Controls:MetroTabItem Name="CartelTab"/>
-            <Controls:MetroTabItem  Name="ChimeraTab"/>
+            
+            <Controls:MetroTabItem Name="USTab" Header="us"/>
+            
+            <Controls:MetroTabItem Name="CartelTab" Header="cartel"/>
+
+            <Controls:MetroTabItem  Name="ChimeraTab" Header="chimera"/>
         </Controls:MetroAnimatedSingleRowTabControl>
     </Controls:MetroContentControl>
 

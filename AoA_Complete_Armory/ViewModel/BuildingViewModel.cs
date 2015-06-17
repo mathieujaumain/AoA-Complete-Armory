@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DM.Armory.ViewModel
 {
-    class BuildingViewModel
+    public class BuildingViewModel
     {
     }
 }

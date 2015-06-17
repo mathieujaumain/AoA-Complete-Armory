@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
-             mc:Ignorable="d" >
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-        <Metro:Tile Name="Building" Width="{Binding Background.ImageSource.Width, ElementName=Building, Mode=OneWay}" Height="{Binding Background.ImageSource.Height, ElementName=Building, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Separator Name="UnitSeparator" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
-        <GroupBox Name="UnitsList"  Header="Units"/>
-        <Separator Name="ReseachSeparator" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
-        <GroupBox Name="ReseachList"  Header="Researches"/>
-    </StackPanel>
+             xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls">
+    <Metro:MetroContentControl>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Metro:Tile Name="Building" Width="{Binding Background.ImageSource.Width, ElementName=Building, Mode=OneWay}" Height="{Binding Background.ImageSource.Height, ElementName=Building, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Separator Name="UnitSeparator" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
+            <GroupBox Name="UnitsList"  Header="Units"/>
+            <Separator Name="ReseachSeparator" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
+            <GroupBox Name="ReseachList"  Header="Researches"/>
+        </StackPanel>
+    </Metro:MetroContentControl>
 </UserControl>

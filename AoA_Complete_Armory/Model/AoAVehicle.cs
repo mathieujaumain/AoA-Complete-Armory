@@ -20,4 +20,6 @@ namespace DM.Armory.Model
             throw new NotImplementedException();
         }
     }
+
+    public enum MovementType { Infantry, GroundVehicle, Helicopter, Plane, }
 }

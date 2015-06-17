@@ -8,6 +8,10 @@
             <BitmapImage x:Key="US_Image" UriSource="pack://application:,,,/assets/bloc_us.jpg"/>
             <BitmapImage x:Key="Chimera_Image" UriSource="pack://application:,,,/assets/bloc_chimere.jpg"/>
 
+            <BitmapImage x:Key="Alu_Image" UriSource="pack://application:,,,/assets/Aluminium.png"/>
+            <BitmapImage x:Key="Cred_Image" UriSource="pack://application:,,,/assets/Credits.png"/>
+            <BitmapImage x:Key="Rare_Image" UriSource="pack://application:,,,/assets/RareEarth.png"/>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />

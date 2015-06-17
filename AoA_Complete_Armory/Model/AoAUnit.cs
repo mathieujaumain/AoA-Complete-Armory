@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using IrisZoomDataApi;
 using IrisZoomDataApi.Model.Ndfbin;
 using IrisZoomDataApi.Model.Ndfbin.Types.AllTypes;
+using DM.Armory.Model.Skills;
 
 namespace DM.Armory.Model
 {
@@ -21,7 +22,6 @@ namespace DM.Armory.Model
         public static string POW_PATH = "Modules.PilotGenerator.Default";
         public static string TRANSPORTER_PATH = "Modules.Transporter.Default";
         public static string SKILLS_PATH = "Modules.Capacite.Default.DefaultSkillList"; //list of TCapaciteDescriptor_ModernWarfare
-        public static string PRODUCTION_PATH = "Modules.Production.Default";
         public static string SCANNER_CONFIG_PATH = "Modules.ScannerConfiguration.Default";
         public static string MOVEMENT_PATH = "Modules.MouvementHandler.Default";
         #endregion
@@ -32,7 +32,7 @@ namespace DM.Armory.Model
         private List<AoAUppgrade> _PossibleUppgrades = new List<AoAUppgrade>();
         private List<AoATurret> _Turrets = new List<AoATurret>();
         private List<AoAUnit> _Children = new List<AoAUnit>();
-        private List<AoAUnit> _Parents = new List<AoAUnit>();
+        private List<IAoASkills> _Skills = new List<IAoASkills>();
 
         public AoAUnit(AoAGameObject obj)
         {
@@ -42,8 +42,8 @@ namespace DM.Armory.Model
             AluminiumCost = obj.AluminiumCost;
             CashCost = obj.CashCost;
             RareEarthCost = obj.RareEarthCost;
-            ConstructionTime = obj.ConstructionTime;
             Faction = obj.Faction;
+            Icon = obj.Icon;
 
             Vehicle = new AoAVehicle();
         }
@@ -55,6 +55,16 @@ namespace DM.Armory.Model
         }
 
         public AoAVehicle Vehicle { get; set; }
+        public long ViewRange { get; set; }
+        public int nbrPOW { get; set; }
+        public int Health { get; set; }
+        public int TransportSlot { get; set; }
+        public int SlotTaken { get; set; }
+        public bool CanSpotStealthyUnits { get; set; }
+        public bool CanHarvest { get; set; }
+        public int StorageSize { get; set; }
+        public bool IsStealthy { get; set; }
+        
 
         public void Update(double timeElapsed)
         {
@@ -67,4 +77,6 @@ namespace DM.Armory.Model
         }
 
     }
+
+    
 }

@@ -18,7 +18,7 @@ namespace DM.Armory.View
     /// <summary>
     /// Interaction logic for BuildingView.xaml
     /// </summary>
-    public partial class BuildingListView : UserControl
+    public partial class BuildingListView
     {
         public BuildingListView()
         {

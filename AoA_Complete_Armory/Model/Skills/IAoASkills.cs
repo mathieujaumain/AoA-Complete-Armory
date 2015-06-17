@@ -8,7 +8,7 @@ namespace DM.Armory.Model.Skills
 {
     public interface IAoASkills
     {
-        SkillType Type { get; internal set; }
+        SkillType Type { get; }
     }
 
     public enum SkillType 

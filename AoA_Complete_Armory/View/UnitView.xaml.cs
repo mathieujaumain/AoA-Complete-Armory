@@ -11,16 +11,25 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using DM.Armory.Model;
+using DM.Armory.ViewModel;
 
-namespace DM.Armory.View.Windows
+namespace DM.Armory.View
 {
     /// <summary>
     /// Interaction logic for UnitWindow.xaml
     /// </summary>
     public partial class UnitView
     {
+        public UnitView(AoAUnitViewModel unitVM) 
+        {
+            InitializeComponent();
+            DataContext = unitVM;
+        }
+
         public UnitView()
         {
+            InitializeComponent();
         }
     }
 }

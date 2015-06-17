@@ -48,5 +48,27 @@ namespace DM.Armory.BL
             box.AppendText(text);
             box.SelectionColor = box.ForeColor;
         }
+
+        public static FlowDocument MakeFlowDocument(string eugenstr, System.Windows.Media.Brush specialColor)
+        {
+            FlowDocument document = new FlowDocument();
+            int i = 0;
+            string[] parts = eugenstr.Split(GREEN_TAG, StringSplitOptions.None);
+            if (parts.Length > 1)
+            {
+                if (i % 2 == 0)
+                {
+                    Paragraph normalPara = new Paragraph(new Run(parts[i].Replace("#styleGreen", string.Empty)));
+                    document.Blocks.Add(normalPara);
+                }
+                else
+                {
+                    Paragraph coloredPara = new Paragraph(new Run(parts[i]));
+                    coloredPara.Foreground = specialColor;
+                    document.Blocks.Add(coloredPara);
+                }
+            }
+            return document;
+        }
     }
 }
