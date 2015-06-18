@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DM.Armory.Model;
 using DM.Armory.ViewModel;
+using DM.Armory.BL;
 
 namespace DM.Armory.View
 {
@@ -25,6 +26,7 @@ namespace DM.Armory.View
         {
             InitializeComponent();
             DataContext = unitVM;
+            DescriptionBox.Document = DM.Armory.BL.EugenStringConverter.MakeFlowDocument(unitVM.Description, Brushes.LightGreen);
         }
 
         public UnitView()

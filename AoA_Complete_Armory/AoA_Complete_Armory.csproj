@@ -70,6 +70,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BL\ObjectLibrary.cs" />
     <Compile Include="Model\Skills\IAoASkills.cs" />
     <Compile Include="ViewModel\AoATurretViewModel.cs" />
     <Compile Include="View\RichTextBoxHelper.cs" />

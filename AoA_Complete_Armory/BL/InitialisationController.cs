@@ -8,6 +8,7 @@ using System.Drawing;
 using DM.Armory.Model;
 using DM.Armory.Properties;
 using System.IO;
+using IrisZoomDataApi.Model.Ndfbin;
 
 
 namespace DM.Armory.BL
@@ -36,7 +37,7 @@ namespace DM.Armory.BL
 
         public bool GetLastUpdateFromDataFolder()
         {
-            DirectoryInfo dataDirectory = new DirectoryInfo(Settings.Default.PathToData);
+            DirectoryInfo dataDirectory = new DirectoryInfo(Settings.Default.PathToGameFolder + DATA_FOLDER);
             DirectoryInfo[] dirs = dataDirectory.GetDirectories();
             //sort by version
             List<DirectoryInfo> orderedList = dirs.OrderBy(x => Convert.ToInt64(x.Name)).ToList(); // folder name = version
@@ -69,7 +70,7 @@ namespace DM.Armory.BL
 
         public bool GetUpdateFromDataFolder(long version)
         {
-            DirectoryInfo dataDirectory = new DirectoryInfo(Settings.Default.PathToData);
+            DirectoryInfo dataDirectory = new DirectoryInfo(Settings.Default.PathToGameFolder);
             DirectoryInfo[] dirs = dataDirectory.GetDirectories(); 
             //sort by version
             List<DirectoryInfo> orderedList = dirs.OrderBy(x => Convert.ToInt64(x.Name)).ToList();
@@ -101,7 +102,6 @@ namespace DM.Armory.BL
             return false;
         }
 
-
         public bool TryGetNdfbinFileFromFolder(string folder, string filename, string ndfbinfile, out NdfbinManager ndfbin)
         {
             ndfbin = null;
@@ -118,10 +118,10 @@ namespace DM.Armory.BL
             }
             catch
             {
+                // TODO : Dump error to log
             }
             return false;
         }
-
 
         public bool TryGetDicFileFromFolder(string folder, string filename, string dicfile, out TradManager dic)
         {
@@ -143,7 +143,6 @@ namespace DM.Armory.BL
             return false;
         }
 
-
         public bool TryGetPackFileFromFolder(string folder, string filename, string packfile, out EdataManager pack)
         {
             pack = null;
@@ -162,5 +161,61 @@ namespace DM.Armory.BL
             }
             return false;
         }
+
+        public List<AoAGameObject> LoadData()
+        {
+            List<AoAGameObject> result = new List<AoAGameObject>();
+            if (GetLastUpdateFromDataFolder())
+            {
+                
+                // Load all Tunite data
+                List<NdfObject> tunites = _EverythingNdfbin.GetClass("TUniteDescriptor").Instances;
+                foreach(NdfObject obj in tunites)
+                {
+                    AoAGameObject gobj = new AoAGameObject();
+                    if (gobj.LoadData(obj, _UniteDic, _IconsPack))
+                        result.Add(gobj);
+                }
+
+                // TODO : Load all Researches
+
+            }
+            else
+            {
+                throw new Exception("Couldn't load game data, check game folder.");
+            }
+
+            return result;
+
+        }
+
+
+        public List<AoAGameObject> LoadData(long version)
+        {
+            List<AoAGameObject> result = new List<AoAGameObject>();
+            if (GetUpdateFromDataFolder(version))
+            {
+
+                // Load all Tunite data
+                List<NdfObject> tunites = _EverythingNdfbin.GetClass("TUniteDescriptor").Instances;
+                foreach (NdfObject obj in tunites)
+                {
+                    AoAGameObject gobj = new AoAGameObject();
+                    if (gobj.LoadData(obj, _UniteDic, _IconsPack))
+                        result.Add(gobj);
+                }
+
+                // TODO : Load all Researches
+
+            }
+            else
+            {
+                throw new Exception("Couldn't load game data, check game folder.");
+            }
+
+            return result;
+
+        }
+
     }
 }

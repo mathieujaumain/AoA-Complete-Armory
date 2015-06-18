@@ -113,7 +113,14 @@ namespace DM.Armory.Model
                 if (!dataobject.TryGetValueFromQuery<NdfUInt32>(UNIT_FACTION, out ndfuint32))
                     if (!dataobject.TryGetValueFromQuery<NdfUInt32>(UNIT_FACTION_ALT, out ndfuint32))
                         return false;
-                Faction = (FactionEnum)ndfuint32.Value;
+                if (ndfuint32 != null)
+                {
+                    Faction = (FactionEnum)ndfuint32.Value;
+                }
+                else
+                {
+                    Faction = FactionEnum.None;
+                }
 
                 //Type
                 NdfInt32 ndfint32;
@@ -147,7 +154,7 @@ namespace DM.Armory.Model
 
     public enum FactionEnum:uint
     {
-        US = 3, Cartel = 1, Chimera = 2, Neutral , Other
+        US = 3, Cartel = 1, Chimera = 2, Neutral , Other, None
     }
 
     public enum ObjectType : uint

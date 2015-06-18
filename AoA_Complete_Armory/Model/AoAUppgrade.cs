@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DM.Armory.Model
 {
-    public class AoAUppgrade
+    public class AoAUppgrade:AoAGameObject
     {
     }
 }

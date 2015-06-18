@@ -56,17 +56,23 @@ namespace DM.Armory.BL
             string[] parts = eugenstr.Split(GREEN_TAG, StringSplitOptions.None);
             if (parts.Length > 1)
             {
-                if (i % 2 == 0)
+                Paragraph paragraph = new Paragraph();
+                while (i < parts.Length)
                 {
-                    Paragraph normalPara = new Paragraph(new Run(parts[i].Replace("#styleGreen", string.Empty)));
-                    document.Blocks.Add(normalPara);
+                    if (i % 2 == 0)
+                    {
+                        Span normalspan = new Span(new Run(parts[i].Replace("#styleGreen", string.Empty)));
+                        paragraph.Inlines.Add(normalspan);
+                    }
+                    else
+                    {
+                        Span coloredSpan = new Span(new Run(parts[i]));
+                        coloredSpan.Foreground = specialColor;
+                        paragraph.Inlines.Add(coloredSpan);
+                    }
+                    i++;
                 }
-                else
-                {
-                    Paragraph coloredPara = new Paragraph(new Run(parts[i]));
-                    coloredPara.Foreground = specialColor;
-                    document.Blocks.Add(coloredPara);
-                }
+                document.Blocks.Add(paragraph);
             }
             return document;
         }

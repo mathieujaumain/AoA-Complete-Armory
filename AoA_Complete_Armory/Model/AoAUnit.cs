@@ -14,16 +14,18 @@ namespace DM.Armory.Model
     {
         #region Ndf Queries
         public static string TURRET_LIST_PATH = "Modules.WeaponManager.Default.TurretDescriptorList";
-        public static string VISIBILITY_PATH = "Modules.Visibility.Default";
-        public static string DAMMAGE_PATH = "Modules.Dammages.Default";
-        public static string TRANSPORTABLE_PATH = "Modules.Transportable";
+        public static string STEALTH_PATH = "Modules.Visibility.Default.UnitStealthBonus"; //Float32
+        public static string AUTOREVEAL_PATH = "Modules.Visibility.Default.AutoRevealType"; //Int32 
+        public static string DAMMAGE_PATH = "Modules.Dammages.Default.MaxDammages"; // uint32
+        public static string TRANSPORTABLE_PATH = "Modules.Transportable.NbSeatsOccupied"; //int32
         public static string HARVESTER_PATH = "Modules.Harvester.Default";
         public static string STORAGE_PATH = "Modules.Storage.Default";
-        public static string POW_PATH = "Modules.PilotGenerator.Default";
-        public static string TRANSPORTER_PATH = "Modules.Transporter.Default";
+        public static string POW_PATH = "Modules.PilotGenerator.Default.NbMaxPilotsGenerated"; //Uint32
         public static string SKILLS_PATH = "Modules.Capacite.Default.DefaultSkillList"; //list of TCapaciteDescriptor_ModernWarfare
         public static string SCANNER_CONFIG_PATH = "Modules.ScannerConfiguration.Default";
         public static string MOVEMENT_PATH = "Modules.MouvementHandler.Default";
+        public static string VIEW_RANGE_PATH = "Modules.ScannerConfiguration.Default.PorteeVision"; //Float32
+        public static string TRANSPORT_PATH = "Modules.Transporter.Default.NbSeatsAvailable"; //int32
         #endregion
 
        

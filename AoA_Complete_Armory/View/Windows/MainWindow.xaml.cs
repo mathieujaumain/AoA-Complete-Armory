@@ -59,6 +59,7 @@ namespace DM.Armory.View.Windows
             edat.ParseEdataFile();
             EdataManager iconspack = edat.ReadPackage(ICON_PACKAGE);
 
+            //Load Object
             AoAGameObject losatObject = new AoAGameObject();
             if (losatObject.LoadData(losatndf, dic, iconspack))
             {

@@ -6,13 +6,15 @@
         xmlns:Metro ="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:ViewModel="clr-namespace:DM.Armory.ViewModel" 
         xmlns:View="clr-namespace:DM.Armory.View"
-        Margin="10"
-        >
+        Margin="10">
+    
     <UserControl.Resources>
         <ViewModel:Int2VisibilityConverter x:Key="Int2VisibilityConverter"/>
         <ViewModel:WPFBitmapConverter x:Key="BitmapConverter"/>
         <ViewModel:EugenStringConverter x:Key="EugenStringConverter"/>
+        <ViewModel:Bool2VisibilityConverter x:Key="Bool2VisibilityConverter" />
     </UserControl.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -39,40 +41,44 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <Label Grid.Column="0" Grid.Row="0" Margin="10,0,0,0">type :</Label>
                 <TextBox Grid.Column="1" Grid.Row="0"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"  />
 
-                <Label Grid.Column="0" Grid.Row="1" Margin="10,0,0,0">HP :</Label>
+                <Label Grid.Column="0" Grid.Row="1" Margin="10,0,0,0">hp :</Label>
                 <TextBox Grid.Column="1" Grid.Row="1"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                <Label Grid.Column="0" Grid.Row="2" Margin="10,0,0,0">off Road speed :</Label>
+                <Label Grid.Column="0" Grid.Row="2" Margin="10,0,0,0">off road speed :</Label>
                 <TextBox Grid.Column="1" Grid.Row="2"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                <Label Grid.Column="0" Grid.Row="3" Margin="10,0,0,0">on Road speed :</Label>
+                <Label Grid.Column="0" Grid.Row="3" Margin="10,0,0,0">on road speed :</Label>
                 <TextBox Grid.Column="1" Grid.Row="3"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                <Label Grid.Column="0" Grid.Row="4" Margin="10,0,0,0">stealth value :</Label>
+                <Label Grid.Column="0" Grid.Row="4" Margin="10,0,0,0">is stealthy ?</Label>
                 <TextBox Grid.Column="1" Grid.Row="4"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                <Label Grid.Column="0" Grid.Row="5" Margin="10,0,0,0">view range:</Label>
+                <Label Grid.Column="0" Grid.Row="5" Margin="10,0,0,0">is revealed on firing ?</Label>
                 <TextBox Grid.Column="1" Grid.Row="5"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                <Label Grid.Column="0" Grid.Row="6" Margin="10,0,0,0">transportable ?</Label>
+                <Label Grid.Column="0" Grid.Row="6" Margin="10,0,0,0">view range:</Label>
                 <TextBox Grid.Column="1" Grid.Row="6"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                <Label Grid.Column="0" Grid.Row="7" Margin="10,0,0,0" Height="26" VerticalAlignment="Top">slots taken :</Label>
-                <TextBox Grid.Column="1" Grid.Row="7"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0">0</TextBox>
+                <Label Grid.Column="0" Grid.Row="7" Margin="10,0,0,0">transportable ?</Label>
+                <TextBox Grid.Column="1" Grid.Row="7"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                <Label Grid.Column="0" Grid.Row="8" Margin="10,0,0,0">potential pow :</Label>
-                <TextBox Grid.Column="1" Grid.Row="8"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+                <Label Grid.Column="0" Grid.Row="8" Margin="10,0,0,0" Height="26" VerticalAlignment="Top">slots taken :</Label>
+                <TextBox Grid.Column="1" Grid.Row="8"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0">0</TextBox>
 
-                <Label Grid.Column="0" Grid.Row="9" Margin="10,0,0,0">can spot stealthy units  ?</Label>
+                <Label Grid.Column="0" Grid.Row="9" Margin="10,0,0,0">potential pow :</Label>
                 <TextBox Grid.Column="1" Grid.Row="9"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                <Label Grid.Column="0" Grid.Row="10" Margin="10,0,0,0">transport slots :</Label>
+                <Label Grid.Column="0" Grid.Row="10" Margin="10,0,0,0">can spot stealthy units ?</Label>
                 <TextBox Grid.Column="1" Grid.Row="10"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+
+                <Label Grid.Column="0" Grid.Row="11" Margin="10,0,0,0">transport slots :</Label>
+                <TextBox Grid.Column="1" Grid.Row="11"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
             </Grid>
 
             <GroupBox Header="Children" Name="ChildrenGroup" HorizontalAlignment="Center" Margin="10,10,10,5" />
@@ -94,7 +100,7 @@
                        Visibility="{Binding RareEarthCost, Converter={StaticResource Int2VisibilityConverter}}" 
                        HorizontalContentAlignment="Center" VerticalAlignment="Center"/>
             </StackPanel>
-            <RichTextBox Name="DescriptionBox" HorizontalAlignment="Center" Margin="10,0" IsReadOnly="True" View.RichTextBoxHelper.DocumentXaml="{Binding Description}" />
+            <RichTextBox Name="DescriptionBox" HorizontalAlignment="Center" Margin="10,0" IsReadOnly="True" />
             <GroupBox Header="Skills" Name="SkillsList" Margin="10,10,10,5" />
             <GroupBox Header="Avaible Uppgrades" Name="UppgradesList" Margin="10,10,10,5" />
         </StackPanel>

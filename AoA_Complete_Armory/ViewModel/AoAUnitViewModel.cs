@@ -36,7 +36,8 @@ namespace DM.Armory.ViewModel
         public long             ViewRange           { get { return _unit.ViewRange; } }
         public bool             CanSpot             { get { return _unit.CanSpotStealthyUnits; } }
         public int              Health              { get { return _unit.Health; } }
-
+        public List<AoATurret>  Turrets             { get { return _unit.Turrets; } }
+        public AoAVehicle       Vehicle             { get { return _unit.Vehicle; } }
     }
 
     public class Int2VisibilityConverter : IValueConverter
@@ -61,6 +62,21 @@ namespace DM.Armory.ViewModel
         {
             bool boolean = (bool)value;
             return boolean ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return 1;
+        }
+    }
+
+    public class Int2BoolConverter : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            int integer = (int)value;
+            return integer > 0;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

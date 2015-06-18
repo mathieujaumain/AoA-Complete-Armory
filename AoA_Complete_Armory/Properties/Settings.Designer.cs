@@ -26,12 +26,12 @@ namespace DM.Armory.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string PathToData {
+        public string PathToGameFolder {
             get {
-                return ((string)(this["PathToData"]));
+                return ((string)(this["PathToGameFolder"]));
             }
             set {
-                this["PathToData"] = value;
+                this["PathToGameFolder"] = value;
             }
         }
         
