@@ -37,6 +37,14 @@ namespace DM.Armory.Model
         public static string HELICOPTER_MIN_RANGE_PROPERTY = "Ammunition.PorteeMinimaleTBA";
         #endregion
 
+        #region Properties
+        public string Name { get; private set; }
+        public long MeanRoF { get; private set; }
+        public long GroundRange { get; private set; }
+        public long VLARange { get; private set; }
+        public long VHARange { get; private set; }
+        #endregion
+
         public int WeaponId = -1;
         public byte[] NameHash;
         private long _MaxNbShotsPerSalvo;

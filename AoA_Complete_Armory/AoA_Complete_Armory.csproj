@@ -73,6 +73,7 @@
     <Compile Include="BL\ObjectLibrary.cs" />
     <Compile Include="Model\Skills\IAoASkills.cs" />
     <Compile Include="ViewModel\AoATurretViewModel.cs" />
+    <Compile Include="ViewModel\AoAWeaponViewModel.cs" />
     <Compile Include="View\RichTextBoxHelper.cs" />
     <Compile Include="View\UnitView.xaml.cs">
       <DependentUpon>UnitView.xaml</DependentUpon>
@@ -90,6 +91,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FactionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WeaponView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,6 +125,9 @@
     </Compile>
     <Compile Include="View\FactionView.xaml.cs">
       <DependentUpon>FactionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WeaponView.xaml.cs">
+      <DependentUpon>WeaponView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

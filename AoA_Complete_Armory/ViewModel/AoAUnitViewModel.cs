@@ -33,7 +33,7 @@ namespace DM.Armory.ViewModel
         public FactionEnum      Faction             { get { return _unit.Faction; } }
         public Bitmap           Icon                { get { return _unit.Icon; } }
         public int              nbrPOW              { get { return _unit.nbrPOW; } }
-        public long             ViewRange           { get { return _unit.ViewRange; } }
+        public float             ViewRange          { get { return _unit.ViewRange; } }
         public bool             CanSpot             { get { return _unit.CanSpotStealthyUnits; } }
         public int              Health              { get { return _unit.Health; } }
         public List<AoATurret>  Turrets             { get { return _unit.Turrets; } }
@@ -111,9 +111,6 @@ namespace DM.Armory.ViewModel
 
         #endregion
     }
-
-
-   
 
     public class EugenStringConverter : IValueConverter
     {
