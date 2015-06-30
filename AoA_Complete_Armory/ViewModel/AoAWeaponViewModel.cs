@@ -15,5 +15,9 @@ namespace DM.Armory.ViewModel
         {
             _Weapon = weapon;
         }
+
+
+        public string Name { get { return _Weapon.Name; } }
+        //public float GroundRange { get { return _Weapon.GroundRange; } }
     }
 }

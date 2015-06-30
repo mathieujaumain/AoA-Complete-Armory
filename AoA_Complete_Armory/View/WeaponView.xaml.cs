@@ -24,5 +24,11 @@ namespace DM.Armory.View
         {
             InitializeComponent();
         }
+
+        public WeaponView(ViewModel.AoAWeaponViewModel weaponVM)
+        {
+            InitializeComponent();
+            this.DataContext = weaponVM;
+        }
     }
 }

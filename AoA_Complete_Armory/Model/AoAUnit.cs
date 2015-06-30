@@ -47,7 +47,7 @@ namespace DM.Armory.Model
             Faction = obj.Faction;
             Icon = obj.Icon;
 
-            Vehicle = new AoAVehicle();
+            //Vehicle = new AoAVehicle();
         }
 
         public List<AoATurret> Turrets
@@ -56,7 +56,7 @@ namespace DM.Armory.Model
             set { lock(_Lock) _Turrets = value; }
         }
 
-        public AoAVehicle Vehicle { get; set; }
+        //public AoAVehicle Vehicle { get; set; }
         public float ViewRange { get; set; }
         public int nbrPOW { get; set; }
         public int Health { get; set; }
@@ -75,7 +75,7 @@ namespace DM.Armory.Model
             throw new NotImplementedException();
         }
 
-        public bool LoadData(NdfObject dataobject, TradManager dictionary, EdataManager iconPackage)
+        new public bool LoadData(NdfObject dataobject, TradManager dictionary, EdataManager iconPackage)
         {
             NdfUInt32 ndfuint32;
             NdfSingle ndfFloat32;
@@ -137,7 +137,7 @@ namespace DM.Armory.Model
                 foreach(NdfObjectReference turr in turrets)
                 {
                     turret = new AoATurret();
-                    if(turret.LoadData(turr.Instance))
+                    if(turret.LoadData(turr.Instance, dictionary, null))
                         Turrets.Add(turret);
                 }
 

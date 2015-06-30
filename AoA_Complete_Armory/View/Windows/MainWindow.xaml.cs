@@ -73,11 +73,19 @@ namespace DM.Armory.View.Windows
                 losatObject = null;
                 if (losat.LoadData(losatndf, dic, iconspack))
                 {
-                    ViewModel.AoAUnitViewModel model =new ViewModel.AoAUnitViewModel(losat);
+                        ViewModel.AoAUnitViewModel model = new ViewModel.AoAUnitViewModel(losat);
 
-                    UnitView view = new UnitView(model);
-                    CartelTab.Content = view;
-                    
+                        UnitView view = new UnitView(model);
+                        CartelTab.Content = view;            
+                }
+            }
+            else 
+            {
+                AoABuilding building = new AoABuilding(losatObject);
+                losatObject = null;
+                if (building.LoadData(losatndf, dic, iconspack))
+                {
+                    ViewModel.BuildingViewModel model = new ViewModel.BuildingViewModel(building);
                 }
             }
             // if object is building...

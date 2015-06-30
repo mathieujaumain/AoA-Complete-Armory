@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using IrisZoomDataApi.Model.Ndfbin;
+using IrisZoomDataApi.Model.Ndfbin.Types.AllTypes;
 
 namespace DM.Armory.Model
 {
@@ -155,14 +156,23 @@ namespace DM.Armory.Model
             }
         }
 
-        public bool LoadData(NdfObject dataobject)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool LoadData(NdfObject dataobject, IrisZoomDataApi.TradManager dictionary, IrisZoomDataApi.EdataManager iconPackage)
         {
-            throw new NotImplementedException();
+            NdfBoolean ndfbool;
+            NdfSingle ndffloat32;
+            NdfUInt32 ndfUint32;
+            NdfLocalisationHash ndfHash;
+            string name;
+
+            // Name
+            if (dataobject.TryGetValueFromQuery<NdfLocalisationHash>(NAME_PROPERTY, out ndfHash)) 
+            {
+                if(dictionary.TryGetString(ndfHash.Value, out name))
+                    Name = name;
+            }
+            else { Name=string.Empty;  }
+
+            return true;
         }
     }
 

@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IrisZoomDataApi;
+using IrisZoomDataApi.Model.Ndfbin;
+using IrisZoomDataApi.Model.Ndfbin.Types.AllTypes;
 
 namespace DM.Armory.Model
 {
-    public class AoABuilding : AoAGameObject
+    public class AoABuilding : AoAGameObject, INdfbinLoadable
     {
 
         private List<AoAUnit> _BuildableUnits = new List<AoAUnit>();
@@ -22,6 +25,11 @@ namespace DM.Armory.Model
             RareEarthCost = obj.RareEarthCost;
             ConstructionTime = obj.ConstructionTime;
             Faction = obj.Faction;
+        }
+
+        bool INdfbinLoadable.LoadData(NdfObject dataobject, TradManager dictionary, EdataManager iconPackage)
+        {
+            throw new NotImplementedException();
         }
     }
 }

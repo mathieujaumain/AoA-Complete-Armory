@@ -27,6 +27,15 @@ namespace DM.Armory.View
             InitializeComponent();
             DataContext = unitVM;
             DescriptionBox.Document = DM.Armory.BL.EugenStringConverter.MakeFlowDocument(unitVM.Description, Brushes.LightGreen);
+
+            foreach (AoATurretViewModel turretVM in unitVM.Turrets) 
+            {
+                foreach (AoAWeaponViewModel weaponVM in turretVM.Weapons) 
+                {
+                    WeaponView view = new WeaponView(weaponVM);
+                    WeaponsList.Children.Add(view);
+                }
+            }
         }
 
         public UnitView()

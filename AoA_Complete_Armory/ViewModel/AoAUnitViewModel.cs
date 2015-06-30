@@ -17,10 +17,13 @@ namespace DM.Armory.ViewModel
     public class AoAUnitViewModel
     {
         private AoAUnit _unit;
+        private List<AoATurretViewModel> _turrets = new List<AoATurretViewModel>();
 
         public AoAUnitViewModel(AoAUnit unit) 
         {
             _unit = unit;
+            foreach (AoATurret turret in _unit.Turrets)
+                _turrets.Add(new AoATurretViewModel(turret));
         }
 
         public string           Name                { get { return _unit.Name; } }
@@ -36,8 +39,11 @@ namespace DM.Armory.ViewModel
         public float             ViewRange          { get { return _unit.ViewRange; } }
         public bool             CanSpot             { get { return _unit.CanSpotStealthyUnits; } }
         public int              Health              { get { return _unit.Health; } }
-        public List<AoATurret>  Turrets             { get { return _unit.Turrets; } }
-        public AoAVehicle       Vehicle             { get { return _unit.Vehicle; } }
+
+
+        public List<AoATurretViewModel> Turrets { get { return _turrets; } }
+
+        //public AoAVehicle       Vehicle             { get { return _unit.Vehicle; } }
     }
 
     public class Int2VisibilityConverter : IValueConverter
