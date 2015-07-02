@@ -74,7 +74,11 @@
     <Compile Include="Model\Skills\IAoASkills.cs" />
     <Compile Include="ViewModel\AoATurretViewModel.cs" />
     <Compile Include="ViewModel\AoAWeaponViewModel.cs" />
+    <Compile Include="View\AoATile.cs" />
     <Compile Include="View\RichTextBoxHelper.cs" />
+    <Compile Include="View\UnitIconView.xaml.cs">
+      <DependentUpon>UnitIconView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UnitView.xaml.cs">
       <DependentUpon>UnitView.xaml</DependentUpon>
     </Compile>
@@ -91,6 +95,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FactionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UnitIconView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,7 +121,7 @@
     <Compile Include="Model\AoAGameObject.cs" />
     <Compile Include="Model\AoATurret.cs" />
     <Compile Include="Model\AoAUnit.cs" />
-    <Compile Include="Model\AoAUppgrade.cs" />
+    <Compile Include="Model\AoAResearch.cs" />
     <Compile Include="Model\AoAVehicle.cs" />
     <Compile Include="Model\AoAWeapon.cs" />
     <Compile Include="Model\INdfbinLoadable.cs" />

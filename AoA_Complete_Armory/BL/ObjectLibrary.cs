@@ -13,7 +13,7 @@ namespace DM.Armory.BL
         private List<AoAUnit> _CartelUnits = new List<AoAUnit>();
         private List<AoAUnit> _UsUnits = new List<AoAUnit>();
         private List<AoAUnit> _ChimeraUnits = new List<AoAUnit>();
-        private List<AoAUppgrade> _Uppgrades = new List<AoAUppgrade>();
+        private List<AoAResearch> _Uppgrades = new List<AoAResearch>();
         private List<AoABuilding> _CartelBuildings = new List<AoABuilding>();
         private List<AoABuilding> _UsBuildings = new List<AoABuilding>();
         private List<AoABuilding> _ChimeraBuildings = new List<AoABuilding>();
@@ -42,8 +42,8 @@ namespace DM.Armory.BL
                     break;
                 }
 
-                if (obj is AoAUppgrade)
-                    _Uppgrades.Add(obj as AoAUppgrade);
+                if (obj is AoAResearch)
+                    _Uppgrades.Add(obj as AoAResearch);
             }
         }
 
@@ -109,7 +109,7 @@ namespace DM.Armory.BL
         }
 
 
-        public List<AoAUppgrade> Uppgrades
+        public List<AoAResearch> Uppgrades
         {
             get { return _Uppgrades; }
             set { _Uppgrades = value; }

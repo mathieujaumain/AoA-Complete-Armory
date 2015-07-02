@@ -3,12 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls">
+             xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:ViewModel="clr-namespace:DM.Armory.ViewModel" 
+            xmlns:View="clr-namespace:DM.Armory.View">
+
+    <UserControl.Resources>
+        <ViewModel:WPFBitmapConverter x:Key="BitmapConverter"/>
+    </UserControl.Resources>
     <Metro:MetroContentControl>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <Metro:Tile Name="Building" Width="{Binding Background.ImageSource.Width, ElementName=Building, Mode=OneWay}" Height="{Binding Background.ImageSource.Height, ElementName=Building, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Metro:Tile Name="Building" ToolTip="{Binding Description}" Width="{Binding Background.ImageSource.Width, ElementName=Building, Mode=OneWay}" Height="{Binding Background.ImageSource.Height, ElementName=Building, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <Metro:Tile.Background>
+                    <ImageBrush ImageSource="{Binding Icon, Converter={StaticResource BitmapConverter}}"/>
+                </Metro:Tile.Background>
+            </Metro:Tile>
+                
             <Separator Name="UnitSeparator" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
-            <GroupBox Name="UnitsList"  Header="Units"/>
+            <GroupBox Header="Units">
+                <StackPanel Orientation="Vertical" Name="UnitsList"></StackPanel>
+            </GroupBox>
             <Separator Name="ReseachSeparator" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
             <GroupBox Name="ReseachList"  Header="Researches"/>
         </StackPanel>

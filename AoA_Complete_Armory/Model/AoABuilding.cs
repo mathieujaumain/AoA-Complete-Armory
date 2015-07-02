@@ -12,8 +12,25 @@ namespace DM.Armory.Model
     public class AoABuilding : AoAGameObject, INdfbinLoadable
     {
 
+#region ndfQueries
+        public static string PRODUCABLE_UNITS_PATH = "Modules.Factory.Default.ProducableUnits"; //Collection of reference to TUniteDescriptors
+        public static string AVAIBLE_RESEARCHES_PATH = "Modules.TechnoRegistrar.Default.ResearchableTechnos"; // Collection of reference to TTechnoLevelDescriptor
+#endregion
+
         private List<AoAUnit> _BuildableUnits = new List<AoAUnit>();
-        private List<AoAUppgrade> _Researches = new List<AoAUppgrade>();
+        private List<AoAResearch> _Researches = new List<AoAResearch>();
+
+        public List<AoAResearch> Researches
+        {
+            get { return _Researches; }
+            set { _Researches = value; }
+        }
+
+        public List<AoAUnit> BuildableUnits
+        {
+            get { return _BuildableUnits; }
+            set { _BuildableUnits = value; }
+        }
 
         public AoABuilding(AoAGameObject obj)
         {
@@ -25,11 +42,64 @@ namespace DM.Armory.Model
             RareEarthCost = obj.RareEarthCost;
             ConstructionTime = obj.ConstructionTime;
             Faction = obj.Faction;
+            Icon = obj.Icon;
         }
 
-        bool INdfbinLoadable.LoadData(NdfObject dataobject, TradManager dictionary, EdataManager iconPackage)
+        new public bool LoadData(NdfObject dataobject, TradManager dictionary, EdataManager iconPackage)
         {
-            throw new NotImplementedException();
+            NdfCollection collection;
+
+            // UNITS
+            if (dataobject.TryGetValueFromQuery<NdfCollection>(PRODUCABLE_UNITS_PATH, out collection))
+            {
+
+                List<CollectionItemValueHolder> unitss = collection.InnerList.FindAll(x => x.Value is NdfObjectReference);
+
+                List<NdfObjectReference> units = new List<NdfObjectReference>();
+                foreach (CollectionItemValueHolder uni in unitss)
+                {
+                    units.Add(uni.Value as NdfObjectReference);
+                }
+
+                AoAGameObject obj;
+                foreach (NdfObjectReference unit in units)
+                {
+                    obj = new AoAGameObject();
+                    if (obj.LoadData(unit.Instance, dictionary, iconPackage))
+                        if (obj.Type != ObjectType.Building)
+                        {
+                            AoAUnit aunit = new AoAUnit(obj);
+                            if (aunit.LoadData(unit.Instance, dictionary, iconPackage)) // !!!!!
+                                _BuildableUnits.Add(aunit);
+                        }
+                }
+            }
+
+            //RESEARCHES
+            if (dataobject.TryGetValueFromQuery<NdfCollection>(AVAIBLE_RESEARCHES_PATH, out collection))
+            {
+
+                List<CollectionItemValueHolder> ress = collection.InnerList.FindAll(x => x.Value is NdfObjectReference);
+
+                List<NdfObjectReference> researches = new List<NdfObjectReference>();
+                foreach (CollectionItemValueHolder uni in ress)
+                {
+                    researches.Add(uni.Value as NdfObjectReference);
+                }
+
+                AoAResearch aResearch;
+                foreach (NdfObjectReference research in researches)
+                {
+                    aResearch = new AoAResearch();
+                    if (aResearch.LoadData(research.Instance, dictionary, iconPackage)) // tech.dic !
+                    {
+                        Researches.Add(aResearch);
+                    }
+                }
+            }
+
+            return true;
+            
         }
     }
 }

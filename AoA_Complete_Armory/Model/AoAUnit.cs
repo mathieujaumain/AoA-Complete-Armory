@@ -31,7 +31,7 @@ namespace DM.Armory.Model
        
 
         private object _Lock = new object();
-        private List<AoAUppgrade> _PossibleUppgrades = new List<AoAUppgrade>();
+        private List<AoAResearch> _PossibleUppgrades = new List<AoAResearch>();
         private List<AoATurret> _Turrets = new List<AoATurret>();
         private List<AoAUnit> _Children = new List<AoAUnit>();
         private List<IAoASkills> _Skills = new List<IAoASkills>();

@@ -46,7 +46,7 @@ namespace DM.Armory.View.Windows
             EdataManager edat = new EdataManager(ndffile);
             edat.ParseEdataFile();
             NdfbinManager everything = edat.ReadNdfbin(EVERYTHING);
-            NdfObject losatndf = everything.GetClass("TUniteDescriptor").Instances[1];
+            NdfObject losatndf = everything.GetClass("TUniteDescriptor").Instances[26]; // caserne CS
 
 
             //load unite dic
@@ -86,9 +86,10 @@ namespace DM.Armory.View.Windows
                 if (building.LoadData(losatndf, dic, iconspack))
                 {
                     ViewModel.BuildingViewModel model = new ViewModel.BuildingViewModel(building);
+                    BuildingListView view = new BuildingListView(model);
+                    CartelTab.Content = view;
                 }
             }
-            // if object is building...
         }
     }
 

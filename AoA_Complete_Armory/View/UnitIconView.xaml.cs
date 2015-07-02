@@ -14,28 +14,22 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DM.Armory.ViewModel;
 
-
 namespace DM.Armory.View
 {
     /// <summary>
-    /// Interaction logic for BuildingView.xaml
+    /// Interaction logic for UnitIconView.xaml
     /// </summary>
-    public partial class BuildingListView
+    public partial class UnitIconView : UserControl
     {
-        public BuildingListView()
+        public UnitIconView()
         {
             InitializeComponent();
         }
 
-        public BuildingListView(BuildingViewModel data) 
+        public UnitIconView(AoAUnitViewModel model)
         {
             InitializeComponent();
-            DataContext = data;
-
-            foreach(AoAUnitViewModel unit in data.Units){
-                UnitIconView view = new UnitIconView(unit);
-                UnitsList.Children.Add(view);
-            }
+            DataContext = model;
         }
     }
 }
