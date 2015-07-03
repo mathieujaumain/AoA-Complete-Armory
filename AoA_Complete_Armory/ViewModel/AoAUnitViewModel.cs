@@ -133,4 +133,22 @@ namespace DM.Armory.ViewModel
             return 1;
         }
     }
+
+
+    public class Description2ToolTipConverter : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            string description = (string)value;
+            string[] parts = description.Split(new string[] { "Available" }, StringSplitOptions.RemoveEmptyEntries);
+
+            return parts[0].Trim();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return 1;
+        }
+    }
 }

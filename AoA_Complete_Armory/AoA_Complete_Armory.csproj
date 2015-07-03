@@ -72,12 +72,16 @@
     </ApplicationDefinition>
     <Compile Include="BL\ObjectLibrary.cs" />
     <Compile Include="Model\Skills\IAoASkills.cs" />
+    <Compile Include="ViewModel\AoAResearchViewModel.cs" />
     <Compile Include="ViewModel\AoATurretViewModel.cs" />
     <Compile Include="ViewModel\AoAWeaponViewModel.cs" />
     <Compile Include="View\AoATile.cs" />
     <Compile Include="View\RichTextBoxHelper.cs" />
-    <Compile Include="View\UnitIconView.xaml.cs">
-      <DependentUpon>UnitIconView.xaml</DependentUpon>
+    <Compile Include="View\IconView.xaml.cs">
+      <DependentUpon>IconView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TileMatrix.xaml.cs">
+      <DependentUpon>TileMatrix.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\UnitView.xaml.cs">
       <DependentUpon>UnitView.xaml</DependentUpon>
@@ -98,7 +102,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UnitIconView.xaml">
+    <Page Include="View\IconView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TileMatrix.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -14,7 +14,7 @@ namespace DM.Armory.Model
 
 #region ndfQueries
         public static string PRODUCABLE_UNITS_PATH = "Modules.Factory.Default.ProducableUnits"; //Collection of reference to TUniteDescriptors
-        public static string AVAIBLE_RESEARCHES_PATH = "Modules.TechnoRegistrar.Default.ResearchableTechnos"; // Collection of reference to TTechnoLevelDescriptor
+        public static string AVAILABLE_RESEARCHES_PATH = "Modules.TechnoRegistrar.Default.ResearchableTechnos"; // Collection of reference to TTechnoLevelDescriptor
 #endregion
 
         private List<AoAUnit> _BuildableUnits = new List<AoAUnit>();
@@ -76,7 +76,7 @@ namespace DM.Armory.Model
             }
 
             //RESEARCHES
-            if (dataobject.TryGetValueFromQuery<NdfCollection>(AVAIBLE_RESEARCHES_PATH, out collection))
+            if (dataobject.TryGetValueFromQuery<NdfCollection>(AVAILABLE_RESEARCHES_PATH, out collection))
             {
 
                 List<CollectionItemValueHolder> ress = collection.InnerList.FindAll(x => x.Value is NdfObjectReference);
@@ -91,7 +91,7 @@ namespace DM.Armory.Model
                 foreach (NdfObjectReference research in researches)
                 {
                     aResearch = new AoAResearch();
-                    if (aResearch.LoadData(research.Instance, dictionary, iconPackage)) // tech.dic !
+                    if (aResearch.LoadData(research.Instance, DM.Armory.View.Windows.MainWindow.techDic, iconPackage)) // tech.dic !
                     {
                         Researches.Add(aResearch);
                     }

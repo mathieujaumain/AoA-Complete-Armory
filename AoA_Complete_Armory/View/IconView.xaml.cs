@@ -19,14 +19,26 @@ namespace DM.Armory.View
     /// <summary>
     /// Interaction logic for UnitIconView.xaml
     /// </summary>
-    public partial class UnitIconView : UserControl
+    public partial class IconView : UserControl
     {
-        public UnitIconView()
+        public IconView()
         {
             InitializeComponent();
         }
 
-        public UnitIconView(AoAUnitViewModel model)
+        public IconView(AoAUnitViewModel model)
+        {
+            InitializeComponent();
+            DataContext = model;
+        }
+
+        public IconView(AoAResearchViewModel model)
+        {
+            InitializeComponent();
+            DataContext = model;
+        }
+
+        public IconView(BuildingViewModel model)
         {
             InitializeComponent();
             DataContext = model;

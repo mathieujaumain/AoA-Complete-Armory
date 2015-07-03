@@ -24,6 +24,8 @@ namespace DM.Armory.View.Windows
     /// </summary>
     public partial class MainWindow
     {
+        public static TradManager techDic;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,6 +40,7 @@ namespace DM.Armory.View.Windows
 
             string trans = @"C:\Users\mja\Documents\perso\mods\ZZ_Win.dat";
             string transFile = "pc\\localisation\\us\\localisation\\unites.dic";
+            string techTrans = @"pc\localisation\us\localisation\techno.dic";
 
             string zz4 = @"C:\Users\mja\Documents\perso\mods\ZZ_4.dat";
             string ICON_PACKAGE = @"pc\texture\pack\commoninterface.ppk";
@@ -53,6 +56,12 @@ namespace DM.Armory.View.Windows
             edat = new EdataManager(trans);
             edat.ParseEdataFile();
             TradManager dic = edat.ReadDictionary(transFile);
+
+            //load tech dic
+            edat = new EdataManager(trans);
+            edat.ParseEdataFile();
+            TradManager tech = edat.ReadDictionary(techTrans);
+            techDic = tech;
 
             //load iconspack
             edat = new EdataManager(zz4);

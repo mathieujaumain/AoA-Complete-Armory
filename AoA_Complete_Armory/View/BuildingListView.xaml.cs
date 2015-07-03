@@ -33,8 +33,14 @@ namespace DM.Armory.View
             DataContext = data;
 
             foreach(AoAUnitViewModel unit in data.Units){
-                UnitIconView view = new UnitIconView(unit);
-                UnitsList.Children.Add(view);
+                IconView view = new IconView(unit);
+                UnitsList.AddATile(view);
+            }
+
+            foreach (AoAResearchViewModel res in data.Researches)
+            {
+                IconView view = new IconView(res);
+                ResearchesList.AddATile(view);
             }
         }
     }

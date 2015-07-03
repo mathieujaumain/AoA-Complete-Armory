@@ -159,7 +159,7 @@ namespace DM.Armory.Model
 
     public enum ObjectType : uint
     {
-        Ground_Unit_A = 3, Ground_Unit_B = 5, Ground_Unit_C = 6, Aircraft = 2, Building = 8
+        Ground_Unit_A = 3, Ground_Unit_B = 5, Ground_Unit_C = 6, Aircraft = 2, Building = 8, Research = 50
     }
 
 }
