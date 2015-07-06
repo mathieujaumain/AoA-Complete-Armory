@@ -49,7 +49,7 @@ namespace DM.Armory.View.Windows
             EdataManager edat = new EdataManager(ndffile);
             edat.ParseEdataFile();
             NdfbinManager everything = edat.ReadNdfbin(EVERYTHING);
-            NdfObject losatndf = everything.GetClass("TUniteDescriptor").Instances[26]; // caserne CS
+            NdfObject losatndf = everything.GetClass("TUniteDescriptor").Instances[1]; // caserne CS 26
 
 
             //load unite dic

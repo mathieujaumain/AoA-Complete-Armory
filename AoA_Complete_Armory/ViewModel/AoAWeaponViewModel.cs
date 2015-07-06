@@ -16,8 +16,15 @@ namespace DM.Armory.ViewModel
             _Weapon = weapon;
         }
 
-
+        public AoAWeapon Weapon { get { return _Weapon; } }
         public string Name { get { return _Weapon.Name; } }
-        //public float GroundRange { get { return _Weapon.GroundRange; } }
+        public float GroundRange { get { return _Weapon.GroundRange; } }
+        public float Alpha { get { return _Weapon.Alpha; } }
+        public float PowGen { get { return _Weapon.PoWGen; } }
+        public float VHARange { get { return _Weapon.VHARange; } }
+        public float VLARange { get { return _Weapon.VLARange; } }
+        public float Splash { get { return _Weapon.Splash; } }
+        public float Sustained { get { return _Weapon.Sustained; }}
+        public float AmbushMultiplier { get { return _Weapon.AmbushMultiplier; } }
     }
 }

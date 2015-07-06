@@ -36,11 +36,14 @@ namespace DM.Armory.ViewModel
         public FactionEnum      Faction             { get { return _unit.Faction; } }
         public Bitmap           Icon                { get { return _unit.Icon; } }
         public int              nbrPOW              { get { return _unit.nbrPOW; } }
-        public float             ViewRange          { get { return _unit.ViewRange; } }
+        public float            ViewRange           { get { return _unit.ViewRange; } }
         public bool             CanSpot             { get { return _unit.CanSpotStealthyUnits; } }
-        public int              Health              { get { return _unit.Health; } }
-
-
+        public float              Health            { get { return _unit.Health; } }
+        public bool             Stealth             { get { return _unit.IsStealthy; } }
+        public int              TransportSlots      { get { return _unit.TransportSlot; } }
+        public int              SeatsTaken          { get { return _unit.SlotTaken; } }
+        public int              Armor               { get { return _unit.Armor; } }
+            
         public List<AoATurretViewModel> Turrets { get { return _turrets; } }
 
         //public AoAVehicle       Vehicle             { get { return _unit.Vehicle; } }
@@ -144,6 +147,22 @@ namespace DM.Armory.ViewModel
             string[] parts = description.Split(new string[] { "Available" }, StringSplitOptions.RemoveEmptyEntries);
 
             return parts[0].Trim();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            return 1;
+        }
+    }
+
+
+    public class Bool2StringConverter : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            bool val = (bool)value;
+            return val ? "true" : "false";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

@@ -17,7 +17,7 @@ namespace DM.Armory.Model
         public static string NAME_PROPERTY = "Ammunition.Name";//loca hash
         public static string TYPE_PROPERTY = "Ammunition.TypeArme"; //loca hash
         public static string ARME_PROPERTY = "Ammunition.Arme"; //uint32
-        public static string POWER_PROPERTY = "Ammunition.Puissance";
+        public static string POWER_PROPERTY = "Ammunition.Puissance"; //float32
         public static string TIME_BETWEEN_SHOTS_PROPERTY = "Ammunition.TempsEntreDeuxTirs"; //float32
         public static string MAX_RANGE_PROPERTY = "Ammunition.PorteeMaximale"; //float32
         public static string SPLASH_DAMAGE_RADIUS_PROPERTY = "Ammunition.RadiusSplashPhysicalDamages"; //float 32
@@ -26,7 +26,7 @@ namespace DM.Armory.Model
         public static string SALVO_RELOAD_TIME_PROPERTY = "Ammunition.TempsEntreDeuxSalves"; //float32
         public static string SIMULTANEOUS_PROJECTILES_PROPERTY = "Ammunition.NbrProjectilesSimultanes"; //uint32
         public static string SHOTS_PER_SALVO_PROPERTY = "Ammunition.NbTirParSalves"; //uint32
-        public static string POW_PROBABILITY_PROPERTY = "Ammunition.GeneratePilotsProbability";
+        public static string POW_PROBABILITY_PROPERTY = "Ammunition.GeneratePilotProbability";
         public static string POW_TAGS_PROPERTY = "Ammunition.PilotsTagSet"; //List of TTypeUnitTag, see DebugTagName property
         public static string INDIRECT_FIRE_PROPERTY = "Ammunition.TirIndirect"; //bool
         public static string TRIGGER_FIRE_PROPERTY = "Ammunition.FireTriggeringProbability"; //float32
@@ -36,14 +36,24 @@ namespace DM.Armory.Model
         public static string PLANE_MAX_RANGE_PROPERTY = "Ammunition.PorteeMaximaleHA"; //float32
         public static string PLANE_MIN_RANGE_PROPERTY = "Ammunition.PorteeMinimaleHA";
         public static string HELICOPTER_MIN_RANGE_PROPERTY = "Ammunition.PorteeMinimaleTBA";
+        public static string AMBUSH_PROPERTY = "Ammunition.AmbushShotDamageMultiplier"; //float32
         #endregion
 
         #region Properties
         public string Name { get; private set; }
-        public long MeanRoF { get; private set; }
-        public long GroundRange { get; private set; }
-        public long VLARange { get; private set; }
-        public long VHARange { get; private set; }
+        public float Sustained { get; private set; }
+        public float GroundRange { get; private set; }
+        public float VLARange { get; private set; }
+        public float VHARange { get; private set; }
+        public float PoWGen { get; private set; }
+        public float Splash { get; private set; }
+        public float Alpha { get; private set; }
+        public int SimulatenousShots { get; private set; }
+        public int MaxShotsPerSalvo { get; private set; }
+        public double TimeBetweenShots { get; private set; }
+        public double SalvoReloadTime { get; private set; }
+        public double AimingTime { get; private set; }
+        public float AmbushMultiplier { get; private set; }
         #endregion
 
         public int WeaponId = -1;
@@ -64,8 +74,6 @@ namespace DM.Armory.Model
         private WeaponsStatus _CurrentStatus = WeaponsStatus.IDLE;
 
         private double _TotalTimeElapsed = 0; // Shitty naming
-
-        private TargetType Targetables = TargetType.None;
 
         void IUpdatable.Update(double timeElapsed)
         {
@@ -172,6 +180,35 @@ namespace DM.Armory.Model
             }
             else { Name=string.Empty;  }
 
+            //GroundRange
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(MAX_RANGE_PROPERTY, out ndffloat32))
+                GroundRange = ndffloat32.Value;
+
+            //Alpha
+            if (!dataobject.TryGetValueFromQuery<NdfSingle>(DAMAGE_PROPERTY, out ndffloat32))
+                return false;
+            Alpha = ndffloat32.Value;
+
+            //TBARange
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(HELICOPTER_MAX_RANGE_PROPERTY, out ndffloat32))
+                VLARange = ndffloat32.Value;
+
+            //THARange
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(PLANE_MAX_RANGE_PROPERTY, out ndffloat32))
+                VHARange = ndffloat32.Value;
+            
+            //Splash
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(SPLASH_DAMAGE_RADIUS_PROPERTY, out ndffloat32))
+                Splash = ndffloat32.Value;
+
+            //PowGen
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(POW_PROBABILITY_PROPERTY, out ndffloat32))
+                PoWGen = ndffloat32.Value;
+
+            //AmBush
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(AMBUSH_MULTIPLIER_PROPERTY, out ndffloat32))
+                AmbushMultiplier = ndffloat32.Value;
+
             return true;
         }
     }
@@ -179,11 +216,6 @@ namespace DM.Armory.Model
     public enum WeaponsStatus
     {
         IDLE, RELOADING, AIMING, FIRING,
-    }
-
-    public enum TargetType:byte
-    {
-        Infantry = 1, Armor = 2, Helicopters = 4, Planes = 8, None = 0
     }
 
     public enum WeaponType:uint

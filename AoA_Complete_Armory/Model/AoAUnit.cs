@@ -16,7 +16,8 @@ namespace DM.Armory.Model
         public static string TURRET_LIST_PATH = "Modules.WeaponManager.Default.TurretDescriptorList";
         public static string STEALTH_PATH = "Modules.Visibility.Default.UnitStealthBonus"; //Float32
         public static string AUTOREVEAL_PATH = "Modules.Visibility.Default.AutoRevealType"; //Int32 
-        public static string DAMMAGE_PATH = "Modules.Dammages.Default.MaxDammages"; // uint32
+        public static string DAMMAGE_PATH = "Modules.Damage.Default.MaxDamages"; // float32
+        public static string ARMOR_PATH = "Modules.Damage.Default.CommonDamageDescriptor.BlindageProperties.ArmorDescriptorFront.BaseBlindage"; // uint32
         public static string TRANSPORTABLE_PATH = "Modules.Transportable.NbSeatsOccupied"; //int32
         public static string HARVESTER_PATH = "Modules.Harvester.Default";
         public static string STORAGE_PATH = "Modules.Storage.Default";
@@ -59,13 +60,14 @@ namespace DM.Armory.Model
         //public AoAVehicle Vehicle { get; set; }
         public float ViewRange { get; set; }
         public int nbrPOW { get; set; }
-        public int Health { get; set; }
+        public float Health { get; set; }
         public int TransportSlot { get; set; }
         public int SlotTaken { get; set; }
         public bool CanSpotStealthyUnits { get; set; }
         public bool CanHarvest { get; set; }
         public int StorageSize { get; set; }
         public bool IsStealthy { get; set; }
+        public int Armor { get; set; }
         public int AutoReveal { get; set; }
 
         
@@ -84,9 +86,13 @@ namespace DM.Armory.Model
             NdfCollection ndfCollection;
 
             // HP
-            //if (!dataobject.TryGetValueFromQuery<NdfUInt32>(DAMMAGE_PATH, out ndfuint32))
-            //    return false;
-            //Health = (int)ndfuint32.Value;
+            if (!dataobject.TryGetValueFromQuery<NdfSingle>(DAMMAGE_PATH, out ndfFloat32))
+                return false;
+            Health = ndfFloat32.Value;
+
+            // Armor
+            if (dataobject.TryGetValueFromQuery<NdfUInt32>(ARMOR_PATH, out ndfuint32))
+                Armor = (int)ndfuint32.Value;
 
             //POW
             if (dataobject.TryGetValueFromQuery<NdfUInt32>(POW_PATH, out ndfuint32))
