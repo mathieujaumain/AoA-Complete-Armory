@@ -86,6 +86,9 @@
     <Compile Include="View\UnitView.xaml.cs">
       <DependentUpon>UnitView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Windows\SecondaryWindow.xaml.cs">
+      <DependentUpon>SecondaryWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="style\AccentChimera.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -150,6 +153,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\UnitView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\SecondaryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DM.Armory.ViewModel;
+using DM.Armory.View.Windows;
 
 namespace DM.Armory.View
 {
@@ -21,6 +22,10 @@ namespace DM.Armory.View
     /// </summary>
     public partial class IconView : UserControl
     {
+        private AoAUnitViewModel unit;
+        private BuildingViewModel building;
+        private AoAResearchViewModel research;
+
         public IconView()
         {
             InitializeComponent();
@@ -29,19 +34,45 @@ namespace DM.Armory.View
         public IconView(AoAUnitViewModel model)
         {
             InitializeComponent();
+            unit = model;
             DataContext = model;
+            Tile.Click += UnitOpen;
+            
+        }
+
+        private void UnitOpen(object sender, RoutedEventArgs e)
+        {
+            SecondaryWindow window = new SecondaryWindow();
+            window.ContentGrid.Children.Add(new UnitView(unit));
+            window.Show();
         }
 
         public IconView(AoAResearchViewModel model)
         {
             InitializeComponent();
             DataContext = model;
+            research = model;
+            //Tile.Click += ResearchOpen;
+        }
+
+        private void ResearchOpen(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public IconView(BuildingViewModel model)
         {
             InitializeComponent();
             DataContext = model;
+            building = model;
+            //Tile.Click += BuildingOpen;
         }
+
+        private void BuildingOpen(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

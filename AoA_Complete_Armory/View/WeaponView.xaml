@@ -12,7 +12,8 @@
         </UserControl.Resources>
 
         <GroupBox Header="{Binding Name}">
-        <Grid>
+        <Viewbox Stretch="Fill">
+            <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -55,5 +56,6 @@
             <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding AmbushMultiplier, Mode=OneWay}" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
         </Grid>
+        </Viewbox>
     </GroupBox>
 </UserControl>

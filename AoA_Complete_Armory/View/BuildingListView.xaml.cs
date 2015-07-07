@@ -35,12 +35,14 @@ namespace DM.Armory.View
             foreach(AoAUnitViewModel unit in data.Units){
                 IconView view = new IconView(unit);
                 UnitsList.AddATile(view);
+                //UnitsList.Children.Add(view);
             }
 
             foreach (AoAResearchViewModel res in data.Researches)
             {
                 IconView view = new IconView(res);
                 ResearchesList.AddATile(view);
+                //ResearchesList.Children.Add(view);
             }
         }
     }

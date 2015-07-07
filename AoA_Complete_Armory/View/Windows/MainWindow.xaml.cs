@@ -39,7 +39,7 @@ namespace DM.Armory.View.Windows
             string EVERYTHING = @"pc\ndf\patchable\gfx\everything.ndfbin";
 
             string trans = @"C:\Users\mja\Documents\perso\mods\ZZ_Win.dat";
-            string transFile = "pc\\localisation\\us\\localisation\\unites.dic";
+            string transFile = @"pc\localisation\us\localisation\unites.dic";
             string techTrans = @"pc\localisation\us\localisation\techno.dic";
 
             string zz4 = @"C:\Users\mja\Documents\perso\mods\ZZ_4.dat";
@@ -49,7 +49,7 @@ namespace DM.Armory.View.Windows
             EdataManager edat = new EdataManager(ndffile);
             edat.ParseEdataFile();
             NdfbinManager everything = edat.ReadNdfbin(EVERYTHING);
-            NdfObject losatndf = everything.GetClass("TUniteDescriptor").Instances[1]; // caserne CS 26
+            NdfObject losatndf = everything.GetClass("TUniteDescriptor").Instances[26]; // caserne CS 26
 
 
             //load unite dic
@@ -83,7 +83,6 @@ namespace DM.Armory.View.Windows
                 if (losat.LoadData(losatndf, dic, iconspack))
                 {
                         ViewModel.AoAUnitViewModel model = new ViewModel.AoAUnitViewModel(losat);
-
                         UnitView view = new UnitView(model);
                         CartelTab.Content = view;            
                 }

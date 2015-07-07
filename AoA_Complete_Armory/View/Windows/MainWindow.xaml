@@ -7,7 +7,8 @@
                       Height="900"
                       Width="1200"
                       TitleCaps="True"
-                      FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet">
+                      FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet"
+                      GlowBrush="Black">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button Content="settings" />
