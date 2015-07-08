@@ -29,13 +29,49 @@ namespace DM.Armory.BL
         private static string NDF_WIN_FILE = "NDF_WIN.dat";
         private static string EVERYTHING = @"pc\ndf\patchable\gfx\everything.ndfbin";
 
+
+        public event EventHandler<String> OnLoadingUpdate = delegate { };
+
         private NdfbinManager _EverythingNdfbin;
+
+        public NdfbinManager EverythingNdfbin
+        {
+            get { return _EverythingNdfbin; }
+            set { _EverythingNdfbin = value; }
+        }
         private TradManager _UniteDic;
+
+        public TradManager UniteDic
+        {
+            get { return _UniteDic; }
+            set { _UniteDic = value; }
+        }
         private TradManager _TechDic;
+
+        public TradManager TechDic
+        {
+            get { return _TechDic; }
+            set { _TechDic = value; }
+        }
         private EdataManager _IconsPack;
 
+        public EdataManager IconsPack
+        {
+            get { return _IconsPack; }
+            set { _IconsPack = value; }
+        }
 
-        public bool GetLastUpdateFromDataFolder()
+        private  List<AoABuilding> BuildingsList = new List<AoABuilding>();
+
+        private List<AoABuilding> _CartelBuildingsList = new List<AoABuilding>();
+        private List<AoABuilding> _USBuildingsList = new List<AoABuilding>();
+        private List<AoABuilding> _ChimeraBuildingsList = new List<AoABuilding>();
+
+        public List<AoABuilding> CartelBuildings { get { return _CartelBuildingsList; } }
+        public List<AoABuilding> UsBuildings { get { return _USBuildingsList; } }
+        public List<AoABuilding> ChimeraBuildings { get { return _ChimeraBuildingsList; } }
+
+        public async Task<bool> GetLastUpdateFromDataFolder()
         {
             DirectoryInfo dataDirectory = new DirectoryInfo(Settings.Default.PathToGameFolder + DATA_FOLDER);
             DirectoryInfo[] dirs = dataDirectory.GetDirectories();
@@ -49,22 +85,40 @@ namespace DM.Armory.BL
 
             foreach (DirectoryInfo dir in orderedList)
             {
-                if(!everything)
+                OnLoadingUpdate(this, "loading data from version " + dir.Name);
+                if (!everything)
+                {
+                    OnLoadingUpdate(this, "try to load everything.ndfbin file.");
+                    await Task.Delay(1000);
                     everything = TryGetNdfbinFileFromFolder(dir.FullName, NDF_WIN_FILE, EVERYTHING, out _EverythingNdfbin);
+                }
 
                 if (!unitdic)
+                {
+                    OnLoadingUpdate(this, "try to load unit.dic file.");
+                    await Task.Delay(1000);
                     unitdic = TryGetDicFileFromFolder(dir.FullName, ZZ_WIN_FILE, UNIT_DIC, out _UniteDic);
+                }
 
                 if (!techdic)
+                {
+                    OnLoadingUpdate(this, "try to load tech.dic  file.");
+                    await Task.Delay(1000);
                     techdic = TryGetDicFileFromFolder(dir.FullName, ZZ_WIN_FILE, TECH_DIC, out _TechDic);
+                }
 
                 if (!icons)
+                {
+                    OnLoadingUpdate(this, "try to load icons package file.");
+                    await Task.Delay(1000);
                     icons = TryGetPackFileFromFolder(dir.FullName, ZZ4_FILE, ICON_PACKAGE, out _IconsPack);
+                }
 
                 if (everything && unitdic && techdic && icons)
+                    OnLoadingUpdate(this, "loading successful.");
                     return true;
             }
-
+            OnLoadingUpdate(this, "loading failed...");
             return false;
         }
 
@@ -111,6 +165,7 @@ namespace DM.Armory.BL
                 return false;
 
             EdataManager dataManager = new EdataManager(fileInfos[0].FullName);
+            dataManager.ParseEdataFile();
             try
             {
                 ndfbin = dataManager.ReadNdfbin(ndfbinfile);
@@ -132,6 +187,7 @@ namespace DM.Armory.BL
                 return false;
 
             EdataManager dataManager = new EdataManager(fileInfos[0].FullName);
+            dataManager.ParseEdataFile();
             try
             {
                 dic = dataManager.ReadDictionary(dicfile);
@@ -151,6 +207,7 @@ namespace DM.Armory.BL
             if (fileInfos.Length <= 0)
                 return false;
             EdataManager dataManager = new EdataManager(fileInfos[0].FullName);
+            dataManager.ParseEdataFile();
             try
             {
                 pack = dataManager.ReadPackage(packfile);
@@ -162,59 +219,108 @@ namespace DM.Armory.BL
             return false;
         }
 
-        public List<AoAGameObject> LoadData()
+        public async Task<bool> LoadData()
         {
             List<AoAGameObject> result = new List<AoAGameObject>();
-            if (GetLastUpdateFromDataFolder())
-            {
-                
-                // Load all Tunite data
-                List<NdfObject> tunites = _EverythingNdfbin.GetClass("TUniteDescriptor").Instances;
-                foreach(NdfObject obj in tunites)
-                {
-                    AoAGameObject gobj = new AoAGameObject();
-                    if (gobj.LoadData(obj, _UniteDic, _IconsPack))
-                        result.Add(gobj);
-                }
-
-                // TODO : Load all Researches
-
-            }
-            else
-            {
-                throw new Exception("Couldn't load game data, check game folder.");
-            }
-
-            return result;
-
-        }
-
-
-        public List<AoAGameObject> LoadData(long version)
-        {
-            List<AoAGameObject> result = new List<AoAGameObject>();
-            if (GetUpdateFromDataFolder(version))
+            if (await GetLastUpdateFromDataFolder())
             {
 
-                // Load all Tunite data
+                // Load all GameObjects
+                List<AoABuilding> BuildingsList = new List<AoABuilding>();
                 List<NdfObject> tunites = _EverythingNdfbin.GetClass("TUniteDescriptor").Instances;
                 foreach (NdfObject obj in tunites)
                 {
                     AoAGameObject gobj = new AoAGameObject();
                     if (gobj.LoadData(obj, _UniteDic, _IconsPack))
-                        result.Add(gobj);
+                    {
+                        if (gobj.Type == ObjectType.Building)
+                        {
+                            AoABuilding building = new AoABuilding(gobj);
+                            if (building.LoadData(obj, _UniteDic, _TechDic, _IconsPack))
+                            {
+                                BuildingsList.Add(building);
+                            }
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+
                 }
+                Classify(BuildingsList);
+                return true;
+            }
+            else
+            {
+                return false;
+                throw new Exception("Couldn't load game data, check game folder.");
+            }
 
-                // TODO : Load all Researches
+            
+        }
 
+
+        public Task LoadData(long version)
+        {
+            if (GetUpdateFromDataFolder(version))
+            {
+                // Load all GameObjects
+                List<AoABuilding> BuildingsList = new List<AoABuilding>();
+                List<NdfObject> tunites = _EverythingNdfbin.GetClass("TUniteDescriptor").Instances;
+                foreach (NdfObject obj in tunites)
+                {
+                    AoAGameObject gobj = new AoAGameObject();
+                    if (gobj.LoadData(obj, _UniteDic, _IconsPack)) 
+                    {
+                        if (gobj.Type == ObjectType.Building)
+                        {
+                            AoABuilding building = new AoABuilding(gobj);
+                            if (building.LoadData(obj, _UniteDic, _TechDic, _IconsPack))
+                            {
+                                BuildingsList.Add(building);
+                            } 
+                               
+                        }
+                        else
+                        {
+                            
+                        }
+                    }
+                        
+                }
+                Classify(BuildingsList);
             }
             else
             {
                 throw new Exception("Couldn't load game data, check game folder.");
             }
 
-            return result;
+            return null;
+        }
 
+        private void Classify(List<AoABuilding> BuildingsList)
+        {
+            foreach (AoABuilding building in BuildingsList)
+            {
+                switch (building.Faction)
+                {
+                    case FactionEnum.Cartel:
+                        _CartelBuildingsList.Add(building);
+                        break;
+
+                    case FactionEnum.US:
+                        _USBuildingsList.Add(building);
+                        break;
+
+                    case FactionEnum.Chimera:
+                        _ChimeraBuildingsList.Add(building);
+                        break;
+
+                    default: break;
+                }
+            }
         }
 
     }

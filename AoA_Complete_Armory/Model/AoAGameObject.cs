@@ -150,6 +150,12 @@ namespace DM.Armory.Model
                 return false;
             }
         }
+
+
+        public bool LoadData(NdfObject dataobject, TradManager dictionary, TradManager dictionary2, EdataManager iconPackage)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public enum FactionEnum:uint

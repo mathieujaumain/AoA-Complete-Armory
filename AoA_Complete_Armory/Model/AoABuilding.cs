@@ -101,5 +101,62 @@ namespace DM.Armory.Model
             return true;
             
         }
+
+        new public bool LoadData(NdfObject dataobject, TradManager dictionary, TradManager techdic, EdataManager iconPackage)
+        {
+            NdfCollection collection;
+
+            // UNITS
+            if (dataobject.TryGetValueFromQuery<NdfCollection>(PRODUCABLE_UNITS_PATH, out collection))
+            {
+
+                List<CollectionItemValueHolder> unitss = collection.InnerList.FindAll(x => x.Value is NdfObjectReference);
+
+                List<NdfObjectReference> units = new List<NdfObjectReference>();
+                foreach (CollectionItemValueHolder uni in unitss)
+                {
+                    units.Add(uni.Value as NdfObjectReference);
+                }
+
+                AoAGameObject obj;
+                foreach (NdfObjectReference unit in units)
+                {
+                    obj = new AoAGameObject();
+                    if (obj.LoadData(unit.Instance, dictionary, iconPackage))
+                        if (obj.Type != ObjectType.Building)
+                        {
+                            AoAUnit aunit = new AoAUnit(obj);
+                            if (aunit.LoadData(unit.Instance, dictionary, iconPackage)) // !!!!!
+                                _BuildableUnits.Add(aunit);
+                        }
+                }
+            }
+
+            //RESEARCHES
+            if (dataobject.TryGetValueFromQuery<NdfCollection>(AVAILABLE_RESEARCHES_PATH, out collection))
+            {
+
+                List<CollectionItemValueHolder> ress = collection.InnerList.FindAll(x => x.Value is NdfObjectReference);
+
+                List<NdfObjectReference> researches = new List<NdfObjectReference>();
+                foreach (CollectionItemValueHolder uni in ress)
+                {
+                    researches.Add(uni.Value as NdfObjectReference);
+                }
+
+                AoAResearch aResearch;
+                foreach (NdfObjectReference research in researches)
+                {
+                    aResearch = new AoAResearch();
+                    if (aResearch.LoadData(research.Instance, techdic, iconPackage)) // tech.dic !
+                    {
+                        Researches.Add(aResearch);
+                    }
+                }
+            }
+
+            return true;
+
+        }
     }
 }

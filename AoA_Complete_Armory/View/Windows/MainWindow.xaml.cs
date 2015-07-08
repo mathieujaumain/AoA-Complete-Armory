@@ -12,10 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using IrisZoomDataApi;
 using IrisZoomDataApi.Model.Ndfbin;
 using DM.Armory.Model;
+using DM.Armory.ViewModel;
+using DM.Armory.BL;
 
 namespace DM.Armory.View.Windows
 {
@@ -30,7 +34,8 @@ namespace DM.Armory.View.Windows
         {
             InitializeComponent();
             // Load everything !!
-            Loaded += delegate { Test(); };
+            //Loaded += delegate { Test(); };
+            Loaded += delegate { StartUp(); };
         }
 
         public void Test()
@@ -97,7 +102,53 @@ namespace DM.Armory.View.Windows
                     BuildingListView view = new BuildingListView(model);
                     CartelTab.Content = view;
                 }
+            }          
+        }
+
+        public async void StartUp()
+        {
+            InitializationController init = new InitializationController();
+            var controller = await this.ShowProgressAsync("loading last update", "starting...");
+            await Task.Delay(3000);
+            init.OnLoadingUpdate += delegate(object sender, string mess) { controller.SetMessage(mess); };
+            if ( await init.LoadData())
+            {
+                await Task.Delay(3000);
+                List<BuildingViewModel> usmodels = new List<BuildingViewModel>();
+                List<BuildingViewModel> carmodels = new List<BuildingViewModel>();
+                List<BuildingViewModel> chimmodels = new List<BuildingViewModel>();
+                //Fill the forms
+                //US
+                foreach(AoABuilding b in init.UsBuildings)
+                {
+                    BuildingViewModel buioding = new BuildingViewModel(b);
+                    usmodels.Add(buioding);
+                }
+                FactionBuildingListView Usview = new FactionBuildingListView(new FactionViewModel(usmodels));
+                UsGrid.Children.Add(Usview);
+
+                //Cartel
+                foreach (AoABuilding b in init.CartelBuildings)
+                {
+                    BuildingViewModel buioding = new BuildingViewModel(b);
+                    carmodels.Add(buioding);
+                }
+                FactionBuildingListView cartelview = new FactionBuildingListView(new FactionViewModel(carmodels));
+                CartelGrid.Children.Add(cartelview);
+
+                //Chimera
+                foreach (AoABuilding b in init.ChimeraBuildings)
+                {
+                    BuildingViewModel buioding = new BuildingViewModel(b);
+                    chimmodels.Add(buioding);
+                }
+                FactionBuildingListView chimview = new FactionBuildingListView(new FactionViewModel(chimmodels));
+                ChimeraGrid.Children.Add(chimview);
+
+                await controller.CloseAsync();
             }
+            else { Console.Out.WriteLine(DateTime.Now.ToShortDateString() + " : loading last update failed."); await controller.CloseAsync(); }
+
         }
     }
 

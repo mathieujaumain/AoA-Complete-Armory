@@ -11,5 +11,6 @@ namespace DM.Armory.Model
     interface INdfbinLoadable
     {
         bool LoadData(NdfObject dataobject, TradManager dictionary, EdataManager iconPackage);
+        bool LoadData(NdfObject dataobject, TradManager dictionary, TradManager dictionary2, EdataManager iconPackage);
     }
 }

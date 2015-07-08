@@ -14,18 +14,24 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DM.Armory.ViewModel;
 
-
 namespace DM.Armory.View
 {
     /// <summary>
-    /// Interaction logic for FactionView.xaml
+    /// Interaction logic for FactionBuildingListView.xaml
     /// </summary>
-    public partial class FactionsView : UserControl
+    public partial class FactionBuildingListView : UserControl
     {
-        public FactionsView()
+
+
+        public FactionBuildingListView(FactionViewModel model)
         {
             InitializeComponent();
 
+            foreach (BuildingViewModel building in model.Buildings)
+            {
+                BuildingListView view = new BuildingListView(building);
+                BuildingsListing.Children.Add(view);
+            }
         }
     }
 }

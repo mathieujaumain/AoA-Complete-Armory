@@ -19,6 +19,12 @@ namespace DM.Armory.Model
         {
             throw new NotImplementedException();
         }
+
+
+        public bool LoadData(NdfObject dataobject, IrisZoomDataApi.TradManager dictionary, IrisZoomDataApi.TradManager dictionary2, IrisZoomDataApi.EdataManager iconPackage)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public enum MovementType { Infantry, GroundVehicle, Helicopter, Plane, }

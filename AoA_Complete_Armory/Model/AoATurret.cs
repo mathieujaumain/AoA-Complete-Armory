@@ -66,5 +66,11 @@ namespace DM.Armory.Model
             }
             return true;
         }
+
+
+        public bool LoadData(NdfObject dataobject, IrisZoomDataApi.TradManager dictionary, IrisZoomDataApi.TradManager dictionary2, IrisZoomDataApi.EdataManager iconPackage)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

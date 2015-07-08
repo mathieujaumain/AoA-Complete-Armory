@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="PathToGameFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">C:\Users\mja\Documents\perso\mods</Value>
     </Setting>
     <Setting Name="Accent" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

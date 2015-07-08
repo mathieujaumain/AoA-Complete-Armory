@@ -19,14 +19,27 @@
     <Controls:MetroContentControl>
         <Controls:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="TabControl">
             <Controls:MetroTabItem  Name="MainTab" Header="main" FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet" >
-                 <views:FactionView x:Name="Factions"/>
+                 <views:FactionsView x:Name="Factions"/>
             </Controls:MetroTabItem >
-            
-            <Controls:MetroTabItem Name="USTab" Header="us"/>
-            
-            <Controls:MetroTabItem Name="CartelTab" Header="cartel"/>
 
-            <Controls:MetroTabItem  Name="ChimeraTab" Header="chimera"/>
+            <Controls:MetroTabItem Name="USTab" Header="us">
+                <ScrollViewer>
+                    <Grid Name="UsGrid"/>
+                </ScrollViewer>
+            </Controls:MetroTabItem>
+
+            <Controls:MetroTabItem Name="CartelTab" Header="cartel">
+                <ScrollViewer>
+                    <Grid Name="CartelGrid"/>
+                </ScrollViewer>
+            </Controls:MetroTabItem>
+
+            <Controls:MetroTabItem  Name="ChimeraTab" Header="chimera">
+                <ScrollViewer>
+                    <Grid Name="ChimeraGrid"/>
+                </ScrollViewer>
+            </Controls:MetroTabItem>
+            
         </Controls:MetroAnimatedSingleRowTabControl>
     </Controls:MetroContentControl>
 
