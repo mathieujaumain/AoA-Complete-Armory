@@ -113,7 +113,7 @@ namespace DM.Armory.View.Windows
             init.OnLoadingUpdate += delegate(object sender, string mess) { controller.SetMessage(mess); };
             if ( await init.LoadData())
             {
-                await Task.Delay(3000);
+                await Task.Delay(1000);
                 List<BuildingViewModel> usmodels = new List<BuildingViewModel>();
                 List<BuildingViewModel> carmodels = new List<BuildingViewModel>();
                 List<BuildingViewModel> chimmodels = new List<BuildingViewModel>();

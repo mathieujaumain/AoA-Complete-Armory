@@ -32,12 +32,22 @@ namespace DM.Armory.View
             InitializeComponent();
             DataContext = data;
 
+            Building = new IconView(data);
+
+            if (data.Units.Count <= 0)
+            {
+                UnitBox.Visibility = System.Windows.Visibility.Collapsed;
+            }
             foreach(AoAUnitViewModel unit in data.Units){
                 IconView view = new IconView(unit);
                 UnitsList.AddATile(view);
                 //UnitsList.Children.Add(view);
             }
 
+            if (data.Researches.Count <= 0)
+            {
+                ResearchBox.Visibility = System.Windows.Visibility.Collapsed;
+            }
             foreach (AoAResearchViewModel res in data.Researches)
             {
                 IconView view = new IconView(res);

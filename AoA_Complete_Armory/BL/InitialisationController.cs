@@ -95,27 +95,27 @@ namespace DM.Armory.BL
 
                 if (!unitdic)
                 {
-                    OnLoadingUpdate(this, "try to load unit.dic file.");
+                    OnLoadingUpdate(this, "try to load unit.dic file...");
                     await Task.Delay(1000);
                     unitdic = TryGetDicFileFromFolder(dir.FullName, ZZ_WIN_FILE, UNIT_DIC, out _UniteDic);
                 }
 
                 if (!techdic)
                 {
-                    OnLoadingUpdate(this, "try to load tech.dic  file.");
+                    OnLoadingUpdate(this, "try to load tech.dic  file...");
                     await Task.Delay(1000);
                     techdic = TryGetDicFileFromFolder(dir.FullName, ZZ_WIN_FILE, TECH_DIC, out _TechDic);
                 }
 
                 if (!icons)
                 {
-                    OnLoadingUpdate(this, "try to load icons package file.");
+                    OnLoadingUpdate(this, "try to load icons package file...");
                     await Task.Delay(1000);
                     icons = TryGetPackFileFromFolder(dir.FullName, ZZ4_FILE, ICON_PACKAGE, out _IconsPack);
                 }
 
                 if (everything && unitdic && techdic && icons)
-                    OnLoadingUpdate(this, "loading successful.");
+                    OnLoadingUpdate(this, "loading successful");
                     return true;
             }
             OnLoadingUpdate(this, "loading failed...");
@@ -240,7 +240,6 @@ namespace DM.Armory.BL
                             {
                                 BuildingsList.Add(building);
                             }
-
                         }
                         else
                         {

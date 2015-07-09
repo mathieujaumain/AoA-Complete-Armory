@@ -65,12 +65,14 @@ namespace DM.Armory.View
             InitializeComponent();
             DataContext = model;
             building = model;
-            //Tile.Click += BuildingOpen;
+            Tile.Click += BuildingOpen;
         }
 
         private void BuildingOpen(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            SecondaryWindow window = new SecondaryWindow();
+            window.ContentGrid.Children.Add(new BuildingView(building));
+            window.Show();
         }
 
 

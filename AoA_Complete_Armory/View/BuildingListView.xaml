@@ -11,16 +11,16 @@
     <UserControl.Resources>
         <ViewModel:WPFBitmapConverter x:Key="BitmapConverter"/>
     </UserControl.Resources>
-    <Metro:MetroContentControl>
+    <Metro:MetroContentControl Margin="10">
         <StackPanel Orientation="Horizontal">
-            <View:IconView  DataContext="{Binding DataContext, ElementName=View}" x:Name="Building" />
+            <View:IconView x:Name="Building" />
 
-            <Separator Name="UnitSeparator" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
-            <GroupBox Header="Units" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Separator Name="UnitSeparator" Visibility="{Binding Visibility, ElementName=UnitBox}" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
+            <GroupBox Name ="UnitBox" Header="Units" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <View:TileMatrix  x:Name="UnitsList" />
             </GroupBox>
-            <Separator Name="ReseachSeparator" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
-            <GroupBox  Header="researches" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Separator Name="ReseachSeparator" Visibility="{Binding Visibility, ElementName=ResearchBox}" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
+            <GroupBox Name="ResearchBox" Header="researches" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <View:TileMatrix x:Name="ResearchesList" />
             </GroupBox>
         </StackPanel>

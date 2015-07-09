@@ -12,7 +12,7 @@ namespace DM.Armory.Model
     public class AoAGameObject:AoABaseObject, INdfbinLoadable
     {
         #region  NDFbin queries
-        public static string UNIT_FACTION = "Modules.TypeUnit.Default.Nationalite";
+        public static string UNIT_FACTION = "Modules.TypeUnit.Default.MotherCountry";
         public static string UNIT_FACTION_ALT = "Modules.TypeUnit.Nationalite";
         public static string UNIT_ICON_ALT = "Modules.TypeUnit.TextureForInterface.FileName";
         public static string UNIT_ICON = "Modules.TypeUnit.Default.TextureForInterface.FileName";
@@ -109,17 +109,17 @@ namespace DM.Armory.Model
                 }
 
                 //Faction
-                NdfUInt32 ndfuint32;
-                if (!dataobject.TryGetValueFromQuery<NdfUInt32>(UNIT_FACTION, out ndfuint32))
-                    if (!dataobject.TryGetValueFromQuery<NdfUInt32>(UNIT_FACTION_ALT, out ndfuint32))
-                        return false;
-                if (ndfuint32 != null)
+                NdfString str;
+                if (!dataobject.TryGetValueFromQuery<NdfString>(UNIT_FACTION, out str))
+                    return false;
+
+                if (str != null)
                 {
-                    Faction = (FactionEnum)ndfuint32.Value;
+                    Faction = FromString2FactionEnum(str.ToString());
                 }
                 else
                 {
-                    Faction = FactionEnum.None;
+                    Faction = FactionEnum.Other;
                 }
 
                 //Type
@@ -131,6 +131,7 @@ namespace DM.Armory.Model
 
                 
                 //COSTS
+                NdfUInt32 ndfuint32;
                 if (dataobject.TryGetValueFromQuery<NdfUInt32>(UNIT_CASH_COST, out ndfuint32))
                     CashCost = (int)ndfuint32.Value;
                 if (dataobject.TryGetValueFromQuery<NdfUInt32>(UNIT_ALU_COST, out ndfuint32))
@@ -139,9 +140,6 @@ namespace DM.Armory.Model
                     ElectricityCost = (int)ndfuint32.Value;
                 if (dataobject.TryGetValueFromQuery<NdfUInt32>(UNIT_REA_COST, out ndfuint32))
                     RareEarthCost = (int)ndfuint32.Value;
-
-                //Build Time
-
 
                 return true;
             }
@@ -156,12 +154,25 @@ namespace DM.Armory.Model
         {
             throw new NotImplementedException();
         }
+
+        public FactionEnum FromString2FactionEnum(string str)
+        {
+            switch (str)
+            {
+                case "US": return FactionEnum.US;
+                case "CS": return FactionEnum.Cartel;
+                case "TFT": return FactionEnum.Chimera;
+                default: return FactionEnum.Other;
+            }
+        }
     }
 
     public enum FactionEnum:uint
     {
-        US = 3, Cartel = 1, Chimera = 2, Neutral , Other, None
+        US = 0, Cartel = 1, Chimera = 2, Neutral , Other, None
     }
+
+    
 
     public enum ObjectType : uint
     {

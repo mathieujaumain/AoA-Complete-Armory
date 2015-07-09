@@ -79,12 +79,24 @@ namespace DM.Armory.Model
 
             //COSTS
             NdfUInt32 ndfuint32;
-            //if (dataobject.TryGetValueFromQuery<NdfUInt32>(CASH_COST, out ndfuint32))
-            //    CashCost = (int)ndfuint32.Value;
-            //if (dataobject.TryGetValueFromQuery<NdfUInt32>(ALU_COST, out ndfuint32))
-            //    AluminiumCost = (int)ndfuint32.Value;
-            //if (dataobject.TryGetValueFromQuery<NdfUInt32>(REA_COST, out ndfuint32))
-            //    RareEarthCost = (int)ndfuint32.Value;
+            try
+            {
+                if (dataobject.TryGetValueFromQuery<NdfUInt32>(CASH_COST, out ndfuint32))
+                    CashCost = (int)ndfuint32.Value;
+            }
+            catch { }
+            try
+            {
+                if (dataobject.TryGetValueFromQuery<NdfUInt32>(ALU_COST, out ndfuint32))
+                    AluminiumCost = (int)ndfuint32.Value;
+            }
+            catch { }
+            try
+            {
+                if (dataobject.TryGetValueFromQuery<NdfUInt32>(REA_COST, out ndfuint32))
+                    RareEarthCost = (int)ndfuint32.Value;
+            }
+            catch { }
             
 
             return true;
