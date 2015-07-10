@@ -14,13 +14,6 @@ namespace DM.Armory.Model
         }
 
 
-
-        public bool LoadData(NdfObject dataobject, IrisZoomDataApi.TradManager dictionary, IrisZoomDataApi.EdataManager iconPackage)
-        {
-            throw new NotImplementedException();
-        }
-
-
         public bool LoadData(NdfObject dataobject, IrisZoomDataApi.TradManager dictionary, IrisZoomDataApi.TradManager dictionary2, IrisZoomDataApi.EdataManager iconPackage)
         {
             throw new NotImplementedException();

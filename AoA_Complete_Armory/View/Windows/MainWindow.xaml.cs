@@ -75,7 +75,7 @@ namespace DM.Armory.View.Windows
 
             //Load Object
             AoAGameObject losatObject = new AoAGameObject();
-            if (losatObject.LoadData(losatndf, dic, iconspack))
+            if (losatObject.LoadData(losatndf, dic, techDic,iconspack))
             {
                 losatObject.Icon.Save("Losat.png");
             }
@@ -85,7 +85,7 @@ namespace DM.Armory.View.Windows
             {
                 AoAUnit losat = new AoAUnit(losatObject);
                 losatObject = null;
-                if (losat.LoadData(losatndf, dic, iconspack))
+                if (losat.LoadData(losatndf, dic, techDic, iconspack))
                 {
                         ViewModel.AoAUnitViewModel model = new ViewModel.AoAUnitViewModel(losat);
                         UnitView view = new UnitView(model);
@@ -96,7 +96,7 @@ namespace DM.Armory.View.Windows
             {
                 AoABuilding building = new AoABuilding(losatObject);
                 losatObject = null;
-                if (building.LoadData(losatndf, dic, iconspack))
+                if (building.LoadData(losatndf, dic, techDic, iconspack))
                 {
                     ViewModel.BuildingViewModel model = new ViewModel.BuildingViewModel(building);
                     BuildingListView view = new BuildingListView(model);

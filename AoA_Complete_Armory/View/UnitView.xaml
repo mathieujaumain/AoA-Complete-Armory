@@ -108,7 +108,9 @@
                 </Viewbox>
                 <RichTextBox Name="DescriptionBox" HorizontalAlignment="Center" Margin="10,0" IsReadOnly="True" />
                 <GroupBox Header="Skills" Name="SkillsList" Margin="10,10,10,5" />
-                <GroupBox Header="Available Upgrades" Name="UppgradesList" Margin="10,10,10,5" />
+                <GroupBox Header="Available Upgrades" Name="UppgradesList" Margin="10,10,10,5">
+                    <StackPanel Orientation="Vertical" Name="UpgradesList" />
+                </GroupBox>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">

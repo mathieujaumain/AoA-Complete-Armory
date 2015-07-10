@@ -164,7 +164,7 @@ namespace DM.Armory.Model
             }
         }
 
-        public bool LoadData(NdfObject dataobject, IrisZoomDataApi.TradManager dictionary, IrisZoomDataApi.EdataManager iconPackage)
+        new public bool LoadData(NdfObject dataobject, IrisZoomDataApi.TradManager dictionary, IrisZoomDataApi.TradManager dictionary2, IrisZoomDataApi.EdataManager iconPackage)
         {
             NdfBoolean ndfbool;
             NdfSingle ndffloat32;
@@ -173,12 +173,12 @@ namespace DM.Armory.Model
             string name;
 
             // Name
-            if (dataobject.TryGetValueFromQuery<NdfLocalisationHash>(NAME_PROPERTY, out ndfHash)) 
+            if (dataobject.TryGetValueFromQuery<NdfLocalisationHash>(NAME_PROPERTY, out ndfHash))
             {
-                if(dictionary.TryGetString(ndfHash.Value, out name))
+                if (dictionary.TryGetString(ndfHash.Value, out name))
                     Name = name;
             }
-            else { Name=string.Empty;  }
+            else { Name = string.Empty; }
 
             //GroundRange
             if (dataobject.TryGetValueFromQuery<NdfSingle>(MAX_RANGE_PROPERTY, out ndffloat32))
@@ -196,7 +196,7 @@ namespace DM.Armory.Model
             //THARange
             if (dataobject.TryGetValueFromQuery<NdfSingle>(PLANE_MAX_RANGE_PROPERTY, out ndffloat32))
                 VHARange = ndffloat32.Value;
-            
+
             //Splash
             if (dataobject.TryGetValueFromQuery<NdfSingle>(SPLASH_DAMAGE_RADIUS_PROPERTY, out ndffloat32))
                 Splash = ndffloat32.Value;
@@ -210,12 +210,6 @@ namespace DM.Armory.Model
                 AmbushMultiplier = ndffloat32.Value;
 
             return true;
-        }
-
-
-        public bool LoadData(NdfObject dataobject, IrisZoomDataApi.TradManager dictionary, IrisZoomDataApi.TradManager dictionary2, IrisZoomDataApi.EdataManager iconPackage)
-        {
-            throw new NotImplementedException();
         }
     }
 

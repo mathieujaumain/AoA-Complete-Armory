@@ -18,12 +18,16 @@ namespace DM.Armory.ViewModel
     {
         private AoAUnit _unit;
         private List<AoATurretViewModel> _turrets = new List<AoATurretViewModel>();
+        private List<AoAUpgradeViewModel> _upgrades = new List<AoAUpgradeViewModel>();
 
         public AoAUnitViewModel(AoAUnit unit) 
         {
             _unit = unit;
             foreach (AoATurret turret in _unit.Turrets)
                 _turrets.Add(new AoATurretViewModel(turret));
+
+            foreach (AoAUpgrade up in _unit.Upgrades)
+                _upgrades.Add(new AoAUpgradeViewModel(up));
         }
 
         public string           Name                { get { return _unit.Name; } }
@@ -45,6 +49,7 @@ namespace DM.Armory.ViewModel
         public int              Armor               { get { return _unit.Armor; } }
             
         public List<AoATurretViewModel> Turrets { get { return _turrets; } }
+        public List<AoAUpgradeViewModel> Upgrades { get { return _upgrades; } }
 
         //public AoAVehicle       Vehicle             { get { return _unit.Vehicle; } }
     }

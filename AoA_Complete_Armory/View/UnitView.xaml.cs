@@ -36,6 +36,12 @@ namespace DM.Armory.View
                     WeaponsList.Children.Add(view);
                 }
             }
+
+            foreach (AoAUpgradeViewModel up in unitVM.Upgrades)
+            {
+                IconView view = new IconView(up);
+                UpgradesList.Children.Add(view);
+            }
         }
 
         public UnitView()

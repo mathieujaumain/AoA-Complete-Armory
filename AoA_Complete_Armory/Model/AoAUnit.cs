@@ -27,12 +27,13 @@ namespace DM.Armory.Model
         public static string MOVEMENT_PATH = "Modules.MouvementHandler.Default";
         public static string VIEW_RANGE_PATH = "Modules.ScannerConfiguration.Default.PorteeVision"; //Float32
         public static string TRANSPORT_PATH = "Modules.Transporter.Default.NbSeatsAvailable"; //int32
+        public static string AVAILABLE_RESEARCHES_PATH = "Modules.TechnoRegistrar.Default.ResearchableTechnos";
         #endregion
 
-       
+
 
         private object _Lock = new object();
-        private List<AoAResearch> _PossibleUppgrades = new List<AoAResearch>();
+        private List<AoAUpgrade> _Uppgrades = new List<AoAUpgrade>();
         private List<AoATurret> _Turrets = new List<AoATurret>();
         private List<AoAUnit> _Children = new List<AoAUnit>();
         private List<IAoASkills> _Skills = new List<IAoASkills>();
@@ -53,8 +54,14 @@ namespace DM.Armory.Model
 
         public List<AoATurret> Turrets
         {
-            get { lock(_Lock) return _Turrets; }
-            set { lock(_Lock) _Turrets = value; }
+            get { lock (_Lock) return _Turrets; }
+            set { lock (_Lock) _Turrets = value; }
+        }
+
+        public List<AoAUpgrade> Upgrades
+        {
+            get { return _Uppgrades; }
+            set { _Uppgrades = value; }
         }
 
         //public AoAVehicle Vehicle { get; set; }
@@ -70,14 +77,14 @@ namespace DM.Armory.Model
         public int Armor { get; set; }
         public int AutoReveal { get; set; }
 
-        
+
 
         public void Update(double timeElapsed)
         {
             throw new NotImplementedException();
         }
 
-        new public bool LoadData(NdfObject dataobject, TradManager dictionary, EdataManager iconPackage)
+        new public bool LoadData(NdfObject dataobject, TradManager dictionary, TradManager dictionary2, EdataManager iconPackage)
         {
             NdfUInt32 ndfuint32;
             NdfSingle ndfFloat32;
@@ -143,7 +150,7 @@ namespace DM.Armory.Model
                 foreach(NdfObjectReference turr in turrets)
                 {
                     turret = new AoATurret();
-                    if(turret.LoadData(turr.Instance, dictionary, null))
+                    if(turret.LoadData(turr.Instance, dictionary, dictionary2, iconPackage))
                         Turrets.Add(turret);
                 }
 
@@ -153,11 +160,60 @@ namespace DM.Armory.Model
             //Vehicle
 
 
+            // Upgrades
+            if (dataobject.TryGetValueFromQuery<NdfCollection>(AVAILABLE_RESEARCHES_PATH, out ndfCollection))
+            {
+                List<CollectionItemValueHolder> ress = ndfCollection.InnerList.FindAll(x => x.Value is NdfObjectReference);
+
+                List<NdfObjectReference> researches = new List<NdfObjectReference>();
+                foreach (CollectionItemValueHolder uni in ress)
+                {
+                    researches.Add(uni.Value as NdfObjectReference);
+                }
+
+                AoAResearch aResearch;
+                foreach (NdfObjectReference research in researches)
+                {
+                    aResearch = new AoAResearch();
+                    if (aResearch.LoadData(research.Instance, dictionary, dictionary2, iconPackage)) // tech.dic !
+                    {
+                        //UPGRADES we can verify if it is an upgrade by looking at the actions list and find a TUnitEffectLauchUpgradeDescriptor
+                        NdfCollection actionsColl;
+                        if (research.Instance.TryGetValueFromQuery<NdfCollection>(AoAResearch.ACTIONS, out actionsColl))
+                        {
+                            List<CollectionItemValueHolder> acts = actionsColl.InnerList.FindAll(x => x.Value is NdfObjectReference);
+
+                            List<NdfObjectReference> actions = new List<NdfObjectReference>();
+                            foreach (CollectionItemValueHolder act in acts)
+                            {
+                                actions.Add(act.Value as NdfObjectReference);
+                            }
+                            actions.RemoveAll(x => x.Class.Name != AoAResearch.ACTION_UPGRADE_KIND);
+
+                            if (actions.Count > 0)
+                            {
+                                NdfCollection coll;
+                                if (actions[0].Instance.TryGetValueFromQuery<NdfCollection>(AoAUpgrade.UPGRADE_EFFECT_COLLECTION, out coll)) // wrong ! upgrade might not be on the first item (and usually, it isn't)
+                                {
+                                    NdfObjectReference upRef = coll.InnerList[0].Value as NdfObjectReference;
+
+                                    // SI c'est une upgrade...
+                                    AoAUpgrade up = new AoAUpgrade(aResearch);
+                                    if (up.LoadData(upRef.Instance, dictionary, dictionary2, iconPackage))
+                                        Upgrades.Add(up);
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+            }
+
 
             return true;
         }
 
-    }
 
-    
+    }
 }

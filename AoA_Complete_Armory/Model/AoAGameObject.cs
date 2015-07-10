@@ -64,7 +64,7 @@ namespace DM.Armory.Model
         public FactionEnum Faction { get; internal set; }
 
 
-        public bool LoadData(NdfObject dataobject, TradManager dictionary, EdataManager iconPackage)
+        public bool LoadData(NdfObject dataobject, TradManager dictionary, TradManager dictionary2, EdataManager iconPackage)
         {
             InstanceIndex = dataobject.Id;
 
@@ -101,7 +101,7 @@ namespace DM.Armory.Model
                 Bitmap bitmap;
                 if (!dataobject.TryGetValueFromQuery<NdfString>(UNIT_ICON, out ndfstring))
                     dataobject.TryGetValueFromQuery<NdfString>(UNIT_ICON_ALT, out ndfstring);
-                if(ndfstring != null)
+                if (ndfstring != null)
                 {
                     string iconpath = ndfstring.ToString().Replace(@"/", @"\").Replace(@"GameData:\", @"pc\texture\").Replace("png", "tgv").ToLower();
                     if (iconPackage.TryToLoadTgv(iconpath, out bitmap)) // must modify icon path first
@@ -129,7 +129,7 @@ namespace DM.Armory.Model
                         return false;
                 Type = (ObjectType)ndfint32.Value;
 
-                
+
                 //COSTS
                 NdfUInt32 ndfuint32;
                 if (dataobject.TryGetValueFromQuery<NdfUInt32>(UNIT_CASH_COST, out ndfuint32))
@@ -147,12 +147,6 @@ namespace DM.Armory.Model
             {
                 return false;
             }
-        }
-
-
-        public bool LoadData(NdfObject dataobject, TradManager dictionary, TradManager dictionary2, EdataManager iconPackage)
-        {
-            throw new NotImplementedException();
         }
 
         public FactionEnum FromString2FactionEnum(string str)

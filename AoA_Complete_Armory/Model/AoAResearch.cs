@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
 using System.Text;
+using IrisZoomDataApi;
 using IrisZoomDataApi.Model.Ndfbin;
 using IrisZoomDataApi.Model.Ndfbin.Types.AllTypes;
 
@@ -11,14 +12,18 @@ namespace DM.Armory.Model
     public class AoAResearch:AoAGameObject, INdfbinLoadable
     {
 
-#region NDF queries
+        #region NDF queries
         public static string NAME_HASH = "NameToken"; // local hash
         public static string DESCRIPTION_HASH = "DescriptionToken";
         public static string ICON_PATH = "Texture.FileName";
         public static string CASH_COST = "ResourcesNeeded.5";
         public static string ALU_COST = "ResourcesNeeded.3";
         public static string REA_COST = "ResourcesNeeded.14";
-#endregion
+        public static string ACTIONS = "Contrainte.Actions"; // list of XUnitEffect
+        public static string ACTION_UPGRADE_KIND = "TActionLaunchUnitEffectInTeam";
+        public static string EFFECT_UPGRADE_CLASS = "TUnitEffectLaunchUpgradeDescriptor";
+        public static string UNIT_UPGRADE = "Effect.Effects[0]";
+        #endregion
 
 
         public AoAResearch() { }
@@ -36,8 +41,10 @@ namespace DM.Armory.Model
             Icon = obj.Icon;
         }
 
-        new public bool LoadData(NdfObject dataobject, IrisZoomDataApi.TradManager dictionary, IrisZoomDataApi.EdataManager iconPackage)
+
+        new public bool LoadData(NdfObject dataobject, TradManager dictionary, TradManager dictionary2, EdataManager iconPackage)
         {
+
             InstanceIndex = dataobject.Id;
 
             //Finish loading data
@@ -47,7 +54,7 @@ namespace DM.Armory.Model
             //NAME
             if (dataobject.TryGetValueFromQuery<NdfLocalisationHash>(NAME_HASH, out localisation))
             {
-                if (!dictionary.TryGetString(localisation.Value, out aString))
+                if (!dictionary2.TryGetString(localisation.Value, out aString))
                     return false;
                 Name = aString;
             }
@@ -55,7 +62,7 @@ namespace DM.Armory.Model
             //Description
             if (dataobject.TryGetValueFromQuery<NdfLocalisationHash>(DESCRIPTION_HASH, out localisation))
             {
-                if (!dictionary.TryGetString(localisation.Value, out aString))
+                if (!dictionary2.TryGetString(localisation.Value, out aString))
                     return false;
                 Description = aString;
             }
@@ -97,7 +104,7 @@ namespace DM.Armory.Model
                     RareEarthCost = (int)ndfuint32.Value;
             }
             catch { }
-            
+
 
             return true;
         }

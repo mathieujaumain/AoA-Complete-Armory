@@ -27,4 +27,44 @@ namespace DM.Armory.ViewModel
 
 
     }
+
+
+    public class AoAUpgradeViewModel
+    {
+        private AoAUpgrade _res;
+
+        public string Name { get { return _res.Name; } }
+        public string Description { get { return _res.Description; } }
+        public int CashCost { get { return _res.CashCost; } }
+        public int AluminiumCost { get { return _res.AluminiumCost; } }
+        public int ElectricityCost { get { return _res.ElectricityCost; } }
+        public int RareEarthCost { get { return _res.RareEarthCost; } }
+        public Bitmap Icon { get { return _res.Icon; } }
+        public ObjectType Type { get { return _res.Type; } }
+        public AoAUnitViewModel UpgradedUnit { private set; get; }
+        public BuildingViewModel UpgradedBuilding { private set; get; }
+
+        public AoAUpgradeViewModel(AoAUpgrade research)
+        {
+            _res = research;
+
+            if (_res.Type != ObjectType.Building)
+            {
+                UpgradedUnit = new AoAUnitViewModel(_res.UpgradedUnit);
+            }
+            else
+            {
+
+            }
+
+                /*
+            case ObjectType.Building:
+                UpgradedBuilding = new BuildingViewModel(_res.UpgradedBuilding);
+                break;
+                    * */
+            
+        }
+
+
+    }
 }

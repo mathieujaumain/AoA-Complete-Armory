@@ -231,7 +231,7 @@ namespace DM.Armory.BL
                 foreach (NdfObject obj in tunites)
                 {
                     AoAGameObject gobj = new AoAGameObject();
-                    if (gobj.LoadData(obj, _UniteDic, _IconsPack))
+                    if (gobj.LoadData(obj, _UniteDic, _TechDic,_IconsPack))
                     {
                         if (gobj.Type == ObjectType.Building)
                         {
@@ -271,7 +271,7 @@ namespace DM.Armory.BL
                 foreach (NdfObject obj in tunites)
                 {
                     AoAGameObject gobj = new AoAGameObject();
-                    if (gobj.LoadData(obj, _UniteDic, _IconsPack)) 
+                    if (gobj.LoadData(obj, _UniteDic, _TechDic, _IconsPack)) 
                     {
                         if (gobj.Type == ObjectType.Building)
                         {

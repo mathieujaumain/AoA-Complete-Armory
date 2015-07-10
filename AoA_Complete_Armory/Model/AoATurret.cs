@@ -32,7 +32,8 @@ namespace DM.Armory.Model
             throw new NotImplementedException();
         }
 
-        public bool LoadData(NdfObject dataobject, IrisZoomDataApi.TradManager dictionary, IrisZoomDataApi.EdataManager iconPackage)
+
+        new public bool LoadData(NdfObject dataobject, IrisZoomDataApi.TradManager dictionary, IrisZoomDataApi.TradManager dictionary2, IrisZoomDataApi.EdataManager iconPackage)
         {
             NdfSingle ndfFloat32;
             NdfCollection ndfCollection;
@@ -60,17 +61,11 @@ namespace DM.Armory.Model
                 foreach (NdfObjectReference w in weapons)
                 {
                     weapon = new AoAWeapon();
-                    if (weapon.LoadData(w.Instance, dictionary, null))
+                    if (weapon.LoadData(w.Instance, dictionary, dictionary2, iconPackage))
                         Weapons.Add(weapon);
                 }
             }
             return true;
-        }
-
-
-        public bool LoadData(NdfObject dataobject, IrisZoomDataApi.TradManager dictionary, IrisZoomDataApi.TradManager dictionary2, IrisZoomDataApi.EdataManager iconPackage)
-        {
-            throw new NotImplementedException();
         }
     }
 }

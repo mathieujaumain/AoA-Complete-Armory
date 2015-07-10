@@ -19,12 +19,20 @@ namespace DM.Armory.Model
 
         private List<AoAUnit> _BuildableUnits = new List<AoAUnit>();
         private List<AoAResearch> _Researches = new List<AoAResearch>();
+        private List<AoAUpgrade> _Upgrades = new List<AoAUpgrade>();
 
         public List<AoAResearch> Researches
         {
             get { return _Researches; }
             set { _Researches = value; }
         }
+
+        public List<AoAUpgrade> Upgrades
+        {
+            get { return _Upgrades; }
+            set { _Upgrades = value; }
+        }
+
 
         public List<AoAUnit> BuildableUnits
         {
@@ -44,64 +52,7 @@ namespace DM.Armory.Model
             Faction = obj.Faction;
             Icon = obj.Icon;
         }
-
-        new public bool LoadData(NdfObject dataobject, TradManager dictionary, EdataManager iconPackage)
-        {
-            NdfCollection collection;
-
-            // UNITS
-            if (dataobject.TryGetValueFromQuery<NdfCollection>(PRODUCABLE_UNITS_PATH, out collection))
-            {
-
-                List<CollectionItemValueHolder> unitss = collection.InnerList.FindAll(x => x.Value is NdfObjectReference);
-
-                List<NdfObjectReference> units = new List<NdfObjectReference>();
-                foreach (CollectionItemValueHolder uni in unitss)
-                {
-                    units.Add(uni.Value as NdfObjectReference);
-                }
-
-                AoAGameObject obj;
-                foreach (NdfObjectReference unit in units)
-                {
-                    obj = new AoAGameObject();
-                    if (obj.LoadData(unit.Instance, dictionary, iconPackage))
-                        if (obj.Type != ObjectType.Building)
-                        {
-                            AoAUnit aunit = new AoAUnit(obj);
-                            if (aunit.LoadData(unit.Instance, dictionary, iconPackage)) // !!!!!
-                                _BuildableUnits.Add(aunit);
-                        }
-                }
-            }
-
-            //RESEARCHES
-            if (dataobject.TryGetValueFromQuery<NdfCollection>(AVAILABLE_RESEARCHES_PATH, out collection))
-            {
-
-                List<CollectionItemValueHolder> ress = collection.InnerList.FindAll(x => x.Value is NdfObjectReference);
-
-                List<NdfObjectReference> researches = new List<NdfObjectReference>();
-                foreach (CollectionItemValueHolder uni in ress)
-                {
-                    researches.Add(uni.Value as NdfObjectReference);
-                }
-
-                AoAResearch aResearch;
-                foreach (NdfObjectReference research in researches)
-                {
-                    aResearch = new AoAResearch();
-                    if (aResearch.LoadData(research.Instance, DM.Armory.View.Windows.MainWindow.techDic, iconPackage)) // tech.dic !
-                    {
-                        Researches.Add(aResearch);
-                    }
-                }
-            }
-
-            return true;
-            
-        }
-
+ 
         new public bool LoadData(NdfObject dataobject, TradManager dictionary, TradManager techdic, EdataManager iconPackage)
         {
             NdfCollection collection;
@@ -122,11 +73,11 @@ namespace DM.Armory.Model
                 foreach (NdfObjectReference unit in units)
                 {
                     obj = new AoAGameObject();
-                    if (obj.LoadData(unit.Instance, dictionary, iconPackage))
+                    if (obj.LoadData(unit.Instance, dictionary, techdic, iconPackage))
                         if (obj.Type != ObjectType.Building)
                         {
                             AoAUnit aunit = new AoAUnit(obj);
-                            if (aunit.LoadData(unit.Instance, dictionary, iconPackage)) // !!!!!
+                            if (aunit.LoadData(unit.Instance, dictionary, techdic, iconPackage)) // !!!!!
                                 _BuildableUnits.Add(aunit);
                         }
                 }
@@ -148,7 +99,7 @@ namespace DM.Armory.Model
                 foreach (NdfObjectReference research in researches)
                 {
                     aResearch = new AoAResearch();
-                    if (aResearch.LoadData(research.Instance, techdic, iconPackage)) // tech.dic !
+                    if (aResearch.LoadData(research.Instance, dictionary, techdic, iconPackage)) // tech.dic !
                     {
                         Researches.Add(aResearch);
                     }
