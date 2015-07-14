@@ -37,34 +37,34 @@ namespace DM.Armory.Model
         public static string PLANE_MIN_RANGE_PROPERTY = "Ammunition.PorteeMinimaleHA";
         public static string HELICOPTER_MIN_RANGE_PROPERTY = "Ammunition.PorteeMinimaleTBA";
         public static string AMBUSH_PROPERTY = "Ammunition.AmbushShotDamageMultiplier"; //float32
+
+        public static string NOISE = "Ammunition.NoiseDissimulationMalus"; // float 32
+        public static string SUPRESS_DAMAGES = "Ammunition.SuppressDamages"; //float32
         #endregion
 
         #region Properties
         public string Name { get; private set; }
-        public float Sustained { get; private set; }
+        public double Sustained { get; private set; }
         public float GroundRange { get; private set; }
         public float VLARange { get; private set; }
         public float VHARange { get; private set; }
         public float PoWGen { get; private set; }
         public float Splash { get; private set; }
         public float Alpha { get; private set; }
+
         public int SimulatenousShots { get; private set; }
         public int MaxShotsPerSalvo { get; private set; }
         public double TimeBetweenShots { get; private set; }
         public double SalvoReloadTime { get; private set; }
         public double AimingTime { get; private set; }
         public float AmbushMultiplier { get; private set; }
+        public bool IsSilenced { get; private set; }
+        public float SupressDamages { get; private set; }
         #endregion
 
         public int WeaponId = -1;
         public byte[] NameHash;
-        private long _MaxNbShotsPerSalvo;
         private long _CurrentNbShotsInSalvo;
-
-        private long _NbSimultaneousProjectilesInOneShot;
-
-        private double _TimeBetweenShots;
-        private double _SalvoReloadTime;
         private double _AimingTime = 0;   
         
         private bool _HasFirstShotBeenFired = false;
@@ -111,9 +111,9 @@ namespace DM.Armory.Model
                     break;
 
                 case WeaponsStatus.RELOADING:
-                    if (_TotalTimeElapsed > _SalvoReloadTime)
+                    if (_TotalTimeElapsed > SalvoReloadTime)
                     {
-                        _CurrentNbShotsInSalvo = _MaxNbShotsPerSalvo;
+                        _CurrentNbShotsInSalvo = MaxShotsPerSalvo;
                         _HasFirstShotBeenFired = false;
                         _CurrentStatus = WeaponsStatus.FIRING;
                         _TotalTimeElapsed = 0;
@@ -138,7 +138,7 @@ namespace DM.Armory.Model
             {
                 if (_CurrentNbShotsInSalvo > 0)
                 {
-                    if (totalTimeElapsed > _TimeBetweenShots)
+                    if (totalTimeElapsed > TimeBetweenShots)
                     {
                         ShootNow();
                         _TotalTimeElapsed = 0;
@@ -157,9 +157,9 @@ namespace DM.Armory.Model
         /// </summary>
         private void ShootNow()
         {
-            if (_CurrentNbShotsInSalvo <= _MaxNbShotsPerSalvo && _CurrentNbShotsInSalvo > 0)
+            if (_CurrentNbShotsInSalvo <= MaxShotsPerSalvo && _CurrentNbShotsInSalvo > 0)
             {
-                _CurrentNbProjectilesFired += _NbSimultaneousProjectilesInOneShot;
+                _CurrentNbProjectilesFired += SimulatenousShots;
                 _CurrentNbShotsInSalvo -= 1;
             }
         }
@@ -183,6 +183,9 @@ namespace DM.Armory.Model
             //GroundRange
             if (dataobject.TryGetValueFromQuery<NdfSingle>(MAX_RANGE_PROPERTY, out ndffloat32))
                 GroundRange = ndffloat32.Value;
+
+
+
 
             //Alpha
             if (!dataobject.TryGetValueFromQuery<NdfSingle>(DAMAGE_PROPERTY, out ndffloat32))
@@ -208,6 +211,51 @@ namespace DM.Armory.Model
             //AmBush
             if (dataobject.TryGetValueFromQuery<NdfSingle>(AMBUSH_MULTIPLIER_PROPERTY, out ndffloat32))
                 AmbushMultiplier = ndffloat32.Value;
+
+            // SimulatenousShots
+            if (!dataobject.TryGetValueFromQuery<NdfUInt32>(SIMULTANEOUS_PROJECTILES_PROPERTY, out ndfUint32))
+                return false;
+            SimulatenousShots = (int)ndfUint32.Value;
+
+            // MaxShotsPerSalvo
+            if (!dataobject.TryGetValueFromQuery<NdfUInt32>(SHOTS_PER_SALVO_PROPERTY, out ndfUint32))
+                return false;
+            MaxShotsPerSalvo = (int)ndfUint32.Value;
+
+            //TimeBetweenShots
+            if (!dataobject.TryGetValueFromQuery<NdfSingle>(TIME_BETWEEN_SHOTS_PROPERTY, out ndffloat32))
+                return false;
+            TimeBetweenShots = ndffloat32.Value;
+
+            //Salvo Reload Time
+            if (!dataobject.TryGetValueFromQuery<NdfSingle>(SALVO_RELOAD_TIME_PROPERTY, out ndffloat32))
+                return false;
+            SalvoReloadTime = ndffloat32.Value;
+
+            //Aiming Time
+            AimingTime = 0;
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(AIMING_TIME_PROPERTY, out ndffloat32))
+                AimingTime = ndffloat32.Value;
+
+            //Noise
+            IsSilenced = false;
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(NOISE, out ndffloat32))
+                IsSilenced = ndffloat32.Value < 5;
+
+            //Supress
+            SupressDamages = 0;
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(SUPRESS_DAMAGES, out ndffloat32))
+                SupressDamages = ndffloat32.Value;
+
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(AMBUSH_MULTIPLIER_PROPERTY, out ndffloat32))
+                AmbushMultiplier = ndffloat32.Value;
+
+
+            double oneSalvoCycleTime =  TimeBetweenShots * MaxShotsPerSalvo + SalvoReloadTime; // sec
+            float nbshotInOneCycle = SimulatenousShots * MaxShotsPerSalvo;
+            double nbCycleInAMinute = 60 / oneSalvoCycleTime;
+
+            Sustained = nbshotInOneCycle * nbCycleInAMinute * Alpha;
 
             return true;
         }

@@ -24,7 +24,9 @@ namespace DM.Armory.ViewModel
         public float VHARange { get { return _Weapon.VHARange; } }
         public float VLARange { get { return _Weapon.VLARange; } }
         public float Splash { get { return _Weapon.Splash; } }
-        public float Sustained { get { return _Weapon.Sustained; }}
+        public long Sustained { get { return (long)_Weapon.Sustained; }}
         public float AmbushMultiplier { get { return _Weapon.AmbushMultiplier; } }
+        public bool IsSilenced { get { return _Weapon.IsSilenced; } }
+        public float SupressDamages { get { return _Weapon.SupressDamages; } }
     }
 }

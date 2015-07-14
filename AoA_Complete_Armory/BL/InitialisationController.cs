@@ -33,6 +33,7 @@ namespace DM.Armory.BL
         public event EventHandler<String> OnLoadingUpdate = delegate { };
 
         private NdfbinManager _EverythingNdfbin;
+        public long Version { private set; get; }
 
         public NdfbinManager EverythingNdfbin
         {
@@ -71,52 +72,64 @@ namespace DM.Armory.BL
         public List<AoABuilding> UsBuildings { get { return _USBuildingsList; } }
         public List<AoABuilding> ChimeraBuildings { get { return _ChimeraBuildingsList; } }
 
-        public async Task<bool> GetLastUpdateFromDataFolder()
+        public bool GetLastUpdateFromDataFolder()
         {
             DirectoryInfo dataDirectory = new DirectoryInfo(Settings.Default.PathToGameFolder + DATA_FOLDER);
+            if (!dataDirectory.Exists) return false;
             DirectoryInfo[] dirs = dataDirectory.GetDirectories();
             //sort by version
-            List<DirectoryInfo> orderedList = dirs.OrderBy(x => Convert.ToInt64(x.Name)).ToList(); // folder name = version
+            if (dirs.Length <= 0) return false;
+            List<DirectoryInfo> orderedList;
+            try
+            {
+                orderedList = dirs.OrderBy(x => -Convert.ToInt64(x.Name)).ToList(); // folder name = version
+            } catch { return false; }
+             
 
             bool everything = false;
             bool unitdic = false;
             bool techdic = false;
             bool icons = false;
-
-            foreach (DirectoryInfo dir in orderedList)
+            if (orderedList.Count > 0)
             {
-                OnLoadingUpdate(this, "loading data from version " + dir.Name);
-                if (!everything)
+                Version = Convert.ToInt64(orderedList[0].Name);
+                foreach (DirectoryInfo dir in orderedList)
                 {
-                    OnLoadingUpdate(this, "try to load everything.ndfbin file.");
-                    await Task.Delay(1000);
-                    everything = TryGetNdfbinFileFromFolder(dir.FullName, NDF_WIN_FILE, EVERYTHING, out _EverythingNdfbin);
-                }
+                    OnLoadingUpdate(this, "loading data from version " + dir.Name);
+                    if (!everything)
+                    {
+                        OnLoadingUpdate(this, "try to load everything.ndfbin file...");
+                        Task.Delay(500);
+                        everything = TryGetNdfbinFileFromFolder(dir.FullName, NDF_WIN_FILE, EVERYTHING, out _EverythingNdfbin);
+                    }
 
-                if (!unitdic)
-                {
-                    OnLoadingUpdate(this, "try to load unit.dic file...");
-                    await Task.Delay(1000);
-                    unitdic = TryGetDicFileFromFolder(dir.FullName, ZZ_WIN_FILE, UNIT_DIC, out _UniteDic);
-                }
+                    if (!unitdic)
+                    {
+                        OnLoadingUpdate(this, "try to load unit.dic file...");
+                        Task.Delay(500);
+                        unitdic = TryGetDicFileFromFolder(dir.FullName, ZZ_WIN_FILE, UNIT_DIC, out _UniteDic);
+                    }
 
-                if (!techdic)
-                {
-                    OnLoadingUpdate(this, "try to load tech.dic  file...");
-                    await Task.Delay(1000);
-                    techdic = TryGetDicFileFromFolder(dir.FullName, ZZ_WIN_FILE, TECH_DIC, out _TechDic);
-                }
+                    if (!techdic)
+                    {
+                        OnLoadingUpdate(this, "try to load tech.dic  file...");
+                        Task.Delay(500);
+                        techdic = TryGetDicFileFromFolder(dir.FullName, ZZ_WIN_FILE, TECH_DIC, out _TechDic);
+                    }
 
-                if (!icons)
-                {
-                    OnLoadingUpdate(this, "try to load icons package file...");
-                    await Task.Delay(1000);
-                    icons = TryGetPackFileFromFolder(dir.FullName, ZZ4_FILE, ICON_PACKAGE, out _IconsPack);
-                }
+                    if (!icons)
+                    {
+                        OnLoadingUpdate(this, "try to load icons package file...");
+                        Task.Delay(500);
+                        icons = TryGetPackFileFromFolder(dir.FullName, ZZ4_FILE, ICON_PACKAGE, out _IconsPack);
+                    }
 
-                if (everything && unitdic && techdic && icons)
-                    OnLoadingUpdate(this, "loading successful");
-                    return true;
+                    if (everything && unitdic && techdic && icons)
+                    {
+                        OnLoadingUpdate(this, "loading successful");
+                        return true;
+                    }
+                }
             }
             OnLoadingUpdate(this, "loading failed...");
             return false;
@@ -127,7 +140,7 @@ namespace DM.Armory.BL
             DirectoryInfo dataDirectory = new DirectoryInfo(Settings.Default.PathToGameFolder);
             DirectoryInfo[] dirs = dataDirectory.GetDirectories(); 
             //sort by version
-            List<DirectoryInfo> orderedList = dirs.OrderBy(x => Convert.ToInt64(x.Name)).ToList();
+            List<DirectoryInfo> orderedList = dirs.OrderBy(x => -Convert.ToInt64(x.Name)).ToList();
             orderedList.RemoveAll(x => Convert.ToInt64(x.Name) > version); // remove all folders corresponding to newer versions of the game data
 
             bool everything = false;
@@ -219,15 +232,16 @@ namespace DM.Armory.BL
             return false;
         }
 
-        public async Task<bool> LoadData()
+        public bool LoadData()
         {
             List<AoAGameObject> result = new List<AoAGameObject>();
-            if (await GetLastUpdateFromDataFolder())
+            if (GetLastUpdateFromDataFolder())
             {
 
                 // Load all GameObjects
                 List<AoABuilding> BuildingsList = new List<AoABuilding>();
                 List<NdfObject> tunites = _EverythingNdfbin.GetClass("TUniteDescriptor").Instances;
+                OnLoadingUpdate(this, "Loadings buildings and units...");
                 foreach (NdfObject obj in tunites)
                 {
                     AoAGameObject gobj = new AoAGameObject();
@@ -248,13 +262,13 @@ namespace DM.Armory.BL
                     }
 
                 }
+                OnLoadingUpdate(this, "Processing buildings...");
                 Classify(BuildingsList);
                 return true;
             }
             else
             {
                 return false;
-                throw new Exception("Couldn't load game data, check game folder.");
             }
 
             
@@ -320,6 +334,16 @@ namespace DM.Armory.BL
                     default: break;
                 }
             }
+        }
+
+        public void Clear()
+        {
+            UniteDic = null;
+            TechDic = null;
+            EverythingNdfbin = null;
+            CartelBuildings.Clear();
+            ChimeraBuildings.Clear();
+            UsBuildings.Clear();
         }
 
     }

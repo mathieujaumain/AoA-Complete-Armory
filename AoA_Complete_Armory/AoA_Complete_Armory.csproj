@@ -70,7 +70,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\AoAUpgrade.cs" />
     <Compile Include="Model\Skills\IAoASkills.cs" />
     <Compile Include="ViewModel\AoAResearchViewModel.cs" />
     <Compile Include="ViewModel\AoATurretViewModel.cs" />
@@ -95,6 +94,9 @@
     </Compile>
     <Compile Include="View\Windows\SecondaryWindow.xaml.cs">
       <DependentUpon>SecondaryWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Windows\SettingsFlyout.xaml.cs">
+      <DependentUpon>SettingsFlyout.xaml</DependentUpon>
     </Compile>
     <Page Include="style\AccentChimera.xaml">
       <SubType>Designer</SubType>
@@ -172,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Windows\SecondaryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Windows\SettingsFlyout.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

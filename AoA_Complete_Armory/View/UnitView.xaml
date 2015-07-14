@@ -25,45 +25,43 @@
 
             <StackPanel Orientation="Vertical" Grid.Column="0" >
                 <Image Name="UnitIcon" HorizontalAlignment="Center"  Source="{Binding Icon, Converter={StaticResource BitmapConverter}}" Margin="10"/>
+                <Viewbox>
                 <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="0" Margin="10,0,0,0">type :</Label>
-                        <TextBox Grid.Column="1" Grid.Row="0"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"  />
-
-                        <Label Grid.Column="0" Grid.Row="1" Margin="10,0,0,0">hp :</Label>
+                        <Label Grid.Column="0" Grid.Row="1" Margin="10,0,0,0">health :</Label>
                         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Health, Mode=OneWay}"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
                         <Label Grid.Column="0" Grid.Row="2" Margin="10,0,0,0">off road speed :</Label>
-                        <TextBox Grid.Column="1" Grid.Row="2"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBox Grid.Column="1" Grid.Row="2"  Text="{Binding Speed, Mode=OneWay}" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
                         <Label Grid.Column="0" Grid.Row="3" Margin="10,0,0,0">on road speed :</Label>
-                        <TextBox Grid.Column="1" Grid.Row="3"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding OnRoadSpeed, Mode=OneWay}" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
                         <Label Grid.Column="0" Grid.Row="4" Margin="10,0,0,0">is stealthy ?</Label>
                         <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Stealth, Converter={StaticResource Bool2StringConverter}, Mode=OneWay}"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                        <Label Grid.Column="0" Grid.Row="5" Margin="10,0,0,0">is revealed on firing ?</Label>
-                        <TextBox Grid.Column="1" Grid.Row="5"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
-
+                        <!--<Label Grid.Column="0" Grid.Row="5" Margin="10,0,0,0">is revealed on firing ?</Label>
+                        <TextBox Grid.Column="1" Grid.Row="5"  Text="{Binding IsRevealedOnFiring, Mode=OneWay, Converter={StaticResource Bool2StringConverter}}" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+                         -->
                         <Label Grid.Column="0" Grid.Row="6" Margin="10,0,0,0">view range:</Label>
                         <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding ViewRange, Mode=OneWay}"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
@@ -85,7 +83,7 @@
                         <Label Grid.Column="0" Grid.Row="12" Margin="10,0,0,0">armor :</Label>
                         <TextBox Grid.Column="1" Grid.Row="12"  Text="{Binding Armor, Mode=OneWay}"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
                     </Grid>
-                <GroupBox Header="Children" Name="ChildrenGroup" HorizontalAlignment="Center" Margin="10,10,10,5" />
+                </Viewbox>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Grid.Column="1">
@@ -107,7 +105,9 @@
                 </StackPanel>
                 </Viewbox>
                 <RichTextBox Name="DescriptionBox" HorizontalAlignment="Center" Margin="10,0" IsReadOnly="True" />
-                <GroupBox Header="Skills" Name="SkillsList" Margin="10,10,10,5" />
+                <GroupBox Header="Researches" Name="ResearchList" Margin="10,10,10,5">
+                    <StackPanel Orientation="Vertical" Name="ResearchesList" />
+                </GroupBox>
                 <GroupBox Header="Available Upgrades" Name="UppgradesList" Margin="10,10,10,5">
                     <StackPanel Orientation="Vertical" Name="UpgradesList" />
                 </GroupBox>

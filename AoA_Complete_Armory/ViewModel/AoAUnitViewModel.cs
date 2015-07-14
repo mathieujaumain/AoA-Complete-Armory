@@ -18,7 +18,8 @@ namespace DM.Armory.ViewModel
     {
         private AoAUnit _unit;
         private List<AoATurretViewModel> _turrets = new List<AoATurretViewModel>();
-        private List<AoAUpgradeViewModel> _upgrades = new List<AoAUpgradeViewModel>();
+        private List<AoAResearchViewModel> _upgrades = new List<AoAResearchViewModel>();
+        private List<AoAUnitViewModel> _children = new List<AoAUnitViewModel>();
 
         public AoAUnitViewModel(AoAUnit unit) 
         {
@@ -26,8 +27,10 @@ namespace DM.Armory.ViewModel
             foreach (AoATurret turret in _unit.Turrets)
                 _turrets.Add(new AoATurretViewModel(turret));
 
-            foreach (AoAUpgrade up in _unit.Upgrades)
-                _upgrades.Add(new AoAUpgradeViewModel(up));
+            foreach (AoAResearch up in _unit.Upgrades)
+                _upgrades.Add(new AoAResearchViewModel(up));
+            foreach (AoAUnit child in _unit.Children)
+                _children.Add(new AoAUnitViewModel(child));
         }
 
         public string           Name                { get { return _unit.Name; } }
@@ -42,14 +45,18 @@ namespace DM.Armory.ViewModel
         public int              nbrPOW              { get { return _unit.nbrPOW; } }
         public float            ViewRange           { get { return _unit.ViewRange; } }
         public bool             CanSpot             { get { return _unit.CanSpotStealthyUnits; } }
-        public float              Health            { get { return _unit.Health; } }
+        public float            Health              { get { return _unit.Health; } }
         public bool             Stealth             { get { return _unit.IsStealthy; } }
         public int              TransportSlots      { get { return _unit.TransportSlot; } }
         public int              SeatsTaken          { get { return _unit.SlotTaken; } }
         public int              Armor               { get { return _unit.Armor; } }
+        public float            Speed               { get { return _unit.Speed; } }
+        public float            OnRoadSpeed         { get { return _unit.OnRoadSpeed; } }
+        public bool             IsRevealedOnFiring  { get { return _unit.AutoReveal; } }
             
         public List<AoATurretViewModel> Turrets { get { return _turrets; } }
-        public List<AoAUpgradeViewModel> Upgrades { get { return _upgrades; } }
+        public List<AoAResearchViewModel> Upgrades { get { return _upgrades; } }
+        public List<AoAUnitViewModel> Children { get { return _children; } }
 
         //public AoAVehicle       Vehicle             { get { return _unit.Vehicle; } }
     }
@@ -155,8 +162,8 @@ namespace DM.Armory.ViewModel
         {
             string description = (string)value;
             string[] parts = description.Split(new string[] { "Available" }, StringSplitOptions.RemoveEmptyEntries);
-
-            return parts[0].Trim();
+            
+            return parts.Length > 0 ? parts[0].Trim(): description;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

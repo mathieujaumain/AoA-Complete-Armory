@@ -28,12 +28,15 @@ namespace DM.Armory.Model
         public static string VIEW_RANGE_PATH = "Modules.ScannerConfiguration.Default.PorteeVision"; //Float32
         public static string TRANSPORT_PATH = "Modules.Transporter.Default.NbSeatsAvailable"; //int32
         public static string AVAILABLE_RESEARCHES_PATH = "Modules.TechnoRegistrar.Default.ResearchableTechnos";
+        public static string CHILD_PATH = "Modules.CompanyUnit.Default.CompanyDescriptor.Modules.Upgrade.Default.UnitDescriptor"; //ndfref
+        public static string SPEED_PATH = "Modules.MouvementHandler.Default.VitesseCombat"; // float32
+        public static string ROAD_BONUS = "Modules.MouvementHandler.Default.SpeedBonusOnRoad"; // float 32
         #endregion
 
 
 
         private object _Lock = new object();
-        private List<AoAUpgrade> _Uppgrades = new List<AoAUpgrade>();
+        private List<AoAResearch> _Uppgrades = new List<AoAResearch>();
         private List<AoATurret> _Turrets = new List<AoATurret>();
         private List<AoAUnit> _Children = new List<AoAUnit>();
         private List<IAoASkills> _Skills = new List<IAoASkills>();
@@ -58,10 +61,16 @@ namespace DM.Armory.Model
             set { lock (_Lock) _Turrets = value; }
         }
 
-        public List<AoAUpgrade> Upgrades
+        public List<AoAResearch> Upgrades
         {
             get { return _Uppgrades; }
             set { _Uppgrades = value; }
+        }
+
+        public List<AoAUnit> Children
+        {
+            get { return _Children; }
+            set { _Children = value; }
         }
 
         //public AoAVehicle Vehicle { get; set; }
@@ -75,7 +84,9 @@ namespace DM.Armory.Model
         public int StorageSize { get; set; }
         public bool IsStealthy { get; set; }
         public int Armor { get; set; }
-        public int AutoReveal { get; set; }
+        public bool AutoReveal { get; set; }
+        public float Speed { get; set; }
+        public float OnRoadSpeed { get; set; }
 
 
 
@@ -108,7 +119,7 @@ namespace DM.Armory.Model
             //AutoReveal
             if (!dataobject.TryGetValueFromQuery<NdfInt32>(AUTOREVEAL_PATH, out ndfInt32))
                 return false;
-            AutoReveal = ndfInt32.Value;
+            AutoReveal = ndfInt32.Value == 2;
 
             //Transporter
             if (dataobject.TryGetValueFromQuery<NdfInt32>(TRANSPORT_PATH, out ndfInt32))
@@ -120,7 +131,7 @@ namespace DM.Armory.Model
             //Stealth
             if (!dataobject.TryGetValueFromQuery<NdfSingle>(STEALTH_PATH, out ndfFloat32))
                 return false;
-            IsStealthy = ndfFloat32.Value > 0f; 
+            IsStealthy = ndfFloat32.Value >= 50f; 
 
             // Slot Taken
             if(dataobject.TryGetValueFromQuery<NdfInt32>(TRANSPORTABLE_PATH, out ndfInt32))
@@ -128,7 +139,7 @@ namespace DM.Armory.Model
                 SlotTaken = ndfInt32.Value;
             } else { SlotTaken = 0; }
 
-            // Slot Taken
+            // vIEW RANGE   
             if(dataobject.TryGetValueFromQuery<NdfSingle>(VIEW_RANGE_PATH, out ndfFloat32))
             {
                 ViewRange = ndfFloat32.Value;
@@ -158,6 +169,14 @@ namespace DM.Armory.Model
 
 
             //Vehicle
+             // Speed
+            if(!dataobject.TryGetValueFromQuery<NdfSingle>(SPEED_PATH, out ndfFloat32))
+                return false;
+            Speed = ndfFloat32.Value;
+            OnRoadSpeed = Speed;
+
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(ROAD_BONUS, out ndfFloat32))
+                OnRoadSpeed *= ndfFloat32.Value ;
 
 
             // Upgrades
@@ -177,39 +196,25 @@ namespace DM.Armory.Model
                     aResearch = new AoAResearch();
                     if (aResearch.LoadData(research.Instance, dictionary, dictionary2, iconPackage)) // tech.dic !
                     {
-                        //UPGRADES we can verify if it is an upgrade by looking at the actions list and find a TUnitEffectLauchUpgradeDescriptor
-                        NdfCollection actionsColl;
-                        if (research.Instance.TryGetValueFromQuery<NdfCollection>(AoAResearch.ACTIONS, out actionsColl))
-                        {
-                            List<CollectionItemValueHolder> acts = actionsColl.InnerList.FindAll(x => x.Value is NdfObjectReference);
-
-                            List<NdfObjectReference> actions = new List<NdfObjectReference>();
-                            foreach (CollectionItemValueHolder act in acts)
-                            {
-                                actions.Add(act.Value as NdfObjectReference);
-                            }
-                            actions.RemoveAll(x => x.Class.Name != AoAResearch.ACTION_UPGRADE_KIND);
-
-                            if (actions.Count > 0)
-                            {
-                                NdfCollection coll;
-                                if (actions[0].Instance.TryGetValueFromQuery<NdfCollection>(AoAUpgrade.UPGRADE_EFFECT_COLLECTION, out coll)) // wrong ! upgrade might not be on the first item (and usually, it isn't)
-                                {
-                                    NdfObjectReference upRef = coll.InnerList[0].Value as NdfObjectReference;
-
-                                    // SI c'est une upgrade...
-                                    AoAUpgrade up = new AoAUpgrade(aResearch);
-                                    if (up.LoadData(upRef.Instance, dictionary, dictionary2, iconPackage))
-                                        Upgrades.Add(up);
-                                }
-                            }
-                        }
+                        Upgrades.Add(aResearch);
                     }
-
-
                 }
             }
 
+            // UnitChildren
+            NdfObjectReference ndfref;
+            if (dataobject.TryGetValueFromQuery<NdfObjectReference>(CHILD_PATH, out ndfref))
+            {
+                AoAGameObject obj = new AoAGameObject();
+                obj.LoadData(ndfref.Instance, dictionary, dictionary2, iconPackage);
+                AoAUnit unit = new AoAUnit(obj);
+                unit.LoadData(ndfref.Instance, dictionary, dictionary2, iconPackage);
+                Children.Add(unit);
+            }
+            else
+            {
+                // Regarder dans technoregistrar ?
+            }
 
             return true;
         }

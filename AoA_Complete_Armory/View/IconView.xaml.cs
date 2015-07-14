@@ -25,7 +25,6 @@ namespace DM.Armory.View
         private AoAUnitViewModel unit;
         private BuildingViewModel building;
         private AoAResearchViewModel research;
-        private AoAUpgradeViewModel upgrade;
 
         public IconView()
         {
@@ -45,6 +44,7 @@ namespace DM.Armory.View
         {
             SecondaryWindow window = new SecondaryWindow();
             window.ContentGrid.Children.Add(new UnitView(unit));
+            window.Title = unit.Name;
             window.Show();
         }
 
@@ -73,32 +73,8 @@ namespace DM.Armory.View
         {
             SecondaryWindow window = new SecondaryWindow();
             window.ContentGrid.Children.Add(new BuildingView(building));
+            window.Title = building.Name;
             window.Show();
         }
-
-        public IconView(AoAUpgradeViewModel model)
-        {
-            InitializeComponent();
-            DataContext = model;
-            upgrade = model;
-            Tile.Click += UpgradeOpen;
-        }
-
-        private void UpgradeOpen(object sender, RoutedEventArgs e)
-        {
-            SecondaryWindow window = new SecondaryWindow();
-            if (upgrade.Type == Model.ObjectType.Building)
-            {
-                window.ContentGrid.Children.Add(new BuildingView(upgrade.UpgradedBuilding));
-                window.Show();
-            }
-            else
-            {
-                window.ContentGrid.Children.Add(new UnitView(upgrade.UpgradedUnit));
-                window.Show();
-            }
-        }
-
-
     }
 }

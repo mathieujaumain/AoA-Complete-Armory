@@ -19,18 +19,11 @@ namespace DM.Armory.Model
 
         private List<AoAUnit> _BuildableUnits = new List<AoAUnit>();
         private List<AoAResearch> _Researches = new List<AoAResearch>();
-        private List<AoAUpgrade> _Upgrades = new List<AoAUpgrade>();
 
         public List<AoAResearch> Researches
         {
             get { return _Researches; }
             set { _Researches = value; }
-        }
-
-        public List<AoAUpgrade> Upgrades
-        {
-            get { return _Upgrades; }
-            set { _Upgrades = value; }
         }
 
 

@@ -11,10 +11,15 @@
                       GlowBrush="Black">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button Content="settings" />
+            <Button Content="settings" Click="Button_Click"/>
         </Controls:WindowCommands>
 
     </Controls:MetroWindow.RightWindowCommands>
+    
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl x:Name="FlyoutControl">
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
 
     <Controls:MetroContentControl>
         <Controls:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="TabControl">
@@ -23,19 +28,19 @@
             </Controls:MetroTabItem >
 
             <Controls:MetroTabItem Name="USTab" Header="us">
-                <ScrollViewer>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto">
                     <Grid Name="UsGrid"/>
                 </ScrollViewer>
             </Controls:MetroTabItem>
 
             <Controls:MetroTabItem Name="CartelTab" Header="cartel">
-                <ScrollViewer>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto">
                     <Grid Name="CartelGrid"/>
                 </ScrollViewer>
             </Controls:MetroTabItem>
 
             <Controls:MetroTabItem  Name="ChimeraTab" Header="chimera">
-                <ScrollViewer>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto">
                     <Grid Name="ChimeraGrid"/>
                 </ScrollViewer>
             </Controls:MetroTabItem>

@@ -37,9 +37,15 @@ namespace DM.Armory.View
                 }
             }
 
-            foreach (AoAUpgradeViewModel up in unitVM.Upgrades)
+            foreach (AoAResearchViewModel up in unitVM.Upgrades)
             {
                 IconView view = new IconView(up);
+                ResearchesList.Children.Add(view);
+            }
+
+            foreach(AoAUnitViewModel unit in unitVM.Children)
+            {
+                IconView view = new IconView(unit);
                 UpgradesList.Children.Add(view);
             }
         }

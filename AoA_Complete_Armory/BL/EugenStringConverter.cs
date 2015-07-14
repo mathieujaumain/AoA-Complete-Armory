@@ -74,6 +74,7 @@ namespace DM.Armory.BL
                 }
                 document.Blocks.Add(paragraph);
             }
+            else { Paragraph paragraph = new Paragraph(new Run(eugenstr)); document.Blocks.Add(paragraph); }
             return document;
         }
     }

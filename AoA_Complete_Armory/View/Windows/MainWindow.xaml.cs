@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,104 +29,59 @@ namespace DM.Armory.View.Windows
     /// </summary>
     public partial class MainWindow
     {
-        public static TradManager techDic;
+        private SettingsFlyout _flyout;
 
         public MainWindow()
         {
             InitializeComponent();
             // Load everything !!
             //Loaded += delegate { Test(); };
-            Loaded += delegate { StartUp(); };
+            //Loaded += delegate { new Thread(StartUp).Start(); };
+            Loaded += MainWindow_Loaded;
+            Factions.UsTile.Click += delegate { TabControl.SelectedItem = USTab; };
+            Factions.CartelTile.Click += delegate { TabControl.SelectedItem = CartelTab; };
+            Factions.ChimeraTile.Click += delegate { TabControl.SelectedItem = ChimeraTab; };
+            _flyout = new SettingsFlyout();
+            _flyout.OnRequestReloading += _flyout_OnRequestReloading;
+            FlyoutControl.Items.Add(_flyout);
         }
 
-        public void Test()
+       
+
+        public async Task<bool> LoadLastUpdateAndFill(ProgressDialogController controller)
         {
-            string ndffile = @"C:\Users\mja\Documents\perso\mods\NDF_Win.dat";
-            string EVERYTHING = @"pc\ndf\patchable\gfx\everything.ndfbin";
-
-            string trans = @"C:\Users\mja\Documents\perso\mods\ZZ_Win.dat";
-            string transFile = @"pc\localisation\us\localisation\unites.dic";
-            string techTrans = @"pc\localisation\us\localisation\techno.dic";
-
-            string zz4 = @"C:\Users\mja\Documents\perso\mods\ZZ_4.dat";
-            string ICON_PACKAGE = @"pc\texture\pack\commoninterface.ppk";
-
-            //load ndffile
-            EdataManager edat = new EdataManager(ndffile);
-            edat.ParseEdataFile();
-            NdfbinManager everything = edat.ReadNdfbin(EVERYTHING);
-            NdfObject losatndf = everything.GetClass("TUniteDescriptor").Instances[26]; // caserne CS 26
-
-
-            //load unite dic
-            edat = new EdataManager(trans);
-            edat.ParseEdataFile();
-            TradManager dic = edat.ReadDictionary(transFile);
-
-            //load tech dic
-            edat = new EdataManager(trans);
-            edat.ParseEdataFile();
-            TradManager tech = edat.ReadDictionary(techTrans);
-            techDic = tech;
-
-            //load iconspack
-            edat = new EdataManager(zz4);
-            edat.ParseEdataFile();
-            EdataManager iconspack = edat.ReadPackage(ICON_PACKAGE);
-
-            //Load Object
-            AoAGameObject losatObject = new AoAGameObject();
-            if (losatObject.LoadData(losatndf, dic, techDic,iconspack))
-            {
-                losatObject.Icon.Save("Losat.png");
-            }
-
-            // if object is unit...
-            if (losatObject.Type != ObjectType.Building) 
-            {
-                AoAUnit losat = new AoAUnit(losatObject);
-                losatObject = null;
-                if (losat.LoadData(losatndf, dic, techDic, iconspack))
-                {
-                        ViewModel.AoAUnitViewModel model = new ViewModel.AoAUnitViewModel(losat);
-                        UnitView view = new UnitView(model);
-                        CartelTab.Content = view;            
-                }
-            }
-            else 
-            {
-                AoABuilding building = new AoABuilding(losatObject);
-                losatObject = null;
-                if (building.LoadData(losatndf, dic, techDic, iconspack))
-                {
-                    ViewModel.BuildingViewModel model = new ViewModel.BuildingViewModel(building);
-                    BuildingListView view = new BuildingListView(model);
-                    CartelTab.Content = view;
-                }
-            }          
-        }
-
-        public async void StartUp()
-        {
+            DateTime start = DateTime.Now;
             InitializationController init = new InitializationController();
-            var controller = await this.ShowProgressAsync("loading last update", "starting...");
-            await Task.Delay(3000);
+            
+            await Task.Delay(2000);
             init.OnLoadingUpdate += delegate(object sender, string mess) { controller.SetMessage(mess); };
-            if ( await init.LoadData())
+            if ( init.LoadData())
             {
-                await Task.Delay(1000);
+                this.Dispatcher.Invoke(() =>
+                {
+                    this.Title += " | Game version = " + init.Version;
+                });
+
                 List<BuildingViewModel> usmodels = new List<BuildingViewModel>();
                 List<BuildingViewModel> carmodels = new List<BuildingViewModel>();
                 List<BuildingViewModel> chimmodels = new List<BuildingViewModel>();
                 //Fill the forms
                 //US
-                foreach(AoABuilding b in init.UsBuildings)
+                foreach (AoABuilding b in init.UsBuildings)
                 {
                     BuildingViewModel buioding = new BuildingViewModel(b);
                     usmodels.Add(buioding);
                 }
-                FactionBuildingListView Usview = new FactionBuildingListView(new FactionViewModel(usmodels));
-                UsGrid.Children.Add(Usview);
+                
+                this.Dispatcher.Invoke(() =>
+                {
+                    FactionBuildingListView Usview = new FactionBuildingListView(new FactionViewModel(usmodels));
+                    UsGrid.Children.Clear();
+                    UsGrid.Children.Add(Usview);
+                });
+                init.UsBuildings.Clear();
+            
+                
 
                 //Cartel
                 foreach (AoABuilding b in init.CartelBuildings)
@@ -133,8 +89,16 @@ namespace DM.Armory.View.Windows
                     BuildingViewModel buioding = new BuildingViewModel(b);
                     carmodels.Add(buioding);
                 }
-                FactionBuildingListView cartelview = new FactionBuildingListView(new FactionViewModel(carmodels));
-                CartelGrid.Children.Add(cartelview);
+                
+                this.Dispatcher.Invoke(() =>
+                {
+                    FactionBuildingListView cartelview = new FactionBuildingListView(new FactionViewModel(carmodels));
+                    CartelGrid.Children.Clear();
+                    CartelGrid.Children.Add(cartelview);
+                });
+                init.CartelBuildings.Clear();
+                    
+                
 
                 //Chimera
                 foreach (AoABuilding b in init.ChimeraBuildings)
@@ -142,14 +106,56 @@ namespace DM.Armory.View.Windows
                     BuildingViewModel buioding = new BuildingViewModel(b);
                     chimmodels.Add(buioding);
                 }
-                FactionBuildingListView chimview = new FactionBuildingListView(new FactionViewModel(chimmodels));
-                ChimeraGrid.Children.Add(chimview);
+                
+                this.Dispatcher.Invoke(() =>
+                {
+                    FactionBuildingListView chimview = new FactionBuildingListView(new FactionViewModel(chimmodels));
+                    ChimeraGrid.Children.Clear();
+                    ChimeraGrid.Children.Add(chimview);
+                });
 
-                await controller.CloseAsync();
+                init.ChimeraBuildings.Clear();
+                controller.SetMessage("Finished, Time taken : " + (DateTime.Now - start).TotalSeconds);
+                await Task.Delay(2000);
+                
+                return true;
             }
-            else { Console.Out.WriteLine(DateTime.Now.ToShortDateString() + " : loading last update failed."); await controller.CloseAsync(); }
+            else { init.Clear(); Console.Out.WriteLine(DateTime.Now.ToShortDateString() + " : loading last update failed."); return false; }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            _flyout.IsOpen = !_flyout.IsOpen;
+        }
+
+
+        async void _flyout_OnRequestReloading(object sender, EventArgs e)
+        {
+            ProgressDialogController controller = await this.ShowProgressAsync("loading last update", "starting...");
+            Thread thread = new Thread(async () =>
+            {
+                await LoadLastUpdateAndFill(controller);
+                await controller.CloseAsync();
+            });
+
+            thread.Start();
 
         }
+
+
+        async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            ProgressDialogController controller = await this.ShowProgressAsync("loading last update", "starting...");
+            Thread thread = new Thread(async () =>
+            {
+                await LoadLastUpdateAndFill(controller);
+                await controller.CloseAsync();
+            });
+
+            thread.Start();
+
+        }
+
     }
 
 
