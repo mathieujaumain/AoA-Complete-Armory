@@ -44,6 +44,24 @@ namespace DM.Armory.View.Windows
             _flyout = new SettingsFlyout();
             _flyout.OnRequestReloading += _flyout_OnRequestReloading;
             FlyoutControl.Items.Add(_flyout);
+
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+        }
+
+        async void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Exception ex = e.ExceptionObject as Exception;
+
+            MetroDialogSettings set = new MetroDialogSettings()
+            {
+                AffirmativeButtonText = "ok",
+            };
+
+            MessageDialogResult res = await this.ShowMessageAsync("Exception", ex.Message, MessageDialogStyle.Affirmative, set);
+            if (res == MessageDialogResult.Affirmative)
+            {
+                this.Close();
+            }
         }
 
        
