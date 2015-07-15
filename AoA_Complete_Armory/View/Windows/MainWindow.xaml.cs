@@ -54,7 +54,7 @@ namespace DM.Armory.View.Windows
 
             MetroDialogSettings set = new MetroDialogSettings()
             {
-                AffirmativeButtonText = "ok",
+                AffirmativeButtonText = "Sorry",
             };
 
             MessageDialogResult res = await this.ShowMessageAsync("Exception", ex.Message, MessageDialogStyle.Affirmative, set);
@@ -133,12 +133,18 @@ namespace DM.Armory.View.Windows
                 });
 
                 init.ChimeraBuildings.Clear();
-                controller.SetMessage("Finished, Time taken : " + (DateTime.Now - start).TotalSeconds);
+                controller.SetMessage("finished, time taken : " + (DateTime.Now - start).TotalSeconds);
                 await Task.Delay(2000);
                 
                 return true;
             }
-            else { init.Clear(); Console.Out.WriteLine(DateTime.Now.ToShortDateString() + " : loading last update failed."); return false; }
+            else
+            {
+                init.Clear(); Console.Out.WriteLine(DateTime.Now.ToShortDateString() + " : loading last update failed."); 
+                controller.SetMessage("loading failed...");
+                await Task.Delay(2000); 
+                return false;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -157,7 +163,7 @@ namespace DM.Armory.View.Windows
             });
 
             thread.Start();
-
+                                                                                           
         }
 
 
