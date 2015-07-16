@@ -14,6 +14,7 @@ namespace DM.Armory.ViewModel
 
         private List<AoAUnitViewModel> _units = new List<AoAUnitViewModel>();
         private List<AoAResearchViewModel> _res = new List<AoAResearchViewModel>();
+        private List<AoATurretViewModel> _turrets = new List<AoATurretViewModel>();
 
         public BuildingViewModel(AoABuilding building)
         {
@@ -24,6 +25,9 @@ namespace DM.Armory.ViewModel
 
             foreach (AoAResearch research in _building.Researches)
                 _res.Add(new AoAResearchViewModel(research));
+
+            foreach (AoATurret turret in _building.Turrets)
+                _turrets.Add(new AoATurretViewModel(turret));
         }
 
         public string Name { get { return _building.Name; } }
@@ -35,5 +39,9 @@ namespace DM.Armory.ViewModel
         public int AluminiumCost { get { return _building.AluminiumCost; } }
         public int ElectricityCost { get { return _building.ElectricityCost; } }
         public int RareEarthCost { get { return _building.RareEarthCost; } }
+        public float ViewRange { get { return _building.ViewRange; } }
+        public bool Stealth { get { return _building.IsStealthy; } }
+
+        public List<AoATurretViewModel> Turrets { get { return _turrets; } }
     }
 }

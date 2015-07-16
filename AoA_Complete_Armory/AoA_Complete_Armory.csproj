@@ -75,6 +75,7 @@
     <Compile Include="ViewModel\AoATurretViewModel.cs" />
     <Compile Include="ViewModel\AoAWeaponViewModel.cs" />
     <Compile Include="ViewModel\FactionModelView.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\AoATile.cs" />
     <Compile Include="View\BuildingView.xaml.cs">
       <DependentUpon>BuildingView.xaml</DependentUpon>

@@ -131,20 +131,20 @@ namespace DM.Armory.Model
             //Stealth
             if (!dataobject.TryGetValueFromQuery<NdfSingle>(STEALTH_PATH, out ndfFloat32))
                 return false;
-            IsStealthy = ndfFloat32.Value >= 50f; 
+            IsStealthy = ndfFloat32.Value >= 50f;
+
+            // vIEW RANGE   
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(VIEW_RANGE_PATH, out ndfFloat32))
+            {
+                ViewRange = ndfFloat32.Value;
+            }
+            else { ViewRange = 0; }
 
             // Slot Taken
             if(dataobject.TryGetValueFromQuery<NdfInt32>(TRANSPORTABLE_PATH, out ndfInt32))
             {
                 SlotTaken = ndfInt32.Value;
             } else { SlotTaken = 0; }
-
-            // vIEW RANGE   
-            if(dataobject.TryGetValueFromQuery<NdfSingle>(VIEW_RANGE_PATH, out ndfFloat32))
-            {
-                ViewRange = ndfFloat32.Value;
-            } else { ViewRange = 0; }
-
 
             //Turrets
             if(dataobject.TryGetValueFromQuery<NdfCollection>(TURRET_LIST_PATH, out ndfCollection))

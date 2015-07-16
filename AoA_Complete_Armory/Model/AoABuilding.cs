@@ -12,13 +12,17 @@ namespace DM.Armory.Model
     public class AoABuilding : AoAGameObject, INdfbinLoadable
     {
 
-#region ndfQueries
+        #region ndfQueries
         public static string PRODUCABLE_UNITS_PATH = "Modules.Factory.Default.ProducableUnits"; //Collection of reference to TUniteDescriptors
         public static string AVAILABLE_RESEARCHES_PATH = "Modules.TechnoRegistrar.Default.ResearchableTechnos"; // Collection of reference to TTechnoLevelDescriptor
-#endregion
+        public static string TURRET_LIST_PATH = "Modules.WeaponManager.Default.TurretDescriptorList";
+        public static string VIEW_RANGE_PATH = "Modules.ScannerConfiguration.Default.PorteeVision"; //Float32
+        public static string STEALTH_PATH = "Modules.Visibility.Default.UnitStealthBonus"; //Float32
+        #endregion
 
         private List<AoAUnit> _BuildableUnits = new List<AoAUnit>();
         private List<AoAResearch> _Researches = new List<AoAResearch>();
+        private List<AoATurret> _Turrets = new List<AoATurret>();
 
         public List<AoAResearch> Researches
         {
@@ -26,12 +30,20 @@ namespace DM.Armory.Model
             set { _Researches = value; }
         }
 
+        public List<AoATurret> Turrets
+        {
+            get { return _Turrets; }
+            set {  _Turrets = value; }
+        }
 
         public List<AoAUnit> BuildableUnits
         {
             get { return _BuildableUnits; }
             set { _BuildableUnits = value; }
         }
+        public bool IsStealthy { get; set; }
+        public float ViewRange { get; set; }
+
 
         public AoABuilding(AoAGameObject obj)
         {
@@ -74,6 +86,41 @@ namespace DM.Armory.Model
                                 _BuildableUnits.Add(aunit);
                         }
                 }
+            }
+
+            //Stealth
+            NdfSingle ndfFloat32;
+            IsStealthy = false;
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(STEALTH_PATH, out ndfFloat32))
+                IsStealthy = ndfFloat32.Value >= 50f;
+
+            // vIEW RANGE   
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(VIEW_RANGE_PATH, out ndfFloat32))
+            {
+                ViewRange = ndfFloat32.Value;
+            }
+            else { ViewRange = 0; }
+
+            //Turrets
+            NdfCollection ndfCollection;
+            if (dataobject.TryGetValueFromQuery<NdfCollection>(TURRET_LIST_PATH, out ndfCollection))
+            {
+                List<CollectionItemValueHolder> turrs = ndfCollection.InnerList.FindAll(x => x.Value is NdfObjectReference);
+
+                List<NdfObjectReference> turrets = new List<NdfObjectReference>();
+                foreach (CollectionItemValueHolder turr in turrs)
+                {
+                    turrets.Add(turr.Value as NdfObjectReference);
+                }
+
+                AoATurret turret;
+                foreach (NdfObjectReference turr in turrets)
+                {
+                    turret = new AoATurret();
+                    if (turret.LoadData(turr.Instance, dictionary, techdic, iconPackage))
+                        Turrets.Add(turret);
+                }
+
             }
 
             //RESEARCHES
