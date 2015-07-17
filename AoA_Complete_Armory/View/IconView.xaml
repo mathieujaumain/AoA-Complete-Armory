@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:ViewModel="clr-namespace:DM.Armory.ViewModel" 
             xmlns:View="clr-namespace:DM.Armory.View"
-             xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls">
+             xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls" 
+             FontFamily="/AoA_Complete_Armory;component/#Bombardier">
 
     <UserControl.Resources>
         <ViewModel:WPFBitmapConverter x:Key="BitmapConverter"/>
@@ -19,7 +20,7 @@
         <Metro:Tile.ToolTip>
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <Label  Margin="10,0,0,0" FontWeight="Bold" Content="{Binding Name}" FontSize="24"/>
+                    <Label  Margin="10,0,0,0" FontWeight="Bold" Content="{Binding Name}" FontSize="24" FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet"/>
                     <Image Source="{DynamicResource Cred_Image}" Visibility="{Binding CashCost, Converter={StaticResource Int2VisibilityConverter}}" />
                     <Label Name="CashPrice" Content="{Binding CashCost}" 
                        Visibility="{Binding CashCost, Converter={StaticResource Int2VisibilityConverter}}"

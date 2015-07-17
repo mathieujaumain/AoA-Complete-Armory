@@ -28,7 +28,7 @@ namespace DM.Armory.View
             InitializeComponent();
             DataContext = bVM;
             DescriptionBox.Document = DM.Armory.BL.EugenStringConverter.MakeFlowDocument(bVM.Description, Brushes.LightGreen);
-            /*
+            
             foreach (AoATurretViewModel turretVM in bVM.Turrets) 
             {
                 foreach (AoAWeaponViewModel weaponVM in turretVM.Weapons) 
@@ -38,12 +38,12 @@ namespace DM.Armory.View
                 }
             }
 
-            foreach (AoAResearchViewModel up in bVM.Upgrades)
+            foreach (AoAResearchViewModel up in bVM.Researches)
             {
                 IconView view = new IconView(up);
                 ResearchesList.Children.Add(view);
             }
-
+            /*
             foreach (AoAUnitViewModel unit in bVM.Children)
             {
                 IconView view = new IconView(unit);

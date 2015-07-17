@@ -39,11 +39,10 @@ namespace DM.Armory.Model
             NdfCollection ndfCollection;
 
             // Traerse speed
+            TraverseSpeed = 0;
             if (dataobject.TryGetValueFromQuery<NdfSingle>(ROTATION_SPEED_PROPERTY, out ndfFloat32))
-            {
                 TraverseSpeed = ndfFloat32.Value;
-            }
-            else { TraverseSpeed = 0; }
+
 
 
             // Weapons

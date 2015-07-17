@@ -18,6 +18,8 @@ namespace DM.Armory.Model
         public static string TURRET_LIST_PATH = "Modules.WeaponManager.Default.TurretDescriptorList";
         public static string VIEW_RANGE_PATH = "Modules.ScannerConfiguration.Default.PorteeVision"; //Float32
         public static string STEALTH_PATH = "Modules.Visibility.Default.UnitStealthBonus"; //Float32
+        public static string DAMMAGE_PATH = "Modules.Damage.Default.MaxDamages"; // float32
+        public static string ARMOR_PATH = "Modules.Damage.Default.CommonDamageDescriptor.BlindageProperties.ArmorDescriptorFront.BaseBlindage"; // uint32
         #endregion
 
         private List<AoAUnit> _BuildableUnits = new List<AoAUnit>();
@@ -41,8 +43,10 @@ namespace DM.Armory.Model
             get { return _BuildableUnits; }
             set { _BuildableUnits = value; }
         }
-        public bool IsStealthy { get; set; }
-        public float ViewRange { get; set; }
+        public bool IsStealthy { get; private set; }
+        public float ViewRange { get; private set; }
+        public float Health { get; private set; }
+        public int Armor { get; private set; }
 
 
         public AoABuilding(AoAGameObject obj)
@@ -93,6 +97,15 @@ namespace DM.Armory.Model
             IsStealthy = false;
             if (dataobject.TryGetValueFromQuery<NdfSingle>(STEALTH_PATH, out ndfFloat32))
                 IsStealthy = ndfFloat32.Value >= 50f;
+
+            if (dataobject.TryGetValueFromQuery<NdfSingle>(DAMMAGE_PATH, out ndfFloat32))
+                Health = ndfFloat32.Value;
+
+            // Armor
+            NdfUInt32 ndfuint32;
+            Armor = 0;
+            if (dataobject.TryGetValueFromQuery<NdfUInt32>(ARMOR_PATH, out ndfuint32))
+                Armor = (int)ndfuint32.Value;
 
             // vIEW RANGE   
             if (dataobject.TryGetValueFromQuery<NdfSingle>(VIEW_RANGE_PATH, out ndfFloat32))

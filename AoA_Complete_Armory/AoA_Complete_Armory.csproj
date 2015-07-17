@@ -204,6 +204,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="BOMBARD_.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -214,9 +215,7 @@
   <ItemGroup>
     <Resource Include="assets\Unicorn.png" />
     <Resource Include="assets\Unicorn.ico" />
-    <Content Include="gamecube-webfont.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Resource Include="gamecube-webfont.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -41,6 +41,8 @@ namespace DM.Armory.ViewModel
         public int RareEarthCost { get { return _building.RareEarthCost; } }
         public float ViewRange { get { return _building.ViewRange; } }
         public bool Stealth { get { return _building.IsStealthy; } }
+        public float Health { get { return _building.Health; } }
+        public float Armor { get { return _building.Armor; } }
 
         public List<AoATurretViewModel> Turrets { get { return _turrets; } }
     }

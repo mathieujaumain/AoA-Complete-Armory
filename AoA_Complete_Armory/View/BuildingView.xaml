@@ -6,7 +6,8 @@
         xmlns:Metro ="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:ViewModel="clr-namespace:DM.Armory.ViewModel" 
         xmlns:View="clr-namespace:DM.Armory.View"
-        Margin="10">
+        Margin="10"
+             FontFamily="/AoA_Complete_Armory;component/#Bombardier" FontSize="18">
 
     <UserControl.Resources>
         <ViewModel:Int2VisibilityConverter x:Key="Int2VisibilityConverter"/>
@@ -25,62 +26,60 @@
 
             <StackPanel Orientation="Vertical" Grid.Column="0" >
                 <Image Name="UnitIcon" HorizontalAlignment="Center"  Source="{Binding Icon, Converter={StaticResource BitmapConverter}}" Margin="10"/>
-                <Viewbox>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-                        <Label Grid.Column="0" Grid.Row="1" Margin="10,0,0,0">health :</Label>
-                        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Health, Mode=OneWay}"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+                    <Label Grid.Column="0" Grid.Row="1" Margin="10,0,0,0">health :</Label>
+                    <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Health, Mode=OneWay}"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                        <!--<Label Grid.Column="0" Grid.Row="3" Margin="10,0,0,0">on road speed :</Label>
+                    <!--<Label Grid.Column="0" Grid.Row="3" Margin="10,0,0,0">on road speed :</Label>
                         <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding OnRoadSpeed, Mode=OneWay}" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 -->
-                        <Label Grid.Column="0" Grid.Row="4" Margin="10,0,0,0">is stealthy ?</Label>
-                        <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Stealth, Converter={StaticResource Bool2StringConverter}, Mode=OneWay}"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+                    <Label Grid.Column="0" Grid.Row="4" Margin="10,0,0,0">is stealthy ?</Label>
+                    <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Stealth, Converter={StaticResource Bool2StringConverter}, Mode=OneWay}"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                        <!--<Label Grid.Column="0" Grid.Row="5" Margin="10,0,0,0">is revealed on firing ?</Label>
+                    <!--<Label Grid.Column="0" Grid.Row="5" Margin="10,0,0,0">is revealed on firing ?</Label>
                         <TextBox Grid.Column="1" Grid.Row="5"  Text="{Binding IsRevealedOnFiring, Mode=OneWay, Converter={StaticResource Bool2StringConverter}}" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
                          -->
-                        <Label Grid.Column="0" Grid.Row="6" Margin="10,0,0,0">view range:</Label>
-                        <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding ViewRange, Mode=OneWay}"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+                    <Label Grid.Column="0" Grid.Row="6" Margin="10,0,0,0">view range:</Label>
+                    <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding ViewRange, Mode=OneWay}"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                        <Label Grid.Column="0" Grid.Row="8" Margin="10,0,0,0" Height="26" VerticalAlignment="Top">slots taken :</Label>
-                        <TextBox Grid.Column="1" Grid.Row="8"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0">0</TextBox>
+                    <Label Grid.Column="0" Grid.Row="8" Margin="10,0,0,0" Height="26" VerticalAlignment="Top">slots taken :</Label>
+                    <TextBox Grid.Column="1" Grid.Row="8"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0">0</TextBox>
 
-                        <Label Grid.Column="0" Grid.Row="10" Margin="10,0,0,0">can spot stealthy units ?</Label>
-                        <TextBox Grid.Column="1" Grid.Row="10"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+                    <Label Grid.Column="0" Grid.Row="10" Margin="10,0,0,0">can spot stealthy units ?</Label>
+                    <TextBox Grid.Column="1" Grid.Row="10"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                        <Label Grid.Column="0" Grid.Row="11" Margin="10,0,0,0">transport slots :</Label>
-                        <TextBox Grid.Column="1" Grid.Row="11"  Text="{Binding TransportSlots, Mode=OneWay}"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+                    <Label Grid.Column="0" Grid.Row="11" Margin="10,0,0,0">transport slots :</Label>
+                    <TextBox Grid.Column="1" Grid.Row="11"  Text="{Binding TransportSlots, Mode=OneWay}"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                        <Label Grid.Column="0" Grid.Row="12" Margin="10,0,0,0">armor :</Label>
-                        <TextBox Grid.Column="1" Grid.Row="12"  Text="{Binding Armor, Mode=OneWay}"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
-                    </Grid>
-                </Viewbox>
+                    <Label Grid.Column="0" Grid.Row="12" Margin="10,0,0,0">armor :</Label>
+                    <TextBox Grid.Column="1" Grid.Row="12"  Text="{Binding Armor, Mode=OneWay}"  IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+                </Grid>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Grid.Column="1">
                 <Viewbox Stretch="Fill">
                     <StackPanel Orientation="Horizontal">
-                        <Label  Margin="10,0,0,0" FontWeight="Bold" Content="{Binding Name}" FontSize="36"/>
+                        <Label  Margin="10,0,0,0" FontWeight="Bold" Content="{Binding Name}" FontSize="36" FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet"/>
                         <Image Source="{DynamicResource Cred_Image}" Visibility="{Binding CashCost, Converter={StaticResource Int2VisibilityConverter}}" />
                         <Label Name="CashPrice" Content="{Binding CashCost}" 
                         Visibility="{Binding CashCost, Converter={StaticResource Int2VisibilityConverter}}"
@@ -95,14 +94,20 @@
                         HorizontalContentAlignment="Center" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Viewbox>
-                <RichTextBox Name="DescriptionBox" HorizontalAlignment="Center" Margin="10,0" IsReadOnly="True" />
-                <GroupBox Header="Researches" Name="ResearchList" Margin="10,10,10,5">
+                <RichTextBox Name="DescriptionBox" HorizontalAlignment="Center" Margin="10,0" IsReadOnly="True" FontFamily="/AoA_Complete_Armory;component/#Bombardier" FontSize="16" />
+                <GroupBox Name="ResearchList" Margin="10,10,10,5">
+                    <GroupBox.Header>
+                        <Label FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet" FontSize="16"  Content="researches"/>
+                    </GroupBox.Header>
                     <StackPanel Orientation="Vertical" Name="ResearchesList" />
                 </GroupBox>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">
-                <GroupBox Header="Weapons" Margin="10,10,10,5" VerticalAlignment="Center">
+                <GroupBox Margin="10,10,10,5" VerticalAlignment="Center">
+                    <GroupBox.Header>
+                        <Label FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet" FontSize="16">weapons</Label>
+                    </GroupBox.Header>
                     <StackPanel Orientation="Vertical" Name="WeaponsList" />
                 </GroupBox>
             </StackPanel>

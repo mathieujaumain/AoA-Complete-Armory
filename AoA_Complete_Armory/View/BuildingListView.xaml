@@ -6,6 +6,7 @@
              xmlns:Metro="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:ViewModel="clr-namespace:DM.Armory.ViewModel" 
             xmlns:View="clr-namespace:DM.Armory.View"
+             FontFamily="/AoA_Complete_Armory;component/#Bombardier"
              Name="View">
 
     <UserControl.Resources>
@@ -16,11 +17,17 @@
             <Grid x:Name="Building" />
 
             <Separator Name="UnitSeparator" Visibility="{Binding Visibility, ElementName=UnitBox}" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
-            <GroupBox Name ="UnitBox" Header="Units" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <GroupBox Name ="UnitBox" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <GroupBox.Header>
+                    <Label FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet" FontSize="14">units</Label>
+                </GroupBox.Header>
                 <View:TileMatrix  x:Name="UnitsList" />
             </GroupBox>
             <Separator Name="ReseachSeparator" Visibility="{Binding Visibility, ElementName=ResearchBox}" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
-            <GroupBox Name="ResearchBox" Header="researches" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <GroupBox Name="ResearchBox"  HorizontalAlignment="Center" VerticalAlignment="Center">
+                <GroupBox.Header>
+                    <Label FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet" FontSize="14">researches</Label>
+                </GroupBox.Header>
                 <View:TileMatrix x:Name="ResearchesList" />
             </GroupBox>
         </StackPanel>

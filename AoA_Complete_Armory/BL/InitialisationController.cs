@@ -241,7 +241,7 @@ namespace DM.Armory.BL
                 // Load all GameObjects
                 List<AoABuilding> BuildingsList = new List<AoABuilding>();
                 List<NdfObject> tunites = _EverythingNdfbin.GetClass("TUniteDescriptor").Instances;
-                OnLoadingUpdate(this, "Loadings buildings and units...");
+                OnLoadingUpdate(this, "loading buildings and units...");
                 foreach (NdfObject obj in tunites)
                 {
                     AoAGameObject gobj = new AoAGameObject();
@@ -262,7 +262,7 @@ namespace DM.Armory.BL
                     }
 
                 }
-                OnLoadingUpdate(this, "Processing buildings...");
+                OnLoadingUpdate(this, "processing buildings...");
                 Classify(BuildingsList);
                 return true;
             }

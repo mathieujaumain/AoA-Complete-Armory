@@ -5,15 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              xmlns:Metro ="http://metro.mahapps.com/winfx/xaml/controls"
-             xmlns:ViewModel="clr-namespace:DM.Armory.ViewModel">
+             xmlns:ViewModel="clr-namespace:DM.Armory.ViewModel" FontFamily="/AoA_Complete_Armory;component/#Bombardier" FontSize="16">
 
         <UserControl.Resources>
         
         </UserControl.Resources>
 
-        <GroupBox Header="{Binding Name}">
-        <Viewbox Stretch="Fill">
-            <Grid>
+    <GroupBox>
+        <GroupBox.Header>
+            <Label FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet" FontSize="16"  Content="{Binding Name}"/>
+        </GroupBox.Header>
+        <Viewbox>
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -36,9 +39,9 @@
             <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Alpha, Mode=OneWay}" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"  />
 
             <Label Grid.Column="0" Grid.Row="1" Margin="10,0,0,0">sustained damages</Label>
-                <TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True" Text="{Binding Sustained, Mode=OneWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+            <TextBox Grid.Column="1" Grid.Row="1" IsReadOnly="True" Text="{Binding Sustained, Mode=OneWay}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
             <Button Grid.Column="2" Grid.Row="1" >visualize</Button>
-        
+
             <Label Grid.Column="0" Grid.Row="2" Margin="10,0,0,0">ground range</Label>
             <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding GroundRange, Mode=OneWay}" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
@@ -53,16 +56,16 @@
 
             <Label Grid.Column="0" Grid.Row="6" Margin="10,0,0,0">splash</Label>
             <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Splash, Mode=OneWay}" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
-            
+
             <Label Grid.Column="0" Grid.Row="7" Margin="10,0,0,0">ambush multiplier</Label>
             <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding AmbushMultiplier, Mode=OneWay}" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                <Label Grid.Column="0" Grid.Row="8" Margin="10,0,0,0">is silenced</Label>
-                <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding IsSilenced, Mode=OneWay}" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+            <Label Grid.Column="0" Grid.Row="8" Margin="10,0,0,0">is silenced</Label>
+            <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding IsSilenced, Mode=OneWay}" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
 
-                <Label Grid.Column="0" Grid.Row="9" Margin="10,0,0,0">supress damages</Label>
-                <TextBox Grid.Column="1" Grid.Row="9" Text="{Binding SupressDamages, Mode=OneWay}" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
-            </Grid>
+            <Label Grid.Column="0" Grid.Row="9" Margin="10,0,0,0">supress damages</Label>
+            <TextBox Grid.Column="1" Grid.Row="9" Text="{Binding SupressDamages, Mode=OneWay}" IsReadOnly="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,0,10,0"/>
+        </Grid>
         </Viewbox>
     </GroupBox>
 </UserControl>

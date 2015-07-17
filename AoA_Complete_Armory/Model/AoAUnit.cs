@@ -109,6 +109,7 @@ namespace DM.Armory.Model
             Health = ndfFloat32.Value;
 
             // Armor
+            Armor = 0;
             if (dataobject.TryGetValueFromQuery<NdfUInt32>(ARMOR_PATH, out ndfuint32))
                 Armor = (int)ndfuint32.Value;
 

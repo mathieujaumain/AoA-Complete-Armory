@@ -7,11 +7,11 @@
                       Height="900"
                       Width="1200"
                       TitleCaps="True"
-                      FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet"
+                      FontFamily="/AoA_Complete_Armory;component/#Bombardier"
                       GlowBrush="Black" Icon="/AoA_Complete_Armory;component/assets/Unicorn.png">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button Content="settings" Click="Button_Click"/>
+            <Button Content="settings" Click="Button_Click" FontFamily="/AoA_Complete_Armory;component/#Bombardier" FontSize="16"/>
         </Controls:WindowCommands>
 
     </Controls:MetroWindow.RightWindowCommands>
@@ -23,7 +23,7 @@
 
     <Controls:MetroContentControl>
         <Controls:MetroAnimatedSingleRowTabControl Grid.Row="1" x:Name="TabControl">
-            <Controls:MetroTabItem  Name="MainTab" Header="main" FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet" >
+            <Controls:MetroTabItem  Name="MainTab" Header="main" >
                  <views:FactionsView x:Name="Factions"/>
             </Controls:MetroTabItem >
 

@@ -5,7 +5,7 @@
         Title="SecondaryWindow" 
         TitleCaps="True"
         GlowBrush="Black"
-        FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet">
+        FontFamily="/AoA_Complete_Armory;component/#Bombardier">
     <Metro:MetroContentControl>
         <ScrollViewer>
             <StackPanel Name="ContentGrid" Orientation="Vertical"/>
