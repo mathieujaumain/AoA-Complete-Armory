@@ -13,7 +13,7 @@
     </UserControl.Resources>
     <Metro:MetroContentControl Margin="10">
         <StackPanel Orientation="Horizontal">
-            <View:IconView x:Name="Building" />
+            <Grid x:Name="Building" />
 
             <Separator Name="UnitSeparator" Visibility="{Binding Visibility, ElementName=UnitBox}" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
             <GroupBox Name ="UnitBox" Header="Units" HorizontalAlignment="Center" VerticalAlignment="Center">

@@ -12,7 +12,7 @@
         <ViewModel:Description2ToolTipConverter x:Key="Description2ToolTipConverter"/>
         <ViewModel:Int2VisibilityConverter x:Key="Int2VisibilityConverter" />
     </UserControl.Resources>
-    <Metro:Tile Name="Tile"  Width="{Binding Background.ImageSource.Width, ElementName=Tile, Mode=OneWay}" Height="{Binding Background.ImageSource.Height, ElementName=Tile, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Metro:Tile Name="Tile"  Width="{Binding Background.ImageSource.Width, ElementName=Tile, Mode=OneWay}" Height="{Binding Background.ImageSource.Height, ElementName=Tile, Mode=OneWay}" HorizontalAlignment="Center" VerticalAlignment="Center" >
         <Metro:Tile.Background>
             <ImageBrush ImageSource="{Binding Icon, Converter={StaticResource BitmapConverter}}"/>
         </Metro:Tile.Background>

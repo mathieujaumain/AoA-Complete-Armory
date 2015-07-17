@@ -32,7 +32,8 @@ namespace DM.Armory.View
             InitializeComponent();
             DataContext = data;
 
-            Building = new IconView(data);
+            IconView bView = new IconView(data);
+            Building.Children.Add(bView);
 
             if (data.Units.Count <= 0)
             {

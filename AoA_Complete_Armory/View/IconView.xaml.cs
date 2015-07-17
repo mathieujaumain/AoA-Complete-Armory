@@ -66,6 +66,7 @@ namespace DM.Armory.View
             InitializeComponent();
             DataContext = model;
             building = model;
+            //this.MouseUp += BuildingOpen;
             Tile.Click += BuildingOpen;
         }
 
