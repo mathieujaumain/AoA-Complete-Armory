@@ -221,5 +221,11 @@ namespace DM.Armory.Model
         }
 
 
+
+
+        public void Reset()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -49,6 +49,15 @@
     <Reference Include="MahApps.Metro">
       <HintPath>..\packages\MahApps.Metro.0.14.0.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot">
+      <HintPath>..\packages\OxyPlot.Core.2014.1.546\lib\portable-net4+sl4+wp71+win8\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf">
+      <HintPath>..\packages\OxyPlot.Wpf.2014.1.546\lib\net45\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Xps">
+      <HintPath>..\packages\OxyPlot.Wpf.2014.1.546\lib\net45\OxyPlot.Xps.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -73,12 +82,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BL\Simulation.cs" />
     <Compile Include="Model\Skills\IAoASkills.cs" />
     <Compile Include="ViewModel\AoAResearchViewModel.cs" />
     <Compile Include="ViewModel\AoATurretViewModel.cs" />
     <Compile Include="ViewModel\AoAWeaponViewModel.cs" />
     <Compile Include="ViewModel\FactionModelView.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\WeaponGraphViewModel.cs" />
     <Compile Include="View\AoATile.cs" />
     <Compile Include="View\BuildingView.xaml.cs">
       <DependentUpon>BuildingView.xaml</DependentUpon>

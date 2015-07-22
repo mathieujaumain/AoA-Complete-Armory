@@ -60,19 +60,22 @@ namespace DM.Armory.Model
         public float AmbushMultiplier { get; private set; }
         public bool IsSilenced { get; private set; }
         public float SupressDamages { get; private set; }
+
+        public long CurrentNbProjectilesFired
+        {
+            get { return _CurrentNbProjectilesFired; }
+            set { _CurrentNbProjectilesFired = value; }
+        }
+
         #endregion
 
         public int WeaponId = -1;
         public byte[] NameHash;
         private long _CurrentNbShotsInSalvo;
         private double _AimingTime = 0;   
-        
         private bool _HasFirstShotBeenFired = false;
-
         private long _CurrentNbProjectilesFired;
-
         private WeaponsStatus _CurrentStatus = WeaponsStatus.IDLE;
-
         private double _TotalTimeElapsed = 0; // Shitty naming
 
         void IUpdatable.Update(double timeElapsed)
@@ -151,6 +154,8 @@ namespace DM.Armory.Model
                 }
             }
         }
+
+        public void IUpdatable.Reset() { _CurrentNbProjectilesFired = 0; _CurrentStatus = WeaponsStatus.IDLE; }
 
         /// <summary>
         /// Fire one shot

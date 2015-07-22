@@ -10,6 +10,7 @@ namespace DM.Armory.Model
     public interface IUpdatable
     {
         void Update(double timeElapsed);
+        void Reset();
     }
     
 }

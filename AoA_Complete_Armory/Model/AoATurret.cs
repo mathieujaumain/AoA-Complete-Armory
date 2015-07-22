@@ -66,5 +66,11 @@ namespace DM.Armory.Model
             }
             return true;
         }
+
+
+        public void Reset()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
