@@ -20,11 +20,11 @@
         <Metro:Tile.ToolTip>
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <Label  Margin="10,0,0,0" FontWeight="Bold" Content="{Binding Name}" FontSize="24" FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet"/>
+                    <Label  Margin="10,0,0,0" FontWeight="Bold" Content="{Binding Name}" FontSize="16" FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet"/>
                     <Image Source="{DynamicResource Cred_Image}" Visibility="{Binding CashCost, Converter={StaticResource Int2VisibilityConverter}}" />
                     <Label Name="CashPrice" Content="{Binding CashCost}" 
                        Visibility="{Binding CashCost, Converter={StaticResource Int2VisibilityConverter}}"
-                       VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                       VerticalContentAlignment="Center" VerticalAlignment="Center" FontFamily="/AoA_Complete_Armory;component/#Bombardier" />
                     <Image Source="{DynamicResource Alu_Image}" Visibility="{Binding AluminiumCost, Converter={StaticResource Int2VisibilityConverter}}" />
                     <Label Name="AluminiumPrice" Content="{Binding AluminiumCost}" 
                        Visibility="{Binding AluminiumCost, Converter={StaticResource Int2VisibilityConverter}}" 

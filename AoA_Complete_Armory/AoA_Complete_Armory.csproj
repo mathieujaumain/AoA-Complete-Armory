@@ -94,6 +94,9 @@
     <Compile Include="View\BuildingView.xaml.cs">
       <DependentUpon>BuildingView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GraphView.xaml.cs">
+      <DependentUpon>GraphView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RichTextBoxHelper.cs" />
     <Compile Include="View\IconView.xaml.cs">
       <DependentUpon>IconView.xaml</DependentUpon>
@@ -130,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FactionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\GraphView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

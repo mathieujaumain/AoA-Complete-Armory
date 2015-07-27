@@ -24,6 +24,8 @@ namespace DM.Armory.BL
             public Simulation()
             {
                 Status = SimulationStatus.Configuration;
+                SimulationStarted += delegate { IsRunning = true; };
+                SimulationFinished += delegate { IsRunning = false; };
             }
 
             private static object _Lock = new object();

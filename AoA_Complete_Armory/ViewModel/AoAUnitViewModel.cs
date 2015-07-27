@@ -26,7 +26,6 @@ namespace DM.Armory.ViewModel
             _unit = unit;
             foreach (AoATurret turret in _unit.Turrets)
                 _turrets.Add(new AoATurretViewModel(turret));
-
             foreach (AoAResearch up in _unit.Upgrades)
                 _upgrades.Add(new AoAResearchViewModel(up));
             foreach (AoAUnit child in _unit.Children)

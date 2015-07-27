@@ -107,13 +107,13 @@
                 <RichTextBox Name="DescriptionBox" HorizontalAlignment="Center" Margin="10,0" IsReadOnly="True" FontFamily="/AoA_Complete_Armory;component/#Bombardier" FontSize="16" />
                 <GroupBox Name="ResearchList" Margin="10,10,10,5">
                     <GroupBox.Header>
-                        <Label FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet" FontSize="16" >researches</Label>
+                        <Label FontFamily="/AoA_Complete_Armory;component/#Bombardier" FontSize="16" >researches</Label>
                     </GroupBox.Header>
                     <StackPanel Orientation="Vertical" Name="ResearchesList" />
                 </GroupBox>
                 <GroupBox Name="UppgradesList" Margin="10,10,10,5">
                     <GroupBox.Header>
-                        <Label FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet" FontSize="16">avaible upgrades</Label>
+                        <Label FontFamily="/AoA_Complete_Armory;component/#Bombardier" FontSize="16">avaible upgrades</Label>
                     </GroupBox.Header>
                     <StackPanel Orientation="Vertical" Name="UpgradesList" />
                 </GroupBox>
@@ -122,7 +122,7 @@
             <StackPanel Orientation="Vertical" Grid.Column="2" VerticalAlignment="Center">
                 <GroupBox  Margin="10,10,10,5" VerticalAlignment="Center">
                     <GroupBox.Header>
-                        <Label FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet" FontSize="16">weapons</Label>
+                        <Label FontFamily="/AoA_Complete_Armory;component/#Bombardier" FontSize="16">weapons</Label>
                     </GroupBox.Header>
                     <StackPanel Orientation="Vertical" Name="WeaponsList" />
                 </GroupBox>
