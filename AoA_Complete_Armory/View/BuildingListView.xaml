@@ -19,14 +19,14 @@
             <Separator Name="UnitSeparator" Visibility="{Binding Visibility, ElementName=UnitBox}" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
             <GroupBox Name ="UnitBox" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <GroupBox.Header>
-                    <Label FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet" FontSize="14">units</Label>
+                    <Label FontFamily="/AoA_Complete_Armory;component/#Bombardier" FontSize="14">units</Label>
                 </GroupBox.Header>
                 <View:TileMatrix  x:Name="UnitsList" />
             </GroupBox>
             <Separator Name="ReseachSeparator" Visibility="{Binding Visibility, ElementName=ResearchBox}" Width="{Binding ActualWidth, ElementName=Building}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" />
             <GroupBox Name="ResearchBox"  HorizontalAlignment="Center" VerticalAlignment="Center">
                 <GroupBox.Header>
-                    <Label FontFamily="/AoA_Complete_Armory;component/#GAMECUBEN DualSet" FontSize="14">researches</Label>
+                    <Label FontFamily="/AoA_Complete_Armory;component/#Bombardier" FontSize="14">researches</Label>
                 </GroupBox.Header>
                 <View:TileMatrix x:Name="ResearchesList" />
             </GroupBox>
