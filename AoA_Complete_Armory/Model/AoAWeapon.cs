@@ -155,7 +155,7 @@ namespace DM.Armory.Model
             }
         }
 
-        void IUpdatable.Reset() { _CurrentNbProjectilesFired = 0; _CurrentStatus = WeaponsStatus.IDLE; }
+        public void IUpdatable.Reset() { _CurrentNbProjectilesFired = 0; _CurrentStatus = WeaponsStatus.IDLE; }
 
         /// <summary>
         /// Fire one shot
